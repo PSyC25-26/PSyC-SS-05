@@ -35,6 +35,11 @@ public class GestDatosService {
         if (tarea == null) {
             throw new IllegalArgumentException("La tarea no puede ser nula");
         }
+
+        if (tarea.getFechaInicio() != null && tarea.getFechaFin() != null && tarea.getFechaInicio().isAfter(tarea.getFechaFin())) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin");
+        }
+
         Tarea tareaGuardada = tareaDAO.save(tarea);
         return tareaGuardada.getId();
     }
@@ -43,32 +48,31 @@ public class GestDatosService {
         if (calendario == null) {
             throw new IllegalArgumentException("El calendario no puede ser nulo");
         }
+        Usuario propietario = calendario.getPropietario();
+        if (propietario == null || propietario.getId() == null) {
+            throw new IllegalArgumentException("El propietario del calendario no puede ser nulo y debe tener un ID válido");
+        }
+
         Calendario calendarioGuardado = calendarioDAO.save(calendario);
         return calendarioGuardado.getId();
     }
 
     @Transactional
-    public void eliminarTarea (Long idUsuario, Long idTarea){
-        Usuario usuario = usuarioDAO.findById(idUsuario).
-            orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
-        
-        Tarea tarea = tareaDAO.findById(idTarea).
-            orElseThrow(() -> new IllegalArgumentException("Tarea no encontrada"));
-        
-        for (Usuario u : tarea.getUsuarios()){
-            if (!u.getId().equals(idUsuario)){
-                throw new IllegalArgumentException("El usuario no tiene permiso para eliminar esta tarea");
-            }
+    public void eliminarTarea (Long idTarea){
+        List <Usuario> usuarios = usuarioDAO.findByTareas_Id(idTarea);
+        for (Usuario usuario : usuarios){
+            usuario.getTareas().removeIf(tarea -> tarea.getId().equals(idTarea));
         }
-
-        usuario.getTareas().remove(tarea);
+        
+        tareaDAO.deleteById(idTarea);
+        
     }
 
     public List <Tarea> obtenerTareasPorUsuario (Long idUsuario){
         Usuario usuario = usuarioDAO.findById(idUsuario).
             orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
         
-        List <Tarea> tareas = tareaDAO.findByUsuario(idUsuario);
+        List <Tarea> tareas = tareaDAO.findByUsuarios_Id(idUsuario);
         
         return tareas; 
     }
@@ -92,5 +96,28 @@ public class GestDatosService {
             usuariosCargados.add(usuario);
         }
         return usuariosCargados;
+    }
+
+    public List <Tarea> cargarTareasPorUsuario (Long idUsuario){
+        List <Tarea> tareas = tareaDAO.findByUsuarios_Id(idUsuario);
+        return tareas;
+    }
+
+    public Calendario cargarCalendarioPorUsuario (long idUsuario){
+        Calendario calendario = calendarioDAO.findByPropietarioId(idUsuario);
+        return calendario;
+    }
+
+    public Tarea modificarTarea (Long idTarea, Tarea tareaModificada){
+        Tarea tarea = tareaDAO.findById(idTarea).
+            orElseThrow(() -> new IllegalArgumentException("Tarea no encontrada"));
+        // Actualizar los campos de la tarea existente con los valores de tareaModificada
+        tarea.setTitulo(tareaModificada.getTitulo());
+        tarea.setDescripcion(tareaModificada.getDescripcion());
+        tarea.setFechaInicio(tareaModificada.getFechaInicio());
+        tarea.setFechaFin(tareaModificada.getFechaFin());
+        tarea.setCategoria(tareaModificada.getCategoria());
+        tareaDAO.save(tarea);
+        return tarea;
     }
 }

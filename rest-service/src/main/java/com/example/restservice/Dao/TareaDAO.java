@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TareaDAO extends CrudRepository<Tarea, Long> {
-    List<Tarea> findByUsuario(Long idUsuario);
-}
+    // Esto se pone para que se pueda buscar las tareas por el id del usuario, es decir, el propietario de las tareas
+    List<Tarea> findByUsuarios_Id(Long idUsuario);}

@@ -7,7 +7,6 @@ import java.util.List;
 
 @Entity
 public class Tarea {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,24 +23,32 @@ public class Tarea {
     @Column (nullable = false)
     private LocalDateTime fechaFin;
 
-    // Esto se hace porque una tarea tiene una categoría 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name="categoria", nullable = false)
     private Categoria categoria;
 
-    //Esto se hace porque una tarea pueden tenerla varios usuarios, y un usuario puede tener varias tareas
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @ManyToMany
+    @JoinTable(
+        // Esto se pone para que se pueda buscar los usuarios por el id de la tarea, 
+        // es decir, los usuarios que tienen esa tarea asignada.
+        //El inverse es para que se pueda buscar las tareas por el id del usuario, 
+        // es decir, el propietario de las tareas
+        name = "tarea_usuario",
+        joinColumns = @JoinColumn(name = "tarea_id"),
+        inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    )
     private List<Usuario> usuarios;
 
     public Tarea() {}
 
-    public Tarea(Long id, String titulo, String descripcion, Categoria categoria, List<Usuario> usuarios) {
+    public Tarea(Long id, String titulo, String descripcion, Categoria categoria, List<Usuario> usuarios, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.usuarios = usuarios;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     // Getters y setters
@@ -65,6 +72,14 @@ public class Tarea {
         return descripcion;
     }
 
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDateTime fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -83,5 +98,13 @@ public class Tarea {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDateTime fechaFin) {
+        this.fechaFin = fechaFin;
     }
 }

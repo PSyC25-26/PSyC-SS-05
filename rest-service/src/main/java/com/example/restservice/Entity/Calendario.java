@@ -11,8 +11,9 @@ public class Calendario {
     private String nombre; 
 
 
-    @ManyToOne
-    @JoinColumn(name = "propietario_id", nullable = false)
+    // Cada usuario tiene un calendario, y cada calendario tiene un usuario
+    @OneToOne
+    @JoinColumn(name = "propietario_id", nullable = false, unique = true)
     private Usuario propietario;
 
     

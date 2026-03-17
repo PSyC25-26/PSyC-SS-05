@@ -1,7 +1,5 @@
 package com.example.restservice.Entity;
-import jakarta.persistence.*;
-
-@Entity
+// No se pone @Entity porque va a ser un ENUM
 public enum Categoria {
     AMIGOS,
     APRENDIZAJE,
