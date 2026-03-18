@@ -1,0 +1,1 @@
+CREATE DATABASE mi_base_datos;

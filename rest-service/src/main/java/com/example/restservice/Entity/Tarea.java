@@ -23,8 +23,8 @@ public class Tarea {
     @Column (nullable = false)
     private LocalDateTime fechaFin;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="categoria", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
     @ManyToMany
