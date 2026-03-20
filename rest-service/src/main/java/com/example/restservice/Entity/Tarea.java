@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Tarea {
@@ -24,7 +25,7 @@ public class Tarea {
     private LocalDateTime fechaFin;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     @ManyToMany
@@ -37,6 +38,7 @@ public class Tarea {
         joinColumns = @JoinColumn(name = "tarea_id"),
         inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
+    @JsonIgnoreProperties("tareas")
     private List<Usuario> usuarios;
 
     public Tarea() {}

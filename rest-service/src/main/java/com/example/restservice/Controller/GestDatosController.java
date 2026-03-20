@@ -33,37 +33,59 @@ public class GestDatosController {
       return new ResponseEntity<>(idUsuario, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
   
-  @PostMapping("/guardarTarea")
-  public ResponseEntity <Long> guardarTarea (@RequestBody Tarea tarea) {
+  @PostMapping("/guardarTarea") // <-- Quitamos el /{idUsuario}
+  public ResponseEntity <Long> guardarTarea (@RequestParam("idUsuarios") List<Long> idUsuarios, @RequestBody Tarea tarea) {
     try{
-      Long idTarea = gestDatosService.guardarTarea(tarea);
+      // Pasamos la lista de idUsuarios al servicio
+      Long idTarea = gestDatosService.guardarTarea(tarea, idUsuarios);
       return new ResponseEntity<>(idTarea, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
   
-  @PostMapping("/guardarCalendario")
-  public ResponseEntity <Long> guardarCalelndario (@RequestBody Calendario calendario) {
+  @PostMapping("/guardarCalendario/{idUsuario}")
+  public ResponseEntity <Long> guardarCalendario (@PathVariable("idUsuario") Long idUsuario, @RequestBody Calendario calendario) {
     try{
-      Long idCalendario = gestDatosService.guardarCalendario(calendario);
+      // Le pasamos el calendario y el id del usuario al servicio
+      Long idCalendario = gestDatosService.guardarCalendario(calendario, idUsuario);
       return new ResponseEntity<>(idCalendario, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
+      e.printStackTrace(); 
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @PostMapping("/guardarCategoria")
+  public ResponseEntity<Long> guardarCategoria(@RequestBody Categoria categoria) {
+    try {
+      Long idCategoria = gestDatosService.guardarCategoria(categoria);
+      return new ResponseEntity<>(idCategoria, HttpStatus.CREATED);
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -75,9 +97,11 @@ public class GestDatosController {
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     catch (IllegalArgumentException e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -89,9 +113,11 @@ public class GestDatosController {
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     catch (IllegalArgumentException e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -103,6 +129,7 @@ public class GestDatosController {
       return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
     catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -114,6 +141,7 @@ public class GestDatosController {
       return new ResponseEntity<>(tareas, HttpStatus.OK);
     }
     catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -125,6 +153,19 @@ public class GestDatosController {
       return new ResponseEntity<>(calendario, HttpStatus.OK);
     }
     catch (Exception e){
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @GetMapping ("/obtenerCategoriaPorTarea/{idTarea}")
+  public ResponseEntity <Categoria> obtenerCategoriaPorTarea(@PathVariable ("idTarea") Long idTarea){
+    try{
+      Categoria categoria = gestDatosService.obtenerCategoriaPorTarea(idTarea);
+      return new ResponseEntity<>(categoria, HttpStatus.OK);
+    }
+    catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -136,9 +177,27 @@ public class GestDatosController {
       return new ResponseEntity<>(tarea, HttpStatus.OK);
     }
     catch (IllegalArgumentException e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @PutMapping ("/modificarCalendario/{idCalendario}")
+  public ResponseEntity <Calendario> modificarCalendario(@PathVariable ("idCalendario") Long idCalendario, @RequestBody Calendario calendarioModificado){
+    try{
+      Calendario calendario = gestDatosService.modificarCalendario(idCalendario, calendarioModificado);
+      return new ResponseEntity<>(calendario, HttpStatus.OK);
+    }
+    catch (IllegalArgumentException e){
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    catch (Exception e){
+      e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }

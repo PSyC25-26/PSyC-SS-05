@@ -12,20 +12,17 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nombre;
 
     @Column(nullable = true)
     private String color; // Ej: "#FF0000" para tareas urgentes
 
-    @Column(nullable = true)
-    private String icono;
-
-    // Relación opcional: Si quieres que las categorías sean propias de cada usuario
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = true)
-    @JsonIgnore // Para evitar bucles infinitos al devolver JSON
-    private Usuario usuario;
+    // // Relación opcional: Si quieres que las categorías sean propias de cada usuario
+    // @ManyToOne
+    // @JoinColumn(name = "usuario_id", nullable = false)
+    // @JsonIgnore // Para evitar bucles infinitos al devolver JSON
+    // private Usuario usuario;
 
     // Relación bidireccional (opcional): Para saber qué tareas tienen esta categoría
     @OneToMany(mappedBy = "categoria")
@@ -35,12 +32,35 @@ public class Categoria {
     // Constructores vacíos y con parámetros
     public Categoria() {}
 
-    public Categoria(String nombre, String color, String icono) {
+    public Categoria(String nombre, String color, Usuario usuario) {
         this.nombre = nombre;
         this.color = color;
-        this.icono = icono;
+        // this.usuario = usuario;
     }
 
     // Getters y Setters...
-    // ...
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    // public Usuario getUsuario() {
+    //     return usuario;
+    // }
+    // public void setUsuario(Usuario usuario) {
+    //     this.usuario = usuario;
+    // }
 }

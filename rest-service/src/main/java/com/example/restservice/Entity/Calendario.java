@@ -1,4 +1,6 @@
 package com.example.restservice.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class Calendario {
 
     // Cada usuario tiene un calendario, y cada calendario tiene un usuario
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "propietario_id", nullable = false, unique = true)
     private Usuario propietario;
 

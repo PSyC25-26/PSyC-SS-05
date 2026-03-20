@@ -2,6 +2,8 @@ package com.example.restservice.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -23,7 +25,12 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String email;
 
+
+    @OneToOne(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Calendario calendario;
+
     @ManyToMany(mappedBy = "usuarios")
+    @JsonIgnoreProperties("usuarios")
     private List<Tarea> tareas;
 
     @Enumerated(EnumType.STRING)
@@ -79,5 +86,13 @@ public class Usuario {
 
     public void setTareas(List<Tarea> tareas) {
         this.tareas = tareas;
+    }
+
+    public Calendario getCalendario() {
+        return calendario;
+    }
+
+    public void setCalendario(Calendario calendario) {
+        this.calendario = calendario;
     }
 }
