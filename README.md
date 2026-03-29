@@ -1,5 +1,15 @@
 # PSyC-SS-05
 
+Para ejecutar el programa:
+Paso 1: Configurar la Base de Datos. Abre MySQL, crea la base de datos ejecutando CREATE DATABASE db_calidad; y asegúrate de que tus credenciales (usuario y contraseña) coinciden con las del archivo application.properties.
+
+Paso 2: Abre tu terminal y muévete al directorio del backend ejecutando el comando: cd PSyC-SS-05/rest-service.
+
+Paso 3: Ejecutar la aplicación. Inicia el servidor usando el Wrapper de Maven. Ejecuta mvnw.cmd spring-boot:run si estás en Windows, o ./mvnw spring-boot:run si usas Linux/macOS.
+
+Paso 4: Verificar. Espera a ver el logo de Spring Boot en la consola indicando que ha arrancado sin errores. La API ya estará funcionando y lista para recibir peticiones en http://localhost:8080/gestDatos.
+
+
 ## Product Backlog
 
 | Sprint sugerido | Issue / Historia de Usuario | Criterios de Aceptación | Prioridad | Estimación (Puntos) |
