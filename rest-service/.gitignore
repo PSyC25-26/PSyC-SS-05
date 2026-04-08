@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# archivos de Vaadin. interfaz visual
+**/node_modules/
+**/frontend/generated/
+**/package.json
+**/package-lock.json
+**/types.d.ts
+**/vite.generated.ts
+**/vite.config.ts
+**/dist/
