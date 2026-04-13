@@ -11,28 +11,33 @@ import com.vaadin.flow.router.RouterLink;
 public class MainLayout extends AppLayout {
 
     public MainLayout() {
-        crearCabecera();
-        crearMenuLateral();
-    }
+        H1 logo = new H1("PSyC Quality Manager");
+        logo.getStyle()
+            .set("font-size", "var(--lumo-font-size-l)")
+            .set("margin", "0");
 
-    private void crearCabecera() {
-        H1 logo = new H1("PSyC-SS-05");
-        logo.getStyle().set("font-size", "var(--lumo-font-size-l)")
-                       .set("margin", "0");
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
+        header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+        header.setWidthFull();
+        header.addClassNames("py-0", "px-m");
 
-        HorizontalLayout cabecera = new HorizontalLayout(new DrawerToggle(), logo);
-        cabecera.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        cabecera.setWidthFull();
-        cabecera.addClassNames("py-0", "px-m");
+        addToNavbar(header);
 
-        addToNavbar(cabecera);
-    }
-
-    private void crearMenuLateral() {
-        // Enlace a la vista de inicio
-        RouterLink inicioLink = new RouterLink("Inicio", InicioView.class);
+        //Sidebar con elementos (vacios de momento)
+        VerticalLayout menu = new VerticalLayout();
         
-        VerticalLayout menu = new VerticalLayout(inicioLink);
+        menu.add( //todas llevan a inicio de momento
+            createMenuLink("Inicio", InicioView.class),
+            createMenuLink("Tareas", InicioView.class),
+            createMenuLink("Categorías", InicioView.class),
+            createMenuLink("Configuración", InicioView.class)
+        );
+
         addToDrawer(menu);
+    }
+
+    //para crear los elementos del sidebar
+    private RouterLink createMenuLink(String viewName, Class<? extends com.vaadin.flow.component.Component> viewClass) {
+        return new RouterLink(viewName, viewClass);
     }
 }
