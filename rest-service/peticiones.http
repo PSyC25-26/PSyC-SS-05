@@ -1,0 +1,95 @@
+###############################################################################
+# GUÍA DE USO - REST CLIENT (para que no haga falta usar postman)
+# 
+# Este archivo permite ejecutar peticiones al backend directamente desde VS Code.
+# Requisitos: Tener instalada la extensión "REST Client" de Huachao Mao.
+#
+# Cómo usar:
+# 1. Asegúrate de que la aplicación Spring Boot esté arrancada.
+# 2. Haz clic en el texto "Send Request" que aparece sobre cada método.
+# 3. La respuesta aparecerá en una ventana dividida a la derecha.
+###############################################################################
+
+@baseUrl = http://localhost:8080/gestDatos
+
+### Obtener todos los usuarios
+GET {{baseUrl}}/obtenerUsuarios
+
+
+
+### VARIABLES GLOBAL (Opcional para facilitar cambios)
+@baseUrl = http://localhost:8080/gestDatos
+
+############################################################
+# SECCIÓN: USUARIOS
+############################################################
+
+### 1. Obtener todos los usuarios (GET)
+GET {{baseUrl}}/obtenerUsuarios
+
+### 2. Guardar un nuevo usuario (POST)
+# Cambia los datos para crear varios y verlos en VisualVM
+POST {{baseUrl}}/guardarUsuario
+Content-Type: application/json
+
+{
+    "username": "hugo_alonso",
+    "email": "hugo@ejemplo.com",
+    "tipoUsuario": "PARTICULAR"
+}
+
+### 3. Eliminar un usuario por ID (DELETE)
+# Sustituye el "1" por el ID real que quieras borrar
+DELETE {{baseUrl}}/eliminarUsuario/1
+
+############################################################
+# SECCIÓN: TAREAS
+############################################################
+
+### 4. Guardar una nueva tarea (POST)
+# IMPORTANTE: idUsuarios se pasa como parámetro en la URL
+POST {{baseUrl}}/guardarTarea?idUsuarios=1
+Content-Type: application/json
+
+{
+    "titulo": "Tarea de Calidad",
+    "descripcion": "Realizar perfilado con VisualVM",
+    "fechaInicio": "2026-04-13T10:00:00",
+    "fechaFin": "2026-04-13T12:00:00"
+}
+
+### 5. Obtener tareas de un usuario específico (GET)
+GET {{baseUrl}}/obtenerTareasPorUsuario/1
+
+### 6. Modificar una tarea existente (PUT)
+PUT {{baseUrl}}/modificarTarea/1
+Content-Type: application/json
+
+{
+    "titulo": "Tarea Actualizada",
+    "descripcion": "Descripción mejorada",
+    "fechaInicio": "2026-04-13T11:00:00",
+    "fechaFin": "2026-04-13T13:00:00"
+}
+
+### 7. Eliminar una tarea (DELETE)
+DELETE {{baseUrl}}/eliminarTarea/1
+
+############################################################
+# SECCIÓN: CALENDARIO Y CATEGORÍAS
+############################################################
+
+### 8. Obtener calendario de un usuario (GET)
+GET {{baseUrl}}/obtenerCalendario/1
+
+### 9. Guardar una categoría (POST)
+POST {{baseUrl}}/guardarCategoria
+Content-Type: application/json
+
+{
+    "nombre": "Urgente",
+    "color": "#FF0000"
+}
+
+### 10. Obtener la categoría de una tarea (GET)
+GET {{baseUrl}}/obtenerCategoriaPorTarea/1
