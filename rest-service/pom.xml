@@ -67,8 +67,21 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
 	</dependency>
-
+<!-- Esto sirve para el calendario -->
+	<dependency>
+			<groupId>org.vaadin.stefan</groupId>
+			<artifactId>fullcalendar2</artifactId>
+			<version>6.4.0</version> 
+		</dependency>
 	</dependencies>
+
+<!-- Esto se hace para hacer el calendario -->
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>https://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
