@@ -2,6 +2,8 @@ package com.example.restservice.Service;
 
 import org.springframework.stereotype.Service;
 import com.example.restservice.Entity.*;
+import com.vaadin.flow.data.provider.DataProvider;
+
 import java.util.List;
 import java.util.ArrayList;
 import jakarta.transaction.Transactional;
@@ -182,5 +184,22 @@ public class GestDatosService {
 
         calendarioDAO.save(calendario);
         return calendario;
+    }
+    // En GestDatosService.java
+    public List<Tarea> listarTodasLasTareas() {
+        return (List<Tarea>) tareaDAO.findAll();
+    }
+
+    public void guardarTarea(Tarea tarea) {
+        tareaDAO.save(tarea);
+    }
+
+    public void eliminarTarea(Tarea tarea) {
+        tareaDAO.delete(tarea);
+}
+
+    public DataProvider<Tarea, Void> getAllTareas() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllTareas'");
     }
 }
