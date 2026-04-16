@@ -120,4 +120,166 @@ class GestDatosServiceTest {
             gestDatosService.guardarCategoria(null);
         });
     }
+
+    @Test
+    void cargarUsuarios_listaVacia() {
+        when(usuarioDAO.findAll()).thenReturn(List.of());
+
+        List<Usuario> resultado = gestDatosService.cargarUsuarios();
+
+        assertThat(resultado).isEmpty();
+    }
+
+    @Test
+    void guardarCategoria_ok() {
+        Categoria categoria = new Categoria();
+
+        Categoria guardada = new Categoria();
+        guardada.setId(1L);
+
+        when(categoriaDAO.save(categoria)).thenReturn(guardada);
+
+        Long id = gestDatosService.guardarCategoria(categoria);
+
+        assertThat(id).isEqualTo(1L);
+    }
+
+    @Test
+    void obtenerTareasPorUsuario_listaVacia() {
+        Usuario usuario = new Usuario();
+        usuario.setId(1L);
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
+        when(tareaDAO.findByUsuarios_Id(1L)).thenReturn(List.of());
+
+        List<Tarea> resultado = gestDatosService.obtenerTareasPorUsuario(1L);
+
+        assertThat(resultado).isEmpty();
+    }
+
+
+    @Test
+    void guardarUsuario_sinUsername() {
+        Usuario usuario = new Usuario();
+
+        Usuario guardado = new Usuario();
+        guardado.setId(2L);
+
+        when(usuarioDAO.save(usuario)).thenReturn(guardado);
+
+        Long id = gestDatosService.guardarUsuario(usuario);
+
+        assertThat(id).isEqualTo(2L);
+    }
+
+
+    @Test
+    void guardarCalendario_ok() {
+        Calendario calendario = new Calendario();
+        Usuario usuario = new Usuario();
+        usuario.setId(1L);
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
+        when(calendarioDAO.findByPropietarioId(1L)).thenReturn(null);
+
+        Calendario guardado = new Calendario();
+        guardado.setId(1L);
+
+        when(calendarioDAO.save(calendario)).thenReturn(guardado);
+
+        long id = gestDatosService.guardarCalendario(calendario, 1L);
+
+        assertThat(id).isEqualTo(1L);
+    }
+
+
+    @Test
+    void guardarCalendario_yaExiste() {
+        Calendario calendario = new Calendario();
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.of(new Usuario()));
+        when(calendarioDAO.findByPropietarioId(1L)).thenReturn(new Calendario());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.guardarCalendario(calendario, 1L);
+        });
+    }
+
+
+    @Test
+    void eliminarTarea_ok() {
+        Usuario usuario = new Usuario();
+        usuario.setId(1L);
+        usuario.setTareas(new java.util.ArrayList<>()); 
+
+        when(usuarioDAO.findByTareas_Id(1L)).thenReturn(List.of(usuario));
+
+        gestDatosService.eliminarTarea(1L);
+    }
+
+
+
+    @Test
+    void eliminarUsuario_ok() {
+        Usuario usuario = new Usuario();
+        usuario.setId(1L);
+
+        Tarea tarea = new Tarea();
+        tarea.setUsuarios(new java.util.ArrayList<>(List.of(usuario))); 
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
+        when(tareaDAO.findByUsuarios_Id(1L)).thenReturn(List.of(tarea));
+
+        gestDatosService.eliminarUsuario(1L);
+    }
+
+
+
+    @Test
+    void modificarTarea_ok() {
+        Tarea tarea = new Tarea();
+        tarea.setId(1L);
+
+        Tarea modificada = new Tarea();
+        modificada.setTitulo("nuevo");
+
+        when(tareaDAO.findById(1L)).thenReturn(Optional.of(tarea));
+
+        Tarea resultado = gestDatosService.modificarTarea(1L, modificada);
+
+        assertThat(resultado).isNotNull();
+    }
+
+
+    @Test
+    void modificarCalendario_ok() {
+        Calendario calendario = new Calendario();
+        calendario.setId(1L);
+
+        Calendario modificado = new Calendario();
+        modificado.setNombre("nuevo");
+
+        when(calendarioDAO.findById(1L)).thenReturn(Optional.of(calendario));
+
+        Calendario res = gestDatosService.modificarCalendario(1L, modificado);
+
+        assertThat(res).isNotNull();
+    }
+
+
+
+    @Test
+    void obtenerCategoriaPorTarea_ok() {
+        Tarea tarea = new Tarea();
+        Categoria categoria = new Categoria();
+        tarea.setCategoria(categoria);
+
+        when(tareaDAO.findById(1L)).thenReturn(Optional.of(tarea));
+
+        Categoria res = gestDatosService.obtenerCategoriaPorTarea(1L);
+
+        assertThat(res).isNotNull();
+    }
+
+
 }
