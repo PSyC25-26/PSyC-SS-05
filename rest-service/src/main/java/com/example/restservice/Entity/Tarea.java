@@ -27,7 +27,8 @@ public class Tarea {
     private LocalDateTime fechaFin;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    // Se pone el nullable = false para que no se pueda crear una tarea sin una categoria asignada, es decir, que la categoria sea obligatoria.
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
     @ManyToMany

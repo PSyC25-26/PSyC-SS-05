@@ -29,7 +29,7 @@ public class MainLayout extends AppLayout {
         menu.add( //todas llevan a inicio de momento
             createMenuLink("Inicio", InicioView.class),
             createMenuLink("Tareas", TareaView.class),
-            createMenuLink("Categorías", InicioView.class),
+            createMenuLink("Categorías", CategoriaView.class),
             createMenuLink("Configuración", InicioView.class)
         );
 
