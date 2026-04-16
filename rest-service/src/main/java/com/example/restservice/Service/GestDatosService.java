@@ -210,4 +210,11 @@ public class GestDatosService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllTareas'");
     }
+
+    public List<Tarea> obtenerTareasPorCategoria(Categoria categoria) {
+        if (categoria == null) {
+            return listarTodasLasTareas();
+        }
+        return tareaDAO.findByCategoria(categoria);
+    }
 }
