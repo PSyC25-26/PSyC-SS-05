@@ -66,4 +66,30 @@ class RendimientoTest {
 
         assertThat(duracion).isGreaterThan(0);
     }
+
+
+
+    @Test
+    void rendimiento_threads() throws InterruptedException {
+        String baseUrl = "http://localhost:" + port;
+        GestDatosCliente client = new GestDatosCliente(baseUrl);
+
+        int numThreads = 5;
+        Thread[] threads = new Thread[numThreads];
+
+        for (int i = 0; i < numThreads; i++) {
+            threads[i] = new Thread(() -> {
+                List<Usuario> usuarios = client.obtenerUsuarios();
+                assertThat(usuarios).isNotNull();
+            });
+        }
+
+        for (Thread t : threads) {
+            t.start();
+        }
+
+        for (Thread t : threads) {
+            t.join();
+        }
+    }
 }
