@@ -1,5 +1,6 @@
 package com.example.restservice.UI;
 
+import com.example.restservice.Entity.Categoria;
 import com.example.restservice.Entity.Tarea;
 import com.example.restservice.Service.GestDatosService;
 import com.vaadin.flow.component.button.Button;
@@ -17,7 +18,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 @PageTitle("Gestión de Tareas")
 @Route(value = "tareas", layout = MainLayout.class)
@@ -32,6 +37,7 @@ public class TareaView extends VerticalLayout {
     private final DateTimePicker fechaInicioField = new DateTimePicker("Fecha y hora de Inicio");
     private final DateTimePicker fechaFinField = new DateTimePicker("Fecha y hora de Fin");
     private final Button guardarBtn = new Button("Añadir Tarea");
+    private final ComboBox<Categoria> categoriaCombo = new ComboBox<>("Categoría");
 
     // Componentes del apartado de EDITAR
     private final ComboBox<Tarea> selectorTareaEditar = new ComboBox<>("Selecciona la tarea a editar");
@@ -57,7 +63,16 @@ public class TareaView extends VerticalLayout {
         // ==========================================
         FormLayout formAñadir = new FormLayout(tituloField, descripcionField, fechaInicioField, fechaFinField, guardarBtn);
         formAñadir.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2));
-        formAñadir.setMaxWidth("800px");
+        formAñadir.setMaxWidth("800px");      
+
+        // 2. Configurar el ComboBox de tareas
+        categoriaCombo.setItems(service.cargarCategorias()); // Carga las categorías existentes
+        categoriaCombo.setItemLabelGenerator(Categoria::getNombre);
+        categoriaCombo.setRequired(true);
+
+        // 3. Añadir los campos a sus respectivos formularios
+        formAñadir.add(tituloField, descripcionField, fechaInicioField, fechaFinField, categoriaCombo, guardarBtn);
+
         guardarBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         formAñadir.setColspan(guardarBtn, 2); 
         guardarBtn.addClickListener(e -> guardarNuevaTarea());
@@ -131,17 +146,46 @@ public class TareaView extends VerticalLayout {
 
     // --- MÉTODOS DE AÑADIR ---
     private void guardarNuevaTarea() {
-        if (tituloField.isEmpty() || descripcionField.isEmpty() || fechaInicioField.isEmpty() || fechaFinField.isEmpty()) {
+        if (tituloField.isEmpty() || categoriaCombo.isEmpty() || descripcionField.isEmpty() || fechaInicioField.isEmpty() || fechaFinField.isEmpty()) {
             Notification.show("Rellena todos los campos para crear.").addThemeVariants(NotificationVariant.LUMO_ERROR);
             return;
         }
 
+        // Obtener los valores de fecha y hora
+        LocalDateTime nuevaInicio = fechaInicioField.getValue();
+        LocalDateTime nuevaFin = fechaFinField.getValue();
+
+        // Comprobar que la fecha de inicio es anterior a la de fin
+        if (nuevaInicio.isAfter(nuevaFin) || nuevaInicio.isEqual(nuevaFin)) {
+            Notification.show("La fecha de inicio debe ser anterior a la de fin.").addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+        }
+
+        //Comprobación de solapamiento con las tareas existentes
+        boolean haySolapamiento = false;
+        for (Tarea t : service.cargarTareas()) {
+            if (nuevaInicio.isBefore(t.getFechaFin()) && nuevaFin.isAfter(t.getFechaInicio())) {
+                haySolapamiento = true;
+                break; 
+            }
+        }
+
+        if (haySolapamiento) {
+            Notification.show("Error: Ya existe una tarea en este horario.").addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return; 
+        }
+
+        //Si llegamos aquí, no hay solapamiento. Guardamos la tarea.
         Tarea nuevaTarea = new Tarea();
         nuevaTarea.setTitulo(tituloField.getValue());
         nuevaTarea.setDescripcion(descripcionField.getValue());
-        nuevaTarea.setFechaInicio(fechaInicioField.getValue()); 
-        nuevaTarea.setFechaFin(fechaFinField.getValue());       
+        nuevaTarea.setFechaInicio(nuevaInicio); 
+        nuevaTarea.setFechaFin(nuevaFin);  
+        nuevaTarea.setCategoria(categoriaCombo.getValue()); // Asignamos la categoría elegida     
 
+        if (!categoriaCombo.isEmpty()) {
+            nuevaTarea.setCategoria(categoriaCombo.getValue());
+        }
         service.guardarTarea(nuevaTarea); 
         Notification.show("¡Tarea guardada!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 

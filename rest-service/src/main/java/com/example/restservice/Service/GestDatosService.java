@@ -176,6 +176,14 @@ public class GestDatosService {
         return tarea;
     }
 
+    public List<Tarea> cargarTareas() {
+        return (List<Tarea>) tareaDAO.findAll();
+    }
+
+    public List<Categoria> cargarCategorias() {
+        return (List<Categoria>) categoriaDAO.findAll();
+    }
+
     public Calendario modificarCalendario(Long idCalendario, Calendario calendarioModificado){
         Calendario calendario = calendarioDAO.findById(idCalendario).
             orElseThrow(() -> new IllegalArgumentException("Calendario no encontrado"));
