@@ -9,12 +9,16 @@ import com.example.restservice.Cliente.GestDatosCliente;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RendimientoTest {
 
     @LocalServerPort
     int port;
+
+    private static final Logger logger = LoggerFactory.getLogger(RendimientoTest.class);
 
     @Test
     void rendimiento_casoExitoso() {
@@ -92,4 +96,34 @@ class RendimientoTest {
             t.join();
         }
     }
+
+
+    @Test
+    void rendimiento_average_max() {
+        String baseUrl = "http://localhost:" + port;
+        GestDatosCliente client = new GestDatosCliente(baseUrl);
+
+        List<Long> tiempos = new java.util.ArrayList<>();
+
+        for (int i = 0; i < 50; i++) {
+            long inicio = System.currentTimeMillis();
+
+            List<Usuario> usuarios = client.obtenerUsuarios();
+            assertThat(usuarios).isNotNull();
+
+            long fin = System.currentTimeMillis();
+            tiempos.add(fin - inicio);
+        }
+
+        double avg = tiempos.stream().mapToLong(Long::longValue).average().orElse(0);
+        long max = tiempos.stream().mapToLong(Long::longValue).max().orElse(0);
+
+        logger.info("AVG: {}", avg);
+        logger.info("MAX: {}", max);
+
+        assertThat(avg).isGreaterThan(0);
+        assertThat(max).isGreaterThan(0);
+    }
+
+
 }
