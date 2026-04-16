@@ -1,7 +1,7 @@
 package com.example.restservice;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
@@ -19,13 +19,18 @@ class GestDatosControllerIntegrationTest {
 
     @Test
     void clienteDeberiaLlamarAlServidor() {
-
         String baseUrl = "http://localhost:" + port;
-
         GestDatosCliente client = new GestDatosCliente(baseUrl);
-
         List<Usuario> usuarios = client.obtenerUsuarios();
 
         assertThat(usuarios).isNotNull();
+    }
+
+    @Test
+    void clienteFallaConServidorNoDisponible() {
+        GestDatosCliente client = new GestDatosCliente("http://localhost:9999");
+
+        assertThatThrownBy(client::obtenerUsuarios)
+                .isInstanceOf(Exception.class);
     }
 }
