@@ -46,4 +46,24 @@ class RendimientoTest {
 
         assertThat(duracion).isGreaterThan(200);
     }
+
+
+    @Test
+    void rendimiento_invocaciones() {
+        String baseUrl = "http://localhost:" + port;
+        GestDatosCliente client = new GestDatosCliente(baseUrl);
+
+        int invocaciones = 200;
+
+        long inicio = System.currentTimeMillis();
+
+        for (int i = 0; i < invocaciones; i++) {
+            List<Usuario> usuarios = client.obtenerUsuarios();
+            assertThat(usuarios).isNotNull();
+        }
+
+        long duracion = System.currentTimeMillis() - inicio;
+
+        assertThat(duracion).isGreaterThan(0);
+    }
 }
