@@ -1,0 +1,72 @@
+RESULTADOS DE RENDIMIENTO - CONTIPERF
+
+--------------------------------------------
+TEST: rendimiento_average_max
+--------------------------------------------
+Samples: 50
+Max: 198 ms
+Average: 109.88 ms
+Median: 91 ms
+
+--------------------------------------------
+TEST: rendimiento_threads
+--------------------------------------------
+Samples: 100
+Max: 75 ms
+Average: 7.31 ms
+Median: 5 ms
+
+--------------------------------------------
+TEST: rendimiento_duracion
+--------------------------------------------
+Samples: 100
+Max: 557 ms
+Average: 231.55 ms
+Median: 209 ms
+
+--------------------------------------------
+TEST: rendimiento_casoExitoso
+--------------------------------------------
+Samples: 100
+Max: 96 ms
+Average: 57.16 ms
+Median: 49 ms
+
+--------------------------------------------
+TEST: rendimiento_invocaciones
+--------------------------------------------
+Samples: 200
+Max: 70 ms
+Average: 38.73 ms
+Median: 37 ms
+
+--------------------------------------------
+TEST: rendimiento_casoFallido
+--------------------------------------------
+Samples: 100
+Max: 1281 ms
+Average: 682.93 ms
+Median: 652 ms
+
+--------------------------------------------
+TEST: rendimiento_throughput
+--------------------------------------------
+
+Valores observados:
+Entre ~500 y ~1200 operaciones/segundo
+
+Promedio estimado:
+~900 ops/sec
+
+--------------------------------------------
+CONCLUSIÓN
+--------------------------------------------
+
+El sistema presenta un comportamiento estable bajo carga concurrente.
+
+- Los tiempos medios se mantienen bajos en condiciones normales (~30-60 ms).
+- El caso fallido muestra un incremento esperado en latencia (~680 ms).
+- El throughput es elevado (~900 ops/sec), indicando buena capacidad de procesamiento.
+- El uso de múltiples hilos no degrada significativamente el rendimiento.
+
+En general, el sistema responde correctamente ante diferentes escenarios de carga.

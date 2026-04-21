@@ -6,24 +6,42 @@ import java.util.List;
 
 import com.example.restservice.Entity.Usuario;
 import com.example.restservice.Cliente.GestDatosCliente;
-import org.junit.jupiter.api.Test;
+
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.junit.ContiPerfRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.web.server.LocalServerPort;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class RendimientoTest {
+public class RendimientoTest {
 
     @LocalServerPort
     int port;
 
     private static final Logger logger = LoggerFactory.getLogger(RendimientoTest.class);
 
+    @Rule
+    public ContiPerfRule rule = new ContiPerfRule();
+
+    private GestDatosCliente getClient() {
+        return new GestDatosCliente("http://localhost:" + port);
+    }
+
+    // CASO EXITOSO
     @Test
-    void rendimiento_casoExitoso() {
-        String baseUrl = "http://localhost:" + port;
-        GestDatosCliente client = new GestDatosCliente(baseUrl);
+    @PerfTest(invocations = 100, threads = 5)
+    public void rendimiento_casoExitoso() {
+        GestDatosCliente client = getClient();
 
         long inicio = System.currentTimeMillis();
         for (int i = 0; i < 100; i++) {
@@ -35,10 +53,11 @@ class RendimientoTest {
         assertThat(duracion).isLessThan(5000);
     }
 
+    // CASO FALLIDO
     @Test
-    void rendimiento_casoFallido() throws InterruptedException {
-        String baseUrl = "http://localhost:" + port;
-        GestDatosCliente client = new GestDatosCliente(baseUrl);
+    @PerfTest(invocations = 100, threads = 5)
+    public void rendimiento_casoFallido() throws InterruptedException {
+        GestDatosCliente client = getClient();
 
         long inicio = System.currentTimeMillis();
         for (int i = 0; i < 100; i++) {
@@ -51,57 +70,31 @@ class RendimientoTest {
         assertThat(duracion).isGreaterThan(200);
     }
 
-
+    // INVOCACIONES
     @Test
-    void rendimiento_invocaciones() {
-        String baseUrl = "http://localhost:" + port;
-        GestDatosCliente client = new GestDatosCliente(baseUrl);
+    @PerfTest(invocations = 200, threads = 1)
+    public void rendimiento_invocaciones() {
+        GestDatosCliente client = getClient();
 
-        int invocaciones = 200;
-
-        long inicio = System.currentTimeMillis();
-
-        for (int i = 0; i < invocaciones; i++) {
+        for (int i = 0; i < 200; i++) {
             List<Usuario> usuarios = client.obtenerUsuarios();
             assertThat(usuarios).isNotNull();
         }
-
-        long duracion = System.currentTimeMillis() - inicio;
-
-        assertThat(duracion).isGreaterThan(0);
     }
 
-
-
+    // HILOS
     @Test
-    void rendimiento_threads() throws InterruptedException {
-        String baseUrl = "http://localhost:" + port;
-        GestDatosCliente client = new GestDatosCliente(baseUrl);
-
-        int numThreads = 5;
-        Thread[] threads = new Thread[numThreads];
-
-        for (int i = 0; i < numThreads; i++) {
-            threads[i] = new Thread(() -> {
-                List<Usuario> usuarios = client.obtenerUsuarios();
-                assertThat(usuarios).isNotNull();
-            });
-        }
-
-        for (Thread t : threads) {
-            t.start();
-        }
-
-        for (Thread t : threads) {
-            t.join();
-        }
+    @PerfTest(invocations = 100, threads = 5)
+    public void rendimiento_threads() {
+        List<Usuario> usuarios = getClient().obtenerUsuarios();
+        assertThat(usuarios).isNotNull();
     }
 
-
+    // PROMEDIO Y MAX
     @Test
-    void rendimiento_average_max() {
-        String baseUrl = "http://localhost:" + port;
-        GestDatosCliente client = new GestDatosCliente(baseUrl);
+    @PerfTest(invocations = 50, threads = 2)
+    public void rendimiento_average_max() {
+        GestDatosCliente client = getClient();
 
         List<Long> tiempos = new java.util.ArrayList<>();
 
@@ -125,5 +118,41 @@ class RendimientoTest {
         assertThat(max).isGreaterThan(0);
     }
 
+    // THROUGHPUT
+    @Test
+    @PerfTest(invocations = 200, threads = 10)
+    public void rendimiento_throughput() {
+        int operaciones = 200;
 
+        long inicio = System.currentTimeMillis();
+
+        for (int i = 0; i < operaciones; i++) {
+            getClient().obtenerUsuarios();
+        }
+
+        long duracion = System.currentTimeMillis() - inicio;
+
+        double throughput = (operaciones * 1000.0) / duracion;
+
+        logger.info("Throughput: {} ops/sec", throughput);
+
+        assertThat(throughput).isGreaterThan(0);
+    }
+
+    // DURACIÓN
+    @Test
+    @PerfTest(invocations = 100, threads = 5)
+    public void rendimiento_duracion() {
+        long inicio = System.currentTimeMillis();
+
+        for (int i = 0; i < 100; i++) {
+            getClient().obtenerUsuarios();
+        }
+
+        long duracion = System.currentTimeMillis() - inicio;
+
+        logger.info("Duración total: {} ms", duracion);
+
+        assertThat(duracion).isLessThan(10000);
+    }
 }
