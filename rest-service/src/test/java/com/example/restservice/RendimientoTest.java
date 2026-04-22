@@ -53,7 +53,7 @@ public class RendimientoTest {
         assertThat(duracion).isLessThan(5000);
     }
 
-    // CASO FALLIDO
+    // CASO FALLIDO, este test pasa pero comprueba que falla 
     @Test
     @PerfTest(invocations = 100, threads = 5)
     public void rendimiento_casoFallido() throws InterruptedException {
