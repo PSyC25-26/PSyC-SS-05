@@ -1,1 +1,1 @@
-CREATE DATABASE db_calidad;
+SHOW TABLES;
