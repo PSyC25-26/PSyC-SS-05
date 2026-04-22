@@ -42,7 +42,6 @@ class GestDatosControllerIntegrationTest {
     void testFlujoCompletoUsuarioYCalendario() {
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setUsername("usuarioIntegracion");
-        // FIX: Añadimos los campos requeridos por nullable = false
         nuevoUsuario.setEmail("integracion@test.com");
         nuevoUsuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         
@@ -77,23 +76,20 @@ class GestDatosControllerIntegrationTest {
     void testFlujoCompletoTareaYCategoria() {
         Usuario usuario = new Usuario();
         usuario.setUsername("usuarioParaTarea");
-        // Ya lo tenías añadido, pero nos aseguramos de que esté
         usuario.setEmail("tarea_integracion@test.com");
         usuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();
 
         Categoria categoria = new Categoria();
-        // FIX: Añadimos el campo nombre requerido
         categoria.setNombre("Categoria de Integracion");
         ResponseEntity<Long> responseCategoria = restTemplate.postForEntity(baseUrl + "/guardarCategoria", categoria, Long.class);
         assertThat(responseCategoria.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         Long idCategoria = responseCategoria.getBody();
-        categoria.setId(idCategoria); // FIX: Guardamos el ID en el objeto para asociarlo correctamente a la tarea
+        categoria.setId(idCategoria);
 
         Tarea tarea = new Tarea();
         tarea.setTitulo("Tarea de Integracion");
         tarea.setDescripcion("Descripcion de prueba");
-        // FIX: Añadimos fechas y categoría requeridas por nullable = false
         tarea.setFechaInicio(LocalDateTime.now());
         tarea.setFechaFin(LocalDateTime.now().plusDays(1));
         tarea.setCategoria(categoria);
@@ -110,7 +106,6 @@ class GestDatosControllerIntegrationTest {
 
         Tarea tareaModificada = new Tarea();
         tareaModificada.setTitulo("Tarea Modificada");
-        // FIX: Completamos el objeto modificado para no lanzar excepciones de validación en el backend
         tareaModificada.setDescripcion("Descripcion de prueba");
         tareaModificada.setFechaInicio(LocalDateTime.now());
         tareaModificada.setFechaFin(LocalDateTime.now().plusDays(1));
@@ -123,7 +118,7 @@ class GestDatosControllerIntegrationTest {
         assertThat(responsePutTarea.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responsePutTarea.getBody().getTitulo()).isEqualTo("Tarea Modificada");
 
-        // 6. Eliminar Tarea
+        //Eliminar Tarea
         ResponseEntity<Void> responseDeleteTarea = restTemplate.exchange(
                 baseUrl + "/eliminarTarea/" + idTarea, HttpMethod.DELETE, null, Void.class);
         assertThat(responseDeleteTarea.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
@@ -135,7 +130,6 @@ class GestDatosControllerIntegrationTest {
     void testGuardarCalendarioConFalloPorDuplicado() {
         Usuario usuario = new Usuario();
         usuario.setUsername("userCalendario");
-        // FIX: Añadimos los campos requeridos
         usuario.setEmail("calendario_error@test.com");
         usuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();
@@ -143,8 +137,7 @@ class GestDatosControllerIntegrationTest {
         Calendario nuevoCalendario = new Calendario();
         nuevoCalendario.setNombre("Calendario Extra");
 
-        // FIX: Cambiamos Long.class a String.class porque en caso de error (BAD_REQUEST)
-        // Spring Boot no devuelve un Long y falla el deserializador
+        
         ResponseEntity<String> responseError = restTemplate.postForEntity(baseUrl + "/guardarCalendario/" + idUsuario, nuevoCalendario, String.class);
         
         assertThat(responseError.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
