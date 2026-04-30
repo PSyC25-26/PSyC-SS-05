@@ -17,20 +17,24 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>21</java.version>
-	</properties>
+        <java.version>21</java.version>
+        <webdrivermanager.version>5.9.2</webdrivermanager.version>
+        <playwright.version>1.58.0</playwright.version>
+        <exec.maven.plugin.version>3.5.0</exec.maven.plugin.version>
+    </properties>
 
 	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-bom</artifactId>
-				<version>24.3.3</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>24.3.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+        </dependencies>
+    </dependencyManagement>
 
 	<dependencies>
 
@@ -94,6 +98,14 @@
     	<scope>test</scope>
 	</dependency>
 
+<!-- Esto se utiliza para los tests de Playwright -->
+	<dependency>
+		<groupId>com.microsoft.playwright</groupId>
+		<artifactId>playwright</artifactId>
+		<version>1.44.0</version>
+		<scope>test</scope>
+	</dependency>
+
 	</dependencies>
 
 <!-- Esto lo hago para hacer el calendario -->
@@ -139,7 +151,34 @@
                 	</execution>
             	</executions>
         	</plugin>
+
+		<!-- Esto se utiliza porque es necesario para que los binarios de los navegadores de Playwright puedan ser instalados a través de Maven -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec.maven.plugin.version}</version>
+			</plugin>
+
 		</plugins>
 	</build>
 
+	<profiles>
+		<!-- Esto se utiliza para ejecutar los tests de Playwright por separado usando mvn test -P playwright -->
+		<profile>
+			<id>playwright</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<includes>
+								<include>**/*Playwright*Test.java</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

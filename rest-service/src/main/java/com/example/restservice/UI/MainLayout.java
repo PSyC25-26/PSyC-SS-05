@@ -16,28 +16,32 @@ public class MainLayout extends AppLayout {
             .set("font-size", "var(--lumo-font-size-l)")
             .set("margin", "0");
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
+        DrawerToggle toggleBtn = new DrawerToggle();
+        toggleBtn.setId("menu-toggle-btn");
+
+        HorizontalLayout header = new HorizontalLayout(toggleBtn, logo);
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.setWidthFull();
         header.addClassNames("py-0", "px-m");
 
         addToNavbar(header);
 
-        //Sidebar con elementos (vacios de momento)
         VerticalLayout menu = new VerticalLayout();
-        
-        menu.add( //todas llevan a inicio de momento
-            createMenuLink("Inicio", InicioView.class),
-            createMenuLink("Tareas", TareaView.class),
-            createMenuLink("Categorías", CategoriaView.class),
-            createMenuLink("Configuración", InicioView.class)
-        );
 
+        // Todos los enlaces con sus IDs correctos para los tests
+        menu.add(
+            createMenuLink("Inicio",         "menu-link-inicio",         InicioView.class),
+            createMenuLink("Tareas",         "menu-link-tareas",         TareaView.class),
+            createMenuLink("Categorías",     "menu-link-categorias",     CategoriaView.class),  // <-- ID para el test
+            createMenuLink("Configuración",  "menu-link-configuracion",  InicioView.class)
+        );
+        
         addToDrawer(menu);
     }
 
-    //para crear los elementos del sidebar
-    private RouterLink createMenuLink(String viewName, Class<? extends com.vaadin.flow.component.Component> viewClass) {
-        return new RouterLink(viewName, viewClass);
+    private RouterLink createMenuLink(String viewName, String id, Class<? extends com.vaadin.flow.component.Component> viewClass) {
+        RouterLink link = new RouterLink(viewName, viewClass);
+        link.setId(id);
+        return link;
     }
 }

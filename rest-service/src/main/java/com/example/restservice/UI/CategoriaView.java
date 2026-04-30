@@ -25,11 +25,8 @@ public class CategoriaView extends VerticalLayout {
 
     private final GestDatosService service;
     private final TextField nombreField = new TextField("Nombre de la categoría");
-    
-    // 1. Usamos un Select (Desplegable) en lugar de un TextField para el color
     private final Select<ColorPredefinido> colorSelector = new Select<>();
 
-    // 2. Creamos una pequeña clase interna para guardar el nombre y el código HEX de cada color
     private static class ColorPredefinido {
         String nombre;
         String hex;
@@ -44,92 +41,89 @@ public class CategoriaView extends VerticalLayout {
         this.service = service;
         setAlignItems(Alignment.CENTER);
 
-        // Paleta de colores que queremos ofrecer al usuario
+        nombreField.setId("nombre-categoria");
+
         List<ColorPredefinido> paletaColores = Arrays.asList(
-            // Vibrantes / Llamativos (Alta urgencia o importancia)
-            new ColorPredefinido("Rojo Fuego", "#FF3333"),
-            new ColorPredefinido("Naranja Neón", "#FF9933"),
-            new ColorPredefinido("Amarillo Eléctrico", "#FFFF33"),
-            new ColorPredefinido("Verde Lima", "#33FF33"),
-            new ColorPredefinido("Cian Brillante", "#33FFFF"),
-            new ColorPredefinido("Magenta", "#FF33FF"),
+            // Vibrantes / Llamativos
+            new ColorPredefinido("Rojo Fuego",          "#FF3333"),
+            new ColorPredefinido("Naranja Neón",         "#FF9933"),
+            new ColorPredefinido("Amarillo Eléctrico",   "#FFFF33"),
+            new ColorPredefinido("Verde Lima",            "#33FF33"),
+            new ColorPredefinido("Cian Brillante",        "#33FFFF"),
+            new ColorPredefinido("Magenta",               "#FF33FF"),
 
-            // Tonos Pastel (Suaves, ideales para no saturar el calendario)
-            new ColorPredefinido("Rosa Pastel", "#FFB3BA"),
-            new ColorPredefinido("Melocotón", "#FFDFBA"),
-            new ColorPredefinido("Amarillo Vainilla", "#FFFFBA"),
-            new ColorPredefinido("Verde Menta", "#BAFFC9"),
-            new ColorPredefinido("Azul Hielo", "#BAE1FF"),
-            new ColorPredefinido("Lavanda Suave", "#D7BDE2"),
+            // Tonos Pastel
+            new ColorPredefinido("Rosa Pastel",           "#FFB3BA"),
+            new ColorPredefinido("Melocotón",             "#FFDFBA"),
+            new ColorPredefinido("Amarillo Vainilla",     "#FFFFBA"),
+            new ColorPredefinido("Verde Menta",           "#BAFFC9"),
+            new ColorPredefinido("Azul Hielo",            "#BAE1FF"),
+            new ColorPredefinido("Lavanda Suave",         "#D7BDE2"),
 
-            // Tonos Profundos / Oscuros (Elegantes y sobrios)
-            new ColorPredefinido("Rojo Vino", "#800000"),
-            new ColorPredefinido("Verde Bosque", "#006400"),
-            new ColorPredefinido("Azul Marino", "#000080"),
-            new ColorPredefinido("Berenjena", "#4B0082"),
-            new ColorPredefinido("Gris Antracita", "#2F4F4F"),
-            new ColorPredefinido("Marrón Chocolate", "#8B4513"),
+            // Tonos Profundos / Oscuros
+            new ColorPredefinido("Rojo Vino",             "#800000"),
+            new ColorPredefinido("Verde Bosque",          "#006400"),
+            new ColorPredefinido("Azul Marino",           "#000080"),
+            new ColorPredefinido("Berenjena",             "#4B0082"),
+            new ColorPredefinido("Gris Antracita",        "#2F4F4F"),
+            new ColorPredefinido("Marrón Chocolate",      "#8B4513"),
 
             // Colores Clásicos / Corporativos
-            new ColorPredefinido("Azul Cobalto", "#2E86C1"),
-            new ColorPredefinido("Rojo Carmesí", "#E74C3C"),
-            new ColorPredefinido("Verde Esmeralda", "#27AE60"),
-            new ColorPredefinido("Naranja Zanahoria", "#D35400"),
-            new ColorPredefinido("Amatista", "#9B59B6"),
-            
+            new ColorPredefinido("Azul Cobalto",          "#2E86C1"),
+            new ColorPredefinido("Rojo Carmesí",          "#E74C3C"),
+            new ColorPredefinido("Verde Esmeralda",       "#27AE60"),
+            new ColorPredefinido("Naranja Zanahoria",     "#D35400"),
+            new ColorPredefinido("Amatista",              "#9B59B6"),
+
             // Especiales / Tonos Tierra
-            new ColorPredefinido("Ocre", "#CC7722"),
-            new ColorPredefinido("Turquesa Oscuro", "#008B8B"),
-            new ColorPredefinido("Oro Viejo", "#DAA520"),
-            new ColorPredefinido("Verde Oliva", "#808000"),
-            new ColorPredefinido("Rosa Coral", "#F08080")
+            new ColorPredefinido("Ocre",                  "#CC7722"),
+            new ColorPredefinido("Turquesa Oscuro",       "#008B8B"),
+            new ColorPredefinido("Oro Viejo",             "#DAA520"),
+            new ColorPredefinido("Verde Oliva",           "#808000"),
+            new ColorPredefinido("Rosa Coral",            "#F08080")
         );
 
-        //Configuramos el desplegable
         colorSelector.setLabel("Color para el calendario");
         colorSelector.setItems(paletaColores);
-        colorSelector.setValue(paletaColores.get(2)); // Ponemos el azul por defecto
+        colorSelector.setValue(paletaColores.get(2));
+        colorSelector.setId("color-categoria");
 
-        //Le decimos a Vaadin cómo debe dibujar cada opción en el desplegable
         colorSelector.setRenderer(new ComponentRenderer<>(color -> {
-            // Creamos un cuadradito pintado
             Div colorBox = new Div();
             colorBox.setWidth("20px");
             colorBox.setHeight("20px");
             colorBox.getStyle().set("background-color", color.hex);
-            colorBox.getStyle().set("border-radius", "4px"); // Bordes redondeados
+            colorBox.getStyle().set("border-radius", "4px");
             colorBox.getStyle().set("border", "1px solid #ccc");
 
-            // Creamos el texto
             Span colorName = new Span(color.nombre);
 
-            // Los ponemos uno al lado del otro
             HorizontalLayout layout = new HorizontalLayout(colorBox, colorName);
             layout.setAlignItems(Alignment.CENTER);
             layout.setSpacing(true);
             return layout;
         }));
 
-        //Botón de guardar
+        // Botón de guardar — ID "btn-guardar-categoria" para que el test lo encuentre
         Button btnCrear = new Button("Añadir Categoría", e -> {
             if (nombreField.isEmpty()) {
                 Notification.show("El nombre es obligatorio");
                 return;
             }
-            
+
             Categoria nueva = new Categoria();
             nueva.setNombre(nombreField.getValue());
-            // Cogemos el código HEX del color seleccionado
-            nueva.setColor(colorSelector.getValue().hex); 
-            
+            nueva.setColor(colorSelector.getValue().hex);
+
             service.guardarCategoria(nueva);
             Notification.show("¡Categoría '" + nueva.getNombre() + "' creada!");
-            
-            // Limpiamos para la siguiente
+
             nombreField.clear();
-            colorSelector.setValue(paletaColores.get(2)); 
+            colorSelector.setValue(paletaColores.get(2));
         });
+        btnCrear.setId("btn-guardar-categoria");  // <-- ID corregido para que coincida con el test
 
         add(new H2("Crear Nueva Categoría"), new FormLayout(nombreField, colorSelector, btnCrear));
+
     }
 }
