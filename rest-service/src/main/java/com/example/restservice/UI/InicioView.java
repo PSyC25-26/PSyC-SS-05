@@ -22,7 +22,6 @@ public class InicioView extends VerticalLayout {
     private final FullCalendar calendar;
     private final GestDatosService gestDatosService;
 
-    // AÑADIMOS EL SERVICIO AL CONSTRUCTOR
     public InicioView(GestDatosService gestDatosService) {
         this.gestDatosService = gestDatosService;
         
@@ -34,14 +33,20 @@ public class InicioView extends VerticalLayout {
         ComboBox<Categoria> filtroCategoriaCombo = new ComboBox<>("Filtrar por categoría");
         filtroCategoriaCombo.setItems(gestDatosService.cargarCategorias());
         filtroCategoriaCombo.setItemLabelGenerator(Categoria::getNombre);
-        filtroCategoriaCombo.setClearButtonVisible(true); // Permite borrar el filtro para ver todo
+        filtroCategoriaCombo.setClearButtonVisible(true);
         filtroCategoriaCombo.setWidth("300px");
+        
+        // ASIGNAMOS ID PARA TESTS
+        filtroCategoriaCombo.setId("filtro-categoria"); //
 
         // 2. CONFIGURAR EL CALENDARIO
         calendar = FullCalendarBuilder.create().build();
         calendar.setOption(FullCalendar.Option.LOCALE, Locale.of("es", "ES"));
         calendar.setOption("weekNumbers", false);
         calendar.setSizeFull(); 
+        
+        // ASIGNAMOS ID PARA TESTS
+        calendar.setId("calendario-principal"); //
 
         Map<String, Object> header = new HashMap<>();
         header.put("left", "prev,next today");
@@ -56,36 +61,28 @@ public class InicioView extends VerticalLayout {
         calendar.setOption("slotLabelFormat", timeFormat);
         calendar.setOption("eventTimeFormat", timeFormat);
 
-        // 3. LÓGICA DEL FILTRO
         filtroCategoriaCombo.addValueChangeListener(event -> {
             Categoria categoriaSeleccionada = event.getValue();
             actualizarCalendario(categoriaSeleccionada);
         });
 
-        // 4. CARGA INICIAL (Sin filtro)
         actualizarCalendario(null);
         
-        // 5. AÑADIR COMPONENTES A LA VISTA
         add(filtroCategoriaCombo, calendar);
     }
 
-    // MÉTODO AUXILIAR PARA RECARGAR EL CALENDARIO
     private void actualizarCalendario(Categoria categoriaFiltro) {
-        // 1. Borramos TODAS las entradas actuales de la memoria del calendario
         calendar.getEntryProvider().asInMemory().removeAllEntries();
 
-        // 2. Obtenemos la lista de tareas correspondiente
         List<Tarea> misTareas;
         if (categoriaFiltro == null) {
-            misTareas = gestDatosService.cargarTareas(); // Muestra todas si no hay filtro
+            misTareas = gestDatosService.cargarTareas(); 
         } else {
-            misTareas = gestDatosService.obtenerTareasPorCategoria(categoriaFiltro); // Muestra solo las de la categoría
+            misTareas = gestDatosService.obtenerTareasPorCategoria(categoriaFiltro); 
         }
         
-        // 3. Creamos y añadimos las nuevas entradas al calendario
         for (Tarea t : misTareas) {
             Entry entry = new Entry();
-            
             entry.setTitle(t.getTitulo()); 
             entry.setStart(t.getFechaInicio());
             entry.setEnd(t.getFechaFin());
@@ -97,8 +94,6 @@ public class InicioView extends VerticalLayout {
             }
             calendar.getEntryProvider().asInMemory().addEntries(entry);
         }
-
-        // 4. ¡NUEVO! Forzamos explícitamente al calendario a repintarse en la pantalla
         calendar.getEntryProvider().refreshAll();
     }
 }

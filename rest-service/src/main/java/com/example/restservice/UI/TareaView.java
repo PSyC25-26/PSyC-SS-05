@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @PageTitle("Gestión de Tareas")
 @Route(value = "tareas", layout = MainLayout.class)
 public class TareaView extends VerticalLayout {
@@ -32,8 +31,8 @@ public class TareaView extends VerticalLayout {
     private final Grid<Tarea> grid = new Grid<>(Tarea.class);
 
     // Componentes del apartado de AÑADIR
-    private final TextField tituloField = new TextField("Título de la tarea");
-    private final TextField descripcionField = new TextField("Descripción");
+    private final TextField tituloField = new TextField("Título");           // <-- Label "Título" para getByLabel()
+    private final TextField descripcionField = new TextField("Descripción"); // <-- Label "Descripción" para getByLabel()
     private final DateTimePicker fechaInicioField = new DateTimePicker("Fecha y hora de Inicio");
     private final DateTimePicker fechaFinField = new DateTimePicker("Fecha y hora de Fin");
     private final Button guardarBtn = new Button("Añadir Tarea");
@@ -56,25 +55,50 @@ public class TareaView extends VerticalLayout {
         this.service = service;
 
         setSizeFull();
-        setAlignItems(Alignment.CENTER); 
+        setAlignItems(Alignment.CENTER);
+
+        // ==========================================
+        // ASIGNACIÓN DE IDs PARA LOS TESTS
+        // ==========================================
+
+        // IDs - Sección Añadir
+        tituloField.setId("titulo-tarea");
+        descripcionField.setId("desc-tarea");
+        fechaInicioField.setId("fecha-inicio-tarea");
+        fechaFinField.setId("fecha-fin-tarea");
+        categoriaCombo.setId("categoria-tarea");
+        guardarBtn.setId("btn-guardar-tarea");
+
+        // IDs - Sección Editar
+        selectorTareaEditar.setId("selector-editar-tarea");
+        editTituloField.setId("edit-titulo-tarea");
+        editDescripcionField.setId("edit-desc-tarea");
+        editFechaInicioField.setId("edit-fecha-inicio-tarea");
+        editFechaFinField.setId("edit-fecha-fin-tarea");
+        guardarCambiosBtn.setId("btn-guardar-cambios-tarea");
+
+        // IDs - Sección Eliminar
+        selectorTareaEliminar.setId("selector-eliminar-tarea");
+        eliminarBtn.setId("btn-eliminar-tarea");
+
+        // ID - Tabla/Grid  <-- CAMBIO CLAVE: ahora es "tabla-tareas" para que coincida con el test
+        grid.setId("tabla-tareas");
 
         // ==========================================
         // 1. CONFIGURAR EL APARTADO DE AÑADIR
         // ==========================================
-        FormLayout formAñadir = new FormLayout(tituloField, descripcionField, fechaInicioField, fechaFinField, guardarBtn);
+        FormLayout formAñadir = new FormLayout();
         formAñadir.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2));
-        formAñadir.setMaxWidth("800px");      
+        formAñadir.setMaxWidth("800px");
 
-        // 2. Configurar el ComboBox de tareas
-        categoriaCombo.setItems(service.cargarCategorias()); // Carga las categorías existentes
+        categoriaCombo.setItems(service.cargarCategorias());
         categoriaCombo.setItemLabelGenerator(Categoria::getNombre);
         categoriaCombo.setRequired(true);
 
-        // 3. Añadir los campos a sus respectivos formularios
         formAñadir.add(tituloField, descripcionField, fechaInicioField, fechaFinField, categoriaCombo, guardarBtn);
 
         guardarBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        formAñadir.setColspan(guardarBtn, 2); 
+        formAñadir.setColspan(guardarBtn, 2);
         guardarBtn.addClickListener(e -> guardarNuevaTarea());
 
         // ==========================================
@@ -87,12 +111,10 @@ public class TareaView extends VerticalLayout {
         formEditar.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2));
         formEditar.setMaxWidth("800px");
 
-        guardarCambiosBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY); // Botón verde
-        
-        // Desactivamos los campos hasta que se seleccione una tarea
+        guardarCambiosBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
+
         desactivarCamposEdicion();
 
-        // Lógica: Cuando seleccionas una tarea, sus datos llenan el formulario
         selectorTareaEditar.addValueChangeListener(event -> {
             Tarea tareaSeleccionada = event.getValue();
             if (tareaSeleccionada != null) {
@@ -107,7 +129,7 @@ public class TareaView extends VerticalLayout {
         });
 
         guardarCambiosBtn.addClickListener(e -> guardarCambiosTarea());
-        
+
         VerticalLayout layoutEditar = new VerticalLayout(selectorTareaEditar, formEditar, guardarCambiosBtn);
         layoutEditar.setPadding(false);
         layoutEditar.setAlignItems(Alignment.CENTER);
@@ -122,24 +144,24 @@ public class TareaView extends VerticalLayout {
         eliminarBtn.addClickListener(e -> eliminarTareaSeleccionada());
 
         HorizontalLayout layoutEliminar = new HorizontalLayout(selectorTareaEliminar, eliminarBtn);
-        layoutEliminar.setDefaultVerticalComponentAlignment(Alignment.BASELINE); 
+        layoutEliminar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
 
         // ==========================================
         // 4. CONFIGURAR LA TABLA (GRID)
         // ==========================================
-        grid.setColumns("id", "titulo", "descripcion", "fechaInicio", "fechaFin"); 
-        actualizarDatosPantalla(); 
+        grid.setColumns("id", "titulo", "descripcion", "fechaInicio", "fechaFin");
+        actualizarDatosPantalla();
 
         // ==========================================
         // 5. AÑADIR TODO A LA PANTALLA VISUAL
         // ==========================================
         add(
-            new H2("Crear nueva tarea"), formAñadir, 
-            new Hr(), 
+            new H2("Crear nueva tarea"), formAñadir,
+            new Hr(),
             new H2("Editar tarea"), layoutEditar,
-            new Hr(), 
-            new H2("Eliminar tarea"), layoutEliminar, 
-            new Hr(), 
+            new Hr(),
+            new H2("Eliminar tarea"), layoutEliminar,
+            new Hr(),
             grid
         );
     }
@@ -151,42 +173,35 @@ public class TareaView extends VerticalLayout {
             return;
         }
 
-        // Obtener los valores de fecha y hora
         LocalDateTime nuevaInicio = fechaInicioField.getValue();
         LocalDateTime nuevaFin = fechaFinField.getValue();
 
-        // Comprobar que la fecha de inicio es anterior a la de fin
         if (nuevaInicio.isAfter(nuevaFin) || nuevaInicio.isEqual(nuevaFin)) {
             Notification.show("La fecha de inicio debe ser anterior a la de fin.").addThemeVariants(NotificationVariant.LUMO_ERROR);
             return;
         }
 
-        //Comprobación de solapamiento con las tareas existentes
         boolean haySolapamiento = false;
         for (Tarea t : service.cargarTareas()) {
             if (nuevaInicio.isBefore(t.getFechaFin()) && nuevaFin.isAfter(t.getFechaInicio())) {
                 haySolapamiento = true;
-                break; 
+                break;
             }
         }
 
         if (haySolapamiento) {
             Notification.show("Error: Ya existe una tarea en este horario.").addThemeVariants(NotificationVariant.LUMO_ERROR);
-            return; 
+            return;
         }
 
-        //Si llegamos aquí, no hay solapamiento. Guardamos la tarea.
         Tarea nuevaTarea = new Tarea();
         nuevaTarea.setTitulo(tituloField.getValue());
         nuevaTarea.setDescripcion(descripcionField.getValue());
-        nuevaTarea.setFechaInicio(nuevaInicio); 
-        nuevaTarea.setFechaFin(nuevaFin);  
-        nuevaTarea.setCategoria(categoriaCombo.getValue()); // Asignamos la categoría elegida     
+        nuevaTarea.setFechaInicio(nuevaInicio);
+        nuevaTarea.setFechaFin(nuevaFin);
+        nuevaTarea.setCategoria(categoriaCombo.getValue());
 
-        if (!categoriaCombo.isEmpty()) {
-            nuevaTarea.setCategoria(categoriaCombo.getValue());
-        }
-        service.guardarTarea(nuevaTarea); 
+        service.guardarTarea(nuevaTarea);
         Notification.show("¡Tarea guardada!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
         tituloField.clear(); descripcionField.clear(); fechaInicioField.clear(); fechaFinField.clear();
@@ -196,23 +211,21 @@ public class TareaView extends VerticalLayout {
     // --- MÉTODOS DE EDITAR ---
     private void guardarCambiosTarea() {
         Tarea tareaModificada = selectorTareaEditar.getValue();
-        
+
         if (tareaModificada == null || editTituloField.isEmpty() || editDescripcionField.isEmpty() || editFechaInicioField.isEmpty() || editFechaFinField.isEmpty()) {
             Notification.show("Revisa que no haya campos vacíos al editar.").addThemeVariants(NotificationVariant.LUMO_ERROR);
             return;
         }
 
-        // Actualizamos los valores del objeto existente
         tareaModificada.setTitulo(editTituloField.getValue());
         tareaModificada.setDescripcion(editDescripcionField.getValue());
         tareaModificada.setFechaInicio(editFechaInicioField.getValue());
         tareaModificada.setFechaFin(editFechaFinField.getValue());
 
-        // Al guardar un objeto que ya tiene ID, Spring hace un UPDATE automáticamente
         service.guardarTarea(tareaModificada);
-        
+
         Notification.show("¡Cambios guardados correctamente!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-        
+
         selectorTareaEditar.clear();
         desactivarCamposEdicion();
         actualizarDatosPantalla();
@@ -252,7 +265,6 @@ public class TareaView extends VerticalLayout {
 
     // --- MÉTODOS AUXILIARES ---
     private void actualizarDatosPantalla() {
-        // Recargar los datos en todos los sitios donde se muestran
         grid.setItems(service.listarTodasLasTareas());
         selectorTareaEliminar.setItems(service.listarTodasLasTareas());
         selectorTareaEditar.setItems(service.listarTodasLasTareas());
