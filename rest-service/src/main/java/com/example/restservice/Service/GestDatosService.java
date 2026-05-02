@@ -25,21 +25,7 @@ public class GestDatosService {
         this.calendarioDAO = calendarioDAO;
     }
 
-    public Long guardarUsuario(Usuario usuario){
-        if (usuario == null) {
-            throw new IllegalArgumentException("El usuario no puede ser nulo");
-        }
-
-        Calendario nuevoCalendario = new Calendario();
-        nuevoCalendario.setNombre("Calendario de " + usuario.getUsername());
-        
-        nuevoCalendario.setPropietario(usuario);
-        usuario.setCalendario(nuevoCalendario);
-
-        Usuario usuarioGuardado = usuarioDAO.save(usuario);
-        
-        return usuarioGuardado.getId();
-    }
+    
 
     public long guardarTarea(Tarea tarea, List<Long> idUsuarios){ // <-- Cambiado a List<Long>
         if (tarea == null) {
@@ -83,12 +69,20 @@ public class GestDatosService {
         return calendarioGuardado.getId();
     }
 
-    public long guardarCategoria(Categoria categoria) {
+    public long guardarCategoria(Categoria categoria, Long idUsuario) {
         if (categoria == null) {
             throw new IllegalArgumentException("La categoría no puede ser nula");
         }
+        // Buscamos el usuario en la BD y se lo asignamos a la categoría
+        Usuario propietario = usuarioDAO.findById(idUsuario).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+        categoria.setUsuario(propietario);
+        
         Categoria categoriaGuardada = categoriaDAO.save(categoria);
         return categoriaGuardada.getId();
+    }
+
+    public List<Categoria> obtenerCategoriasPorUsuario(Long idUsuario) {
+        return categoriaDAO.findByUsuario_Id(idUsuario);
     }
 
 
@@ -204,17 +198,33 @@ public class GestDatosService {
 
     public void eliminarTarea(Tarea tarea) {
         tareaDAO.delete(tarea);
-}
+    }
 
     public DataProvider<Tarea, Void> getAllTareas() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllTareas'");
     }
+    public Usuario guardarUsuario(Usuario usuario) {
+        // Usamos tu UsuarioDAO real
+        return usuarioDAO.save(usuario);
+    }
 
+    public Usuario autenticarUsuario(String username, String password) {
+        // Usamos tu usuarioDAO para traer todos los usuarios
+        Iterable<Usuario> todosLosUsuarios = usuarioDAO.findAll();
+        
+        for (Usuario u : todosLosUsuarios) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                return u; // Coinciden usuario y contraseña
+            }
+        }
+        return null; // No coinciden
+    }
     public List<Tarea> obtenerTareasPorCategoria(Categoria categoria) {
         if (categoria == null) {
             return listarTodasLasTareas();
         }
         return tareaDAO.findByCategoria(categoria);
     }
+    
 }

@@ -1,8 +1,18 @@
 package com.example.restservice.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "categorias")
@@ -19,10 +29,10 @@ public class Categoria {
     private String color; // Ej: "#FF0000" para tareas urgentes
 
     // // Relación opcional: Si quieres que las categorías sean propias de cada usuario
-    // @ManyToOne
-    // @JoinColumn(name = "usuario_id", nullable = false)
-    // @JsonIgnore // Para evitar bucles infinitos al devolver JSON
-    // private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnore // Para evitar bucles infinitos al devolver JSON
+    private Usuario usuario;
 
     // Relación bidireccional (opcional): Para saber qué tareas tienen esta categoría
     @OneToMany(mappedBy = "categoria")
@@ -57,5 +67,11 @@ public class Categoria {
     public void setColor(String color) {
         this.color = color;
     }
-   
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

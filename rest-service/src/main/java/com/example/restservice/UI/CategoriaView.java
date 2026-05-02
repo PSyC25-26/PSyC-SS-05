@@ -1,5 +1,8 @@
 package com.example.restservice.UI;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.example.restservice.Entity.Categoria;
 import com.example.restservice.Service.GestDatosService;
 import com.vaadin.flow.component.button.Button;
@@ -15,9 +18,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import java.util.Arrays;
-import java.util.List;
 
 @PageTitle("Categorías")
 @Route(value = "categorias", layout = MainLayout.class)
@@ -110,16 +110,22 @@ public class CategoriaView extends VerticalLayout {
                 Notification.show("El nombre es obligatorio");
                 return;
             }
-
-            Categoria nueva = new Categoria();
-            nueva.setNombre(nombreField.getValue());
-            nueva.setColor(colorSelector.getValue().hex);
-
-            service.guardarCategoria(nueva);
-            Notification.show("¡Categoría '" + nueva.getNombre() + "' creada!");
-
-            nombreField.clear();
-            colorSelector.setValue(paletaColores.get(2));
+            
+            // 1. Recuperamos el ID del usuario logueado
+            Long usuarioId = (Long) com.vaadin.flow.server.VaadinSession.getCurrent().getAttribute("usuarioId");
+            
+            if (usuarioId != null) {
+                Categoria nueva = new Categoria();
+                nueva.setNombre(nombreField.getValue());
+                nueva.setColor(colorSelector.getValue().hex);
+                
+                // 2. Pasamos el usuarioId al servicio
+                service.guardarCategoria(nueva, usuarioId);
+                
+                Notification.show("Categoría '" + nueva.getNombre() + "' creada!");
+                nombreField.clear();
+                colorSelector.setValue(paletaColores.get(2));
+            }
         });
         btnCrear.setId("btn-guardar-categoria");  // <-- ID corregido para que coincida con el test
 

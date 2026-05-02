@@ -29,7 +29,12 @@ public class GestDatosController {
   @PostMapping("/guardarUsuario")
   public ResponseEntity <Long> guardarUsuario (@RequestBody Usuario usuario) {
     try{
-      Long idUsuario = gestDatosService.guardarUsuario(usuario);
+      // 1. Guardamos el usuario y recogemos el objeto Usuario devuelto
+      Usuario usuarioGuardado = gestDatosService.guardarUsuario(usuario);
+      
+      // 2. Le pedimos el ID a ese usuario guardado
+      Long idUsuario = usuarioGuardado.getId();
+      
       return new ResponseEntity<>(idUsuario, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
@@ -76,10 +81,11 @@ public class GestDatosController {
     }
   }
 
-  @PostMapping("/guardarCategoria")
-  public ResponseEntity<Long> guardarCategoria(@RequestBody Categoria categoria) {
+  @PostMapping("/guardarCategoria/{idUsuario}")
+  public ResponseEntity<Long> guardarCategoria(@PathVariable("idUsuario") Long idUsuario, @RequestBody Categoria categoria) {
     try {
-      Long idCategoria = gestDatosService.guardarCategoria(categoria);
+      // Ahora sí recibimos el idUsuario por la URL
+      Long idCategoria = gestDatosService.guardarCategoria(categoria, idUsuario);
       return new ResponseEntity<>(idCategoria, HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
       e.printStackTrace();

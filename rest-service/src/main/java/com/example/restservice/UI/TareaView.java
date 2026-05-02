@@ -1,5 +1,10 @@
 package com.example.restservice.UI;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.restservice.Entity.Categoria;
 import com.example.restservice.Entity.Tarea;
 import com.example.restservice.Service.GestDatosService;
@@ -18,10 +23,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import java.time.LocalDateTime;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vaadin.flow.server.VaadinSession;
 
 @PageTitle("Gestión de Tareas")
 @Route(value = "tareas", layout = MainLayout.class)
@@ -91,7 +93,11 @@ public class TareaView extends VerticalLayout {
         formAñadir.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2));
         formAñadir.setMaxWidth("800px");
 
-        categoriaCombo.setItems(service.cargarCategorias());
+        Long usuarioId = (Long) com.vaadin.flow.server.VaadinSession.getCurrent().getAttribute("usuarioId");
+        if (usuarioId != null) {
+            categoriaCombo.setItems(service.obtenerCategoriasPorUsuario(usuarioId));
+        }
+        
         categoriaCombo.setItemLabelGenerator(Categoria::getNombre);
         categoriaCombo.setRequired(true);
 
@@ -201,11 +207,19 @@ public class TareaView extends VerticalLayout {
         nuevaTarea.setFechaFin(nuevaFin);
         nuevaTarea.setCategoria(categoriaCombo.getValue());
 
-        service.guardarTarea(nuevaTarea);
-        Notification.show("¡Tarea guardada!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-
-        tituloField.clear(); descripcionField.clear(); fechaInicioField.clear(); fechaFinField.clear();
-        actualizarDatosPantalla();
+        Long usuarioId = (Long) VaadinSession.getCurrent().getAttribute("usuarioId");
+        
+        if (usuarioId != null) {
+            // Usamos el método de tu servicio que SÍ recibe la lista de IDs para enlazar la relación
+            service.guardarTarea(nuevaTarea, java.util.List.of(usuarioId));
+            
+            Notification.show("¡Tarea guardada!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+            tituloField.clear(); descripcionField.clear(); fechaInicioField.clear(); fechaFinField.clear();
+            actualizarDatosPantalla(); // Refresca la tabla
+        } else {
+            Notification.show("Error: Sesión no válida").addThemeVariants(NotificationVariant.LUMO_ERROR);
+        }
+    
     }
 
     // --- MÉTODOS DE EDITAR ---
@@ -265,8 +279,16 @@ public class TareaView extends VerticalLayout {
 
     // --- MÉTODOS AUXILIARES ---
     private void actualizarDatosPantalla() {
-        grid.setItems(service.listarTodasLasTareas());
-        selectorTareaEliminar.setItems(service.listarTodasLasTareas());
-        selectorTareaEditar.setItems(service.listarTodasLasTareas());
-    }
+            // 1. Recuperamos quién es el usuario logueado
+            Long usuarioId = (Long) VaadinSession.getCurrent().getAttribute("usuarioId");
+            
+            if (usuarioId != null) {
+                // 2. Pedimos SOLO las tareas de este usuario
+                List<Tarea> misTareas = service.obtenerTareasPorUsuario(usuarioId);
+                
+                grid.setItems(misTareas);
+                selectorTareaEliminar.setItems(misTareas);
+                selectorTareaEditar.setItems(misTareas);
+            }
+        }
 }

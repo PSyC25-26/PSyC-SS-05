@@ -1,22 +1,25 @@
 package com.example.restservice.UI;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import org.vaadin.stefan.fullcalendar.Entry;
+import org.vaadin.stefan.fullcalendar.FullCalendar;
+import org.vaadin.stefan.fullcalendar.FullCalendarBuilder;
+
+import com.example.restservice.Entity.Categoria;
+import com.example.restservice.Entity.Tarea;
+import com.example.restservice.Service.GestDatosService;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.vaadin.stefan.fullcalendar.FullCalendar;
-import org.vaadin.stefan.fullcalendar.FullCalendarBuilder;
-import org.vaadin.stefan.fullcalendar.Entry;
-import java.util.Locale;
-import java.util.HashMap;
-import java.util.Map;
-import com.example.restservice.Service.GestDatosService;
-import com.example.restservice.Entity.Tarea;
-import com.example.restservice.Entity.Categoria;
-import java.util.List;
+import com.vaadin.flow.server.VaadinSession;
 
 @PageTitle("Inicio")
-@Route(value = "", layout = MainLayout.class) 
+@Route(value = "inicio", layout = MainLayout.class) 
 public class InicioView extends VerticalLayout {
 
     private final FullCalendar calendar;
@@ -31,7 +34,10 @@ public class InicioView extends VerticalLayout {
         
         // 1. CONFIGURAR EL FILTRO DE CATEGORÍAS
         ComboBox<Categoria> filtroCategoriaCombo = new ComboBox<>("Filtrar por categoría");
-        filtroCategoriaCombo.setItems(gestDatosService.cargarCategorias());
+        Long usuarioId = (Long) com.vaadin.flow.server.VaadinSession.getCurrent().getAttribute("usuarioId");
+        if (usuarioId != null) {
+            filtroCategoriaCombo.setItems(gestDatosService.obtenerCategoriasPorUsuario(usuarioId));
+        }
         filtroCategoriaCombo.setItemLabelGenerator(Categoria::getNombre);
         filtroCategoriaCombo.setClearButtonVisible(true);
         filtroCategoriaCombo.setWidth("300px");
@@ -72,28 +78,35 @@ public class InicioView extends VerticalLayout {
     }
 
     private void actualizarCalendario(Categoria categoriaFiltro) {
-        calendar.getEntryProvider().asInMemory().removeAllEntries();
-
-        List<Tarea> misTareas;
-        if (categoriaFiltro == null) {
-            misTareas = gestDatosService.cargarTareas(); 
-        } else {
-            misTareas = gestDatosService.obtenerTareasPorCategoria(categoriaFiltro); 
-        }
-        
-        for (Tarea t : misTareas) {
-            Entry entry = new Entry();
-            entry.setTitle(t.getTitulo()); 
-            entry.setStart(t.getFechaInicio());
-            entry.setEnd(t.getFechaFin());
+            calendar.getEntryProvider().asInMemory().removeAllEntries();
             
-            if (t.getCategoria() != null && t.getCategoria().getColor() != null) {
-                entry.setColor(t.getCategoria().getColor());
-            } else {
-                entry.setColor("#bdc3c7"); 
+            // 1. Recuperamos el usuario logueado
+            Long usuarioId = (Long) VaadinSession.getCurrent().getAttribute("usuarioId");
+            if (usuarioId == null) return; // Por seguridad, si no hay sesión no hace nada
+    
+            // 2. Obtenemos SOLO las tareas de este usuario
+            List<Tarea> misTareas = gestDatosService.obtenerTareasPorUsuario(usuarioId);
+    
+            // 3. Si además ha elegido filtrar por una categoría, filtramos la lista
+            if (categoriaFiltro != null) {
+                misTareas = misTareas.stream()
+                    .filter(t -> t.getCategoria() != null && t.getCategoria().getId().equals(categoriaFiltro.getId()))
+                    .toList(); // En Java 16+ se usa toList() o collect(Collectors.toList())
             }
-            calendar.getEntryProvider().asInMemory().addEntries(entry);
+            
+            for (Tarea t : misTareas) {
+                Entry entry = new Entry();
+                entry.setTitle(t.getTitulo());
+                entry.setStart(t.getFechaInicio());
+                entry.setEnd(t.getFechaFin());
+                
+                if (t.getCategoria() != null && t.getCategoria().getColor() != null) {
+                    entry.setColor(t.getCategoria().getColor());
+                } else {
+                    entry.setColor("#bdc3c7");
+                }
+                calendar.getEntryProvider().asInMemory().addEntries(entry);
+            }
+            calendar.getEntryProvider().refreshAll();
         }
-        calendar.getEntryProvider().refreshAll();
-    }
 }
