@@ -1,21 +1,26 @@
 package com.example.restservice.Service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.time.LocalDateTime;
 
-import com.example.restservice.Dao.*;
-import com.example.restservice.Entity.*;
-
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.example.restservice.Dao.CalendarioDAO;
+import com.example.restservice.Dao.CategoriaDAO;
+import com.example.restservice.Dao.TareaDAO;
+import com.example.restservice.Dao.UsuarioDAO;
+import com.example.restservice.Entity.Calendario;
+import com.example.restservice.Entity.Categoria;
+import com.example.restservice.Entity.Tarea;
+import com.example.restservice.Entity.Usuario;
 
 @ExtendWith(MockitoExtension.class)
 class GestDatosServiceTest {
@@ -50,15 +55,14 @@ class GestDatosServiceTest {
     void guardarUsuario_ok() {
         Usuario usuario = new Usuario();
         usuario.setUsername("test");
-
         Usuario usuarioGuardado = new Usuario();
         usuarioGuardado.setId(1L);
-
+        
         when(usuarioDAO.save(usuario)).thenReturn(usuarioGuardado);
-
-        Long id = gestDatosService.guardarUsuario(usuario);
-
-        assertThat(id).isEqualTo(1L);
+        
+        Usuario resultado = gestDatosService.guardarUsuario(usuario);
+        
+        assertThat(resultado.getId()).isEqualTo(1L);
     }
 
     
@@ -117,7 +121,7 @@ class GestDatosServiceTest {
     @Test
     void guardarCategoria_null_deberiaLanzarExcepcion() {
         assertThrows(IllegalArgumentException.class, () -> {
-            gestDatosService.guardarCategoria(null);
+            gestDatosService.guardarCategoria(null, 1L);
         });
     }
 
@@ -133,14 +137,18 @@ class GestDatosServiceTest {
     @Test
     void guardarCategoria_ok() {
         Categoria categoria = new Categoria();
-
         Categoria guardada = new Categoria();
         guardada.setId(1L);
-
+        
+        // CORRECCIÓN: Como ahora guardarCategoria busca al usuario, hay que simular (mockear) esa búsqueda
+        Usuario usuarioMock = new Usuario();
+        usuarioMock.setId(1L);
+        when(usuarioDAO.findById(1L)).thenReturn(java.util.Optional.of(usuarioMock));
         when(categoriaDAO.save(categoria)).thenReturn(guardada);
-
-        Long id = gestDatosService.guardarCategoria(categoria);
-
+        
+        // CORRECCIÓN: Ahora le pasamos el ID del usuario (ejemplo: 1L)
+        Long id = gestDatosService.guardarCategoria(categoria, 1L);
+        
         assertThat(id).isEqualTo(1L);
     }
 
@@ -161,15 +169,14 @@ class GestDatosServiceTest {
     @Test
     void guardarUsuario_sinUsername() {
         Usuario usuario = new Usuario();
-
         Usuario guardado = new Usuario();
         guardado.setId(2L);
-
+        
         when(usuarioDAO.save(usuario)).thenReturn(guardado);
-
-        Long id = gestDatosService.guardarUsuario(usuario);
-
-        assertThat(id).isEqualTo(2L);
+        
+        Usuario resultado = gestDatosService.guardarUsuario(usuario);
+        
+        assertThat(resultado.getId()).isEqualTo(2L);
     }
 
 

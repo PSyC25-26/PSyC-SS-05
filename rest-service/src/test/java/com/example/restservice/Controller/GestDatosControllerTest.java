@@ -1,21 +1,19 @@
 package com.example.restservice.Controller;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+
 import com.example.restservice.Entity.Calendario;
 import com.example.restservice.Entity.Categoria;
 import com.example.restservice.Entity.Tarea;
 import com.example.restservice.Entity.Usuario;
 import com.example.restservice.Service.GestDatosService;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.http.ResponseEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class GestDatosControllerTest {
 
@@ -74,18 +72,20 @@ class GestDatosControllerTest {
     @Test
     void guardarUsuario_ok() {
         logger.info("Test guardarUsuario_ok START");
-
         GestDatosService service = Mockito.mock(GestDatosService.class);
         GestDatosController controller = new GestDatosController(service);
-
+        
         Usuario usuario = new Usuario();
-        Mockito.when(service.guardarUsuario(usuario)).thenReturn(1L);
-
+        Usuario usuarioGuardado = new Usuario();
+        usuarioGuardado.setId(1L);
+        
+        // CORRECCIÓN: El mock debe devolver un objeto Usuario, no un 1L
+        Mockito.when(service.guardarUsuario(usuario)).thenReturn(usuarioGuardado);
+        
         ResponseEntity<Long> response = controller.guardarUsuario(usuario);
-
-        logger.info("Usuario guardado con status: {}", response.getStatusCodeValue());
-
-        assertThat(response.getStatusCodeValue()).isEqualTo(201);
+        
+        logger.info("Usuario guardado con status: {}", response.getStatusCode().value()); 
+        assertThat(response.getStatusCode().value()).isEqualTo(201);
     }
 
     @Test
@@ -179,36 +179,32 @@ class GestDatosControllerTest {
     @Test
     void guardarCategoria_ok() {
         logger.info("Test guardarCategoria_ok START");
-
         GestDatosService service = Mockito.mock(GestDatosService.class);
         GestDatosController controller = new GestDatosController(service);
-
+        
         Categoria categoria = new Categoria();
-
-        Mockito.when(service.guardarCategoria(categoria)).thenReturn(1L);
-
-        ResponseEntity<Long> response = controller.guardarCategoria(categoria);
-
-        logger.info("Categoria guardada, status: {}", response.getStatusCodeValue());
-
-        assertThat(response.getStatusCodeValue()).isEqualTo(201);
+        
+        Mockito.when(service.guardarCategoria(categoria, 1L)).thenReturn(1L);
+        
+        ResponseEntity<Long> response = controller.guardarCategoria(1L, categoria);
+        
+        logger.info("Categoria guardada, status: {}", response.getStatusCode().value());
+        assertThat(response.getStatusCode().value()).isEqualTo(201);
     }
 
     @Test
     void guardarCategoria_error() {
         logger.warn("Test guardarCategoria_error START");
-
         GestDatosService service = Mockito.mock(GestDatosService.class);
         GestDatosController controller = new GestDatosController(service);
-
-        Mockito.when(service.guardarCategoria(null))
+        
+        Mockito.when(service.guardarCategoria(null, 1L))
                 .thenThrow(new IllegalArgumentException());
-
-        ResponseEntity<Long> response = controller.guardarCategoria(null);
-
-        logger.warn("Error esperado, status: {}", response.getStatusCodeValue());
-
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+                
+        ResponseEntity<Long> response = controller.guardarCategoria(1L, null);
+        
+        logger.warn("Error esperado, status: {}", response.getStatusCode().value());
+        assertThat(response.getStatusCode().value()).isEqualTo(400);
     }
 
     @Test
