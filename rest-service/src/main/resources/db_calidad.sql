@@ -1,1 +1,2 @@
-create DATABASE db_calidad
+CREATE DATABASE IF NOT EXISTS db_calidad;
+use db_calidad;
