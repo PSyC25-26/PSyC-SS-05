@@ -43,8 +43,8 @@ class InicioPlaywrightAcceptanceTest {
  
     @Test
     void testFlujoCompletoEndToEnd() {
-        // 1. Entrar desde la página de inicio
-        page.navigate("http://localhost:" + port + "/");
+        // 1. Entrar desde la página de inicio (CORREGIDO A /inicio)
+        page.navigate("http://localhost:" + port + "/inicio");
         assertThat(page).hasTitle("Inicio");
 
         // 2. Navegar a Categorías → crear una categoría
