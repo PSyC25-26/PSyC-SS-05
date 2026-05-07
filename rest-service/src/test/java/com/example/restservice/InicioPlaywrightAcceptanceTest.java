@@ -27,7 +27,7 @@ class InicioPlaywrightAcceptanceTest {
         browser = playwright.chromium().launch(
             new BrowserType.LaunchOptions()
                 .setHeadless(true)
-                .setSlowMo(1500)
+                .setSlowMo(1500) // Mantiene la lentitud para que le dé tiempo a cargar la UI
         );
         browserContext = browser.newContext();
         page = browserContext.newPage();
@@ -40,32 +40,50 @@ class InicioPlaywrightAcceptanceTest {
         if (playwright != null) playwright.close();
     }
 
- 
     @Test
     void testFlujoCompletoEndToEnd() {
-        // 1. Entrar desde la página de inicio (CORREGIDO A /inicio)
-        page.navigate("http://localhost:" + port + "/inicio");
+        // Generamos un usuario único para que no falle si la BD no se limpia entre tests
+        String uniqueSuffix = String.valueOf(System.currentTimeMillis());
+        String testUser = "testuser" + uniqueSuffix;
+        String testEmail = "test" + uniqueSuffix + "@test.com";
+
+        // 1. REGISTRAR UN USUARIO NUEVO
+        page.navigate("http://localhost:" + port + "/registro");
+        page.getByLabel("Nombre de usuario").fill(testUser);
+        page.getByLabel("Correo electrónico").fill(testEmail);
+        page.getByLabel("Contraseña").fill("1234");
+        page.getByText("Registrarse").click();
+
+        // 2. INICIAR SESIÓN (Vaadin nos redirige al login tras el registro)
+        page.waitForURL("**/login");
+        page.fill("input[name='username']", testUser);
+        page.fill("input[name='password']", "1234");
+        page.press("input[name='password']", "Enter"); // Pulsamos Enter para enviar el formulario
+
+        // 3. ESPERAR A QUE CARGUE EL INICIO
+        page.waitForURL("**/inicio");
         assertThat(page).hasTitle("Inicio");
 
-        // 2. Navegar a Categorías → crear una categoría
+        // 4. Navegar a Categorías → crear una categoría
         page.locator("#menu-link-categorias").click();
         assertThat(page).hasTitle("Categorías");
         
         page.locator("#nombre-categoria input").fill("Deporte");
         page.locator("#btn-guardar-categoria").click();
+        page.waitForTimeout(500); // Pequeña pausa para asegurar el guardado en BD
 
-        // 3. Volver a la pagina de inicio (calendario)
+        // 5. Volver a la pagina de inicio (calendario)
         page.locator("#menu-link-inicio").click();
         assertThat(page.locator("#calendario-principal")).isVisible();
 
-        // 4. Navegar a Tareas → crear una tarea usando esa categoría
+        // 6. Navegar a Tareas → crear una tarea usando esa categoría
         page.locator("#menu-link-tareas").click();
         assertThat(page).hasTitle("Gestión de Tareas");
 
         page.getByLabel("Título").first().fill("Entrenamiento de fútbol");
         page.getByLabel("Descripción").first().fill("Fuerza y velocidad");
         
-        // Rellenar fechas mediante inyección de JS (como tienes en tu ejemplo)
+        // Rellenar fechas mediante inyección de JS
         page.locator("#fecha-inicio-tarea").evaluate("el => { el.value = '2026-04-15T10:00'; el.dispatchEvent(new Event('change')); }");
         page.locator("#fecha-fin-tarea").evaluate("el => { el.value = '2026-04-15T12:00'; el.dispatchEvent(new Event('change')); }");
 
@@ -76,11 +94,11 @@ class InicioPlaywrightAcceptanceTest {
         // Guardar la tarea
         page.locator("#btn-guardar-tarea").click();
 
-        // 5. Mostrar el calendario
+        // 7. Mostrar el calendario
         page.locator("#menu-link-inicio").click();
         assertThat(page.locator("#calendario-principal")).isVisible();
 
-        // 6. Modificar la tarea
+        // 8. Modificar la tarea
         page.locator("#menu-link-tareas").click();
         
         // Abrir el desplegable de editar y seleccionar nuestra tarea
@@ -92,11 +110,11 @@ class InicioPlaywrightAcceptanceTest {
         page.locator("#edit-desc-tarea input").fill("Mates y triples");
         page.locator("#btn-guardar-cambios-tarea").click();
 
-        // 7. Mostrar de nuevo el calendario
+        // 9. Mostrar de nuevo el calendario
         page.locator("#menu-link-inicio").click();
         assertThat(page.locator("#calendario-principal")).isVisible();
 
-        // 8. Eliminar la tarea
+        // 10. Eliminar la tarea
         page.locator("#menu-link-tareas").click();
         
         // Abrir el desplegable de eliminar y seleccionar nuestra tarea ya modificada
@@ -106,7 +124,7 @@ class InicioPlaywrightAcceptanceTest {
         // Clic en eliminar
         page.locator("#btn-eliminar-tarea").click();
 
-        // 9. Volver a mostrar el calendario
+        // 11. Volver a mostrar el calendario
         page.locator("#menu-link-inicio").click();
         assertThat(page.locator("#calendario-principal")).isVisible();
     }
