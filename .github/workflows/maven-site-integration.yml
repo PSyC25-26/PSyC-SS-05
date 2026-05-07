@@ -60,7 +60,7 @@ jobs:
       - name: Run DB initialization script
         run: |
           echo "Running DB setup..."
-          mysql -h 127.0.0.1 -uroot -proot < src/main/resources/dbsetup.sql
+          mysql -h 127.0.0.1 -uroot -proot < src/main/resources/db_calidad.sql
 
       - name: Run Unit tests and generate converage report
         run: mvn test jacoco:report
