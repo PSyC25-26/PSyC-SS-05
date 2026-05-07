@@ -164,7 +164,6 @@
     </build>
 
     <profiles>
-        <!-- Esto se utiliza para ejecutar los tests de Playwright por separado usando mvn test -P playwright -->
         <profile>
             <id>playwright</id>
             <build>
@@ -177,6 +176,36 @@
                                 <include>**/*Playwright*Test.java</include>
                             </includes>
                         </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>performance</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>copy-perf-report</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/site/reports</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.build.directory}/contiperf-report</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
