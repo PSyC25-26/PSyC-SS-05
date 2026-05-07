@@ -26,7 +26,7 @@ class InicioPlaywrightAcceptanceTest {
 
         browser = playwright.chromium().launch(
             new BrowserType.LaunchOptions()
-                .setHeadless(false)
+                .setHeadless(true)
                 .setSlowMo(1500)
         );
         browserContext = browser.newContext();

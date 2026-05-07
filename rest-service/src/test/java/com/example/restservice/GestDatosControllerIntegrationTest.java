@@ -42,6 +42,7 @@ class GestDatosControllerIntegrationTest {
     void testFlujoCompletoUsuarioYCalendario() {
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setUsername("usuarioIntegracion");
+        nuevoUsuario.setPassword("1234"); // <--- añado una contraseña para que no de error el test
         nuevoUsuario.setEmail("integracion@test.com");
         nuevoUsuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         
@@ -76,6 +77,7 @@ class GestDatosControllerIntegrationTest {
     void testFlujoCompletoTareaYCategoria() {
         Usuario usuario = new Usuario();
         usuario.setUsername("usuarioParaTarea");
+        usuario.setPassword("1234"); // <--- AÑADIR ESTA LÍNEA
         usuario.setEmail("tarea_integracion@test.com");
         usuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();
@@ -130,6 +132,7 @@ class GestDatosControllerIntegrationTest {
     void testGuardarCalendarioConFalloPorDuplicado() {
         Usuario usuario = new Usuario();
         usuario.setUsername("userCalendario");
+        usuario.setPassword("1234"); 
         usuario.setEmail("calendario_error@test.com");
         usuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();

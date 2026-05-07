@@ -204,7 +204,13 @@ public class GestDatosService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllTareas'");
     }
+    
     public Usuario guardarUsuario(Usuario usuario) {
+        // Añadimos la comprobación para que pase el test
+        if (usuario == null) {
+            throw new IllegalArgumentException("El usuario no puede ser nulo");
+        }
+        
         // Usamos tu UsuarioDAO real
         return usuarioDAO.save(usuario);
     }
