@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,7 @@ class GestDatosControllerIntegrationTest {
     void testFlujoCompletoUsuarioYCalendario() {
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setUsername("usuarioIntegracion");
-        nuevoUsuario.setPassword("1234"); // <--- añado una contraseña para que no de error el test
+        nuevoUsuario.setPassword("1234"); 
         nuevoUsuario.setEmail("integracion@test.com");
         nuevoUsuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         
@@ -55,6 +54,12 @@ class GestDatosControllerIntegrationTest {
         assertThat(responseGetUsuarios.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseGetUsuarios.getBody()).isNotEmpty();
 
+        // ARREGLO 1: Creamos un calendario explícitamente antes de intentar recuperarlo
+        Calendario calendarioInicial = new Calendario();
+        calendarioInicial.setNombre("Calendario Original");
+        restTemplate.postForEntity(baseUrl + "/guardarCalendario/" + idUsuario, calendarioInicial, Long.class);
+
+        // Ahora sí podemos recuperar el calendario modificado
         Calendario calendarioModificado = new Calendario();
         calendarioModificado.setNombre("Calendario Modificado Integracion");
         
@@ -77,14 +82,16 @@ class GestDatosControllerIntegrationTest {
     void testFlujoCompletoTareaYCategoria() {
         Usuario usuario = new Usuario();
         usuario.setUsername("usuarioParaTarea");
-        usuario.setPassword("1234"); // <--- AÑADIR ESTA LÍNEA
+        usuario.setPassword("1234");
         usuario.setEmail("tarea_integracion@test.com");
         usuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();
 
         Categoria categoria = new Categoria();
         categoria.setNombre("Categoria de Integracion");
-        ResponseEntity<Long> responseCategoria = restTemplate.postForEntity(baseUrl + "/guardarCategoria", categoria, Long.class);
+        
+        // ARREGLO 2: Añadimos el "/idUsuario" a la ruta porque el Controller espera "/guardarCategoria/{idUsuario}"
+        ResponseEntity<Long> responseCategoria = restTemplate.postForEntity(baseUrl + "/guardarCategoria/" + idUsuario, categoria, Long.class);
         assertThat(responseCategoria.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         Long idCategoria = responseCategoria.getBody();
         categoria.setId(idCategoria);
@@ -140,7 +147,10 @@ class GestDatosControllerIntegrationTest {
         Calendario nuevoCalendario = new Calendario();
         nuevoCalendario.setNombre("Calendario Extra");
 
+        // ARREGLO 3: Guardamos un primer calendario para que sea un exito (201)
+        restTemplate.postForEntity(baseUrl + "/guardarCalendario/" + idUsuario, nuevoCalendario, Long.class);
         
+        // Ahora sí, intentamos guardar el SEGUNDO calendario para que falle por duplicado (400)
         ResponseEntity<String> responseError = restTemplate.postForEntity(baseUrl + "/guardarCalendario/" + idUsuario, nuevoCalendario, String.class);
         
         assertThat(responseError.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
