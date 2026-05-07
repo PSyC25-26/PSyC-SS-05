@@ -26,7 +26,7 @@ class InicioPlaywrightAcceptanceTest {
 
         browser = playwright.chromium().launch(
             new BrowserType.LaunchOptions()
-                .setHeadless(true)
+                .setHeadless(false) // Para ver el navegador durante la prueba
                 .setSlowMo(1500) // Mantiene la lentitud para que le dé tiempo a cargar la UI
         );
         browserContext = browser.newContext();
@@ -84,8 +84,8 @@ class InicioPlaywrightAcceptanceTest {
         page.getByLabel("Descripción").first().fill("Fuerza y velocidad");
         
         // Rellenar fechas mediante inyección de JS
-        page.locator("#fecha-inicio-tarea").evaluate("el => { el.value = '2026-04-15T10:00'; el.dispatchEvent(new Event('change')); }");
-        page.locator("#fecha-fin-tarea").evaluate("el => { el.value = '2026-04-15T12:00'; el.dispatchEvent(new Event('change')); }");
+        page.locator("#fecha-inicio-tarea").evaluate("el => { el.value = '2026-05-15T10:00'; el.dispatchEvent(new Event('change')); }");
+        page.locator("#fecha-fin-tarea").evaluate("el => { el.value = '2026-05-15T12:00'; el.dispatchEvent(new Event('change')); }");
 
         // Seleccionar la categoría creada ("Deporte")
         page.locator("#categoria-tarea").click(); 
