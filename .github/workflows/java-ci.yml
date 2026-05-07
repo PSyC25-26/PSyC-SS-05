@@ -23,13 +23,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
+          
       - name: Prepare database for integration tests
         run: |
           sudo /etc/init.d/mysql start
-          mysql -uroot -proot < db_calidad.sql
+          mysql -uroot -proot -e "CREATE DATABASE db_calidad;"
+          mysql -uroot -proot db_calidad < db_calidad.sql
 
-      # 4. Construimos y pasamos SonarCloud DENTRO de la carpeta rest-service
       - name: Build and analyze with SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
