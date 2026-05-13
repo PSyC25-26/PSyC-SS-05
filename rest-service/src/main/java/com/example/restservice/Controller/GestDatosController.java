@@ -17,15 +17,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 
+/**
+ * @brief Controlador REST para la gestión de usuarios, tareas,
+ * categorías y calendarios.
+ * 
+ * Esta clase expone los endpoints necesarios para realizar
+ * operaciones CRUD sobre las distintas entidades del sistema.
+ */
 @RestController
 @RequestMapping("/gestDatos")
 public class GestDatosController {
   private final GestDatosService gestDatosService;
 
+  /**
+   * @brief Constructor del controlador.
+   * 
+   * @param gestDatosService servicio encargado de la lógica de negocio.
+   */
   public GestDatosController(GestDatosService gestDatosService) {
     this.gestDatosService = gestDatosService;
   }
 
+  /**
+   * @brief Guarda un nuevo usuario en la base de datos.
+   * 
+   * Este método recibe un usuario mediante una petición HTTP POST
+   * y delega la operación al servicio correspondiente.
+   * 
+   * @param usuario usuario recibido en la petición.
+   * @return identificador del usuario creado.
+   */
   @PostMapping("/guardarUsuario")
   public ResponseEntity <Long> guardarUsuario (@RequestBody Usuario usuario) {
     try{
@@ -47,6 +68,16 @@ public class GestDatosController {
     }
   }
   
+  /**
+   * @brief Guarda una nueva tarea.
+   * 
+   * La tarea se asocia a los usuarios cuyos identificadores
+   * se reciben en la petición.
+   * 
+   * @param idUsuarios lista de identificadores de usuarios.
+   * @param tarea tarea que se desea almacenar.
+   * @return identificador de la tarea creada.
+   */
   @PostMapping("/guardarTarea") // <-- Quitamos el /{idUsuario}
   public ResponseEntity <Long> guardarTarea (@RequestParam("idUsuarios") List<Long> idUsuarios, @RequestBody Tarea tarea) {
     try{
@@ -64,6 +95,13 @@ public class GestDatosController {
     }
   }
   
+  /**
+   * @brief Guarda un calendario asociado a un usuario.
+   * 
+   * @param idUsuario identificador del usuario propietario.
+   * @param calendario calendario a almacenar.
+   * @return identificador del calendario creado.
+   */
   @PostMapping("/guardarCalendario/{idUsuario}")
   public ResponseEntity <Long> guardarCalendario (@PathVariable("idUsuario") Long idUsuario, @RequestBody Calendario calendario) {
     try{
@@ -81,6 +119,13 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Guarda una categoría asociada a un usuario.
+   * 
+   * @param idUsuario identificador del usuario.
+   * @param categoria categoría que se desea almacenar.
+   * @return identificador de la categoría creada.
+   */
   @PostMapping("/guardarCategoria/{idUsuario}")
   public ResponseEntity<Long> guardarCategoria(@PathVariable("idUsuario") Long idUsuario, @RequestBody Categoria categoria) {
     try {
@@ -96,6 +141,12 @@ public class GestDatosController {
     }
   }
   
+  /**
+   * @brief Elimina un usuario del sistema.
+   * 
+   * @param idUsuario identificador del usuario a eliminar.
+   * @return respuesta HTTP sin contenido.
+   */
   @DeleteMapping("/eliminarUsuario/{idUsuario}")
   public ResponseEntity <Void> eliminarUsuario (@PathVariable ("idUsuario") Long idUsuario) {
     try{
@@ -112,6 +163,12 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Elimina una tarea existente.
+   * 
+   * @param idTarea identificador de la tarea a eliminar.
+   * @return respuesta HTTP sin contenido.
+   */
   @DeleteMapping("/eliminarTarea/{idTarea}")
   public ResponseEntity <Void> eliminarTarea (@PathVariable ("idTarea") Long idTarea) {
     try{
@@ -128,6 +185,11 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Obtiene todos los usuarios registrados.
+   * 
+   * @return lista de usuarios almacenados.
+   */
   @GetMapping("/obtenerUsuarios")
   public ResponseEntity <List<Usuario>> obtenerUsuarios(){
     try{
@@ -140,6 +202,12 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Obtiene las tareas asociadas a un usuario.
+   * 
+   * @param idUsuario identificador del usuario.
+   * @return lista de tareas del usuario.
+   */
   @GetMapping ("/obtenerTareasPorUsuario/{idUsuario}")
   public ResponseEntity <List<Tarea>> obtenerTareasPorUsuario(@PathVariable ("idUsuario") Long idUsuario){
     try{
@@ -152,6 +220,12 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Obtiene el calendario asociado a un usuario.
+   * 
+   * @param idUsuario identificador del usuario.
+   * @return calendario del usuario.
+   */
   @GetMapping ("/obtenerCalendario/{idUsuario}")
   public ResponseEntity <Calendario> obtenerCalendarioPorUsuario(@PathVariable ("idUsuario") Long idUsuario){
     try{
@@ -164,6 +238,12 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Obtiene la categoría asociada a una tarea.
+   * 
+   * @param idTarea identificador de la tarea.
+   * @return categoría asociada a la tarea.
+   */
   @GetMapping ("/obtenerCategoriaPorTarea/{idTarea}")
   public ResponseEntity <Categoria> obtenerCategoriaPorTarea(@PathVariable ("idTarea") Long idTarea){
     try{
@@ -176,6 +256,13 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Modifica una tarea existente.
+   * 
+   * @param idTarea identificador de la tarea.
+   * @param tareaModificada nuevos datos de la tarea.
+   * @return tarea modificada.
+   */
   @PutMapping ("/modificarTarea/{idTarea}")
   public ResponseEntity <Tarea> modificarTarea(@PathVariable ("idTarea") Long idTarea, @RequestBody Tarea tareaModificada){
     try{
@@ -192,6 +279,13 @@ public class GestDatosController {
     }
   }
 
+  /**
+   * @brief Modifica un calendario existente.
+   * 
+   * @param idCalendario identificador del calendario.
+   * @param calendarioModificado nuevos datos del calendario.
+   * @return calendario modificado.
+   */
   @PutMapping ("/modificarCalendario/{idCalendario}")
   public ResponseEntity <Calendario> modificarCalendario(@PathVariable ("idCalendario") Long idCalendario, @RequestBody Calendario calendarioModificado){
     try{
