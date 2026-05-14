@@ -308,3 +308,120 @@ La documentación técnica detallada, incluyendo la arquitectura del sistema, la
 [**Portal de Documentación (Sphinx)**](https://psyc25-26.github.io/PSyC-SS-05/sphinx/)
 
 ---
+
+## Documentación automática con Doxygen
+
+El proyecto incluye documentación automática generada mediante **Doxygen** integrado con **Maven**. La documentación se genera automáticamente utilizando comentarios en formato Doxygen añadidos al código fuente del proyecto.
+
+### Herramientas utilizadas
+
+- Doxygen
+- Graphviz
+- Maven
+- GitHub Actions
+- GitHub Pages
+- LaTeX / MiKTeX (generación PDF)
+
+---
+
+### Instalación de dependencias para documentación
+
+#### Doxygen
+
+Descargar: https://www.doxygen.nl/download.html
+
+Comprobar instalación:
+
+```bash
+doxygen --version
+```
+
+#### Graphviz
+
+Descargar: https://graphviz.org/download/
+
+> **Importante:** marcar la opción **Add Graphviz to PATH** durante la instalación.
+
+Comprobar instalación:
+
+```bash
+dot -V
+```
+
+#### MiKTeX 
+
+Descargar: https://miktex.org/download
+
+---
+
+### Generar documentación HTML
+
+Desde `PSyC-SS-05/rest-service` ejecutar:
+
+```bash
+mvn doxygen:report
+```
+
+La documentación HTML se genera en:
+
+```txt
+target/doxygen/html
+```
+
+Abrir:
+
+```txt
+target/doxygen/html/index.html
+```
+
+---
+
+### Generar documentación PDF
+
+Tras ejecutar:
+
+```bash
+mvn doxygen:report
+```
+
+acceder a:
+
+```txt
+target/doxygen/latex
+```
+
+y ejecutar:
+
+```bash
+make.bat
+```
+
+El PDF generado será:
+
+```txt
+refman.pdf
+```
+
+---
+
+### GitHub Actions y GitHub Pages
+
+El proyecto incluye automatización completa de la documentación mediante GitHub Actions.
+
+Workflow utilizado:
+
+```txt
+.github/workflows/doxygen.yml
+```
+
+Cada push realizado sobre la rama principal genera automáticamente:
+
+- documentación Doxygen
+- integración Maven
+- despliegue automático en GitHub Pages
+
+Documentación publicada en:
+
+https://psyc25-26.github.io/PSyC-SS-05/
+
+---
