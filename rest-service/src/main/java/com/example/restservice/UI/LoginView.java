@@ -9,26 +9,46 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 
+/**
+ * @class LoginView
+ * @brief Vista de autenticación de usuarios.
+ * 
+ * Permite iniciar sesión mediante nombre de usuario
+ * y contraseña.
+ */
 @Route("login")
 public class LoginView extends VerticalLayout {
 
+    /**
+     * @brief Constructor de la vista LoginView.
+     * 
+     * @param gestDatosService servicio de gestión de datos.
+     */
     public LoginView(GestDatosService gestDatosService) {
+
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 
         LoginForm loginForm = new LoginForm();
+
         loginForm.setForgotPasswordButtonVisible(false);
 
         loginForm.addLoginListener(e -> {
+
             Usuario usuario = gestDatosService.autenticarUsuario(e.getUsername(), e.getPassword());
             
             if (usuario != null) {
+
                 VaadinSession.getCurrent().setAttribute("usuarioId", usuario.getId());
+
                 // Navegamos directamente a InicioView
                 UI.getCurrent().navigate(InicioView.class); 
+
             } else {
+
                 loginForm.setError(true);
+
             }
         });
 

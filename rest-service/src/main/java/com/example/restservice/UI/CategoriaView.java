@@ -19,24 +19,69 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+/**
+ * @brief Vista para la gestión de categorías.
+ * 
+ * Permite crear nuevas categorías asociadas
+ * al usuario autenticado y seleccionar un color
+ * identificativo para el calendario.
+ */
 @PageTitle("Categorías")
 @Route(value = "categorias", layout = MainLayout.class)
 public class CategoriaView extends VerticalLayout {
 
+    /**
+     * Servicio encargado de la lógica de negocio.
+     */
     private final GestDatosService service;
+
+    /**
+     * Campo de texto para introducir el nombre
+     * de la categoría.
+     */
     private final TextField nombreField = new TextField("Nombre de la categoría");
+
+    /**
+     * Selector de colores predefinidos.
+     */
     private final Select<ColorPredefinido> colorSelector = new Select<>();
 
+    /**
+     * @brief Clase auxiliar que representa un color
+     * predefinido para las categorías.
+     */
     private static class ColorPredefinido {
+
+        /**
+         * Nombre descriptivo del color.
+         */
         String nombre;
+
+        /**
+         * Código hexadecimal del color.
+         */
         String hex;
 
+        /**
+         * @brief Constructor de ColorPredefinido.
+         * 
+         * @param nombre nombre descriptivo del color.
+         * @param hex código hexadecimal del color.
+         */
         public ColorPredefinido(String nombre, String hex) {
             this.nombre = nombre;
             this.hex = hex;
         }
     }
 
+    /**
+     * @brief Constructor de la vista de categorías.
+     * 
+     * Inicializa los componentes gráficos y permite
+     * crear nuevas categorías asociadas al usuario.
+     * 
+     * @param service servicio de gestión de datos.
+     */
     public CategoriaView(GestDatosService service) {
         this.service = service;
         setAlignItems(Alignment.CENTER);
@@ -104,7 +149,9 @@ public class CategoriaView extends VerticalLayout {
             return layout;
         }));
 
-        // Botón de guardar — ID "btn-guardar-categoria" para que el test lo encuentre
+        /**
+         * Botón para crear una nueva categoría.
+         */
         Button btnCrear = new Button("Añadir Categoría", e -> {
             if (nombreField.isEmpty()) {
                 Notification.show("El nombre es obligatorio");
@@ -127,7 +174,9 @@ public class CategoriaView extends VerticalLayout {
                 colorSelector.setValue(paletaColores.get(2));
             }
         });
-        btnCrear.setId("btn-guardar-categoria");  // <-- ID corregido para que coincida con el test
+
+        // Botón de guardar — ID "btn-guardar-categoria" para que el test lo encuentre
+        btnCrear.setId("btn-guardar-categoria");
 
         add(new H2("Crear Nueva Categoría"), new FormLayout(nombreField, colorSelector, btnCrear));
 

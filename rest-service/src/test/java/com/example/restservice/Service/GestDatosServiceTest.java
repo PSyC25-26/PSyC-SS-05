@@ -22,6 +22,13 @@ import com.example.restservice.Entity.Categoria;
 import com.example.restservice.Entity.Tarea;
 import com.example.restservice.Entity.Usuario;
 
+/**
+ * @class GestDatosServiceTest
+ * @brief Pruebas unitarias de la clase GestDatosService.
+ * 
+ * Verifica el correcto funcionamiento de los métodos
+ * del servicio mediante el uso de Mockito.
+ */
 @ExtendWith(MockitoExtension.class)
 class GestDatosServiceTest {
 
@@ -40,9 +47,12 @@ class GestDatosServiceTest {
     @InjectMocks
     private GestDatosService gestDatosService;
 
-    
+    /**
+     * @brief Comprueba que se devuelve la lista de usuarios.
+     */
     @Test
     void cargarUsuarios_deberiaDevolverLista() {
+
         when(usuarioDAO.findAll()).thenReturn(List.of(new Usuario(), new Usuario()));
 
         List<Usuario> resultado = gestDatosService.cargarUsuarios();
@@ -50,12 +60,18 @@ class GestDatosServiceTest {
         assertThat(resultado).hasSize(2);
     }
 
-   
+    /**
+     * @brief Comprueba el guardado correcto de un usuario.
+     */
     @Test
     void guardarUsuario_ok() {
+
         Usuario usuario = new Usuario();
+
         usuario.setUsername("test");
+
         Usuario usuarioGuardado = new Usuario();
+
         usuarioGuardado.setId(1L);
         
         when(usuarioDAO.save(usuario)).thenReturn(usuarioGuardado);
@@ -65,26 +81,36 @@ class GestDatosServiceTest {
         assertThat(resultado.getId()).isEqualTo(1L);
     }
 
-    
+    /**
+     * @brief Comprueba que se lanza una excepción al guardar un usuario nulo.
+     */
     @Test
     void guardarUsuario_null_deberiaLanzarExcepcion() {
+
         assertThrows(IllegalArgumentException.class, () -> {
             gestDatosService.guardarUsuario(null);
         });
     }
 
-   
+    /**
+     * @brief Comprueba que no se puede guardar una tarea nula.
+     */
     @Test
     void guardarTarea_null_deberiaLanzarExcepcion() {
+
         assertThrows(IllegalArgumentException.class, () -> {
             gestDatosService.guardarTarea(null, List.of());
         });
     }
 
-    
+    /**
+     * @brief Comprueba que las fechas inválidas generan excepción.
+     */
     @Test
     void guardarTarea_fechasInvalidas_deberiaLanzarExcepcion() {
+
         Tarea tarea = new Tarea();
+
         tarea.setFechaInicio(LocalDateTime.now());
         tarea.setFechaFin(LocalDateTime.now().minusDays(1));
 
@@ -93,10 +119,14 @@ class GestDatosServiceTest {
         });
     }
 
-    
+    /**
+     * @brief Comprueba la obtención de tareas de un usuario.
+     */
     @Test
     void obtenerTareasPorUsuario_ok() {
+
         Usuario usuario = new Usuario();
+
         usuario.setId(1L);
 
         when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
@@ -107,9 +137,12 @@ class GestDatosServiceTest {
         assertThat(resultado).hasSize(1);
     }
 
-    
+    /**
+     * @brief Comprueba el comportamiento cuando el usuario no existe.
+     */
     @Test
     void obtenerTareasPorUsuario_usuarioNoExiste() {
+
         when(usuarioDAO.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -117,16 +150,23 @@ class GestDatosServiceTest {
         });
     }
 
-   
+    /**
+     * @brief Comprueba que no se puede guardar una categoría nula.
+     */
     @Test
     void guardarCategoria_null_deberiaLanzarExcepcion() {
+
         assertThrows(IllegalArgumentException.class, () -> {
             gestDatosService.guardarCategoria(null, 1L);
         });
     }
 
+    /**
+     * @brief Comprueba el comportamiento con una lista vacía de usuarios.
+     */
     @Test
     void cargarUsuarios_listaVacia() {
+
         when(usuarioDAO.findAll()).thenReturn(List.of());
 
         List<Usuario> resultado = gestDatosService.cargarUsuarios();
@@ -134,27 +174,38 @@ class GestDatosServiceTest {
         assertThat(resultado).isEmpty();
     }
 
+    /**
+     * @brief Comprueba el guardado correcto de una categoría.
+     */
     @Test
     void guardarCategoria_ok() {
+
         Categoria categoria = new Categoria();
+
         Categoria guardada = new Categoria();
+
         guardada.setId(1L);
         
-        // CORRECCIÓN: Como ahora guardarCategoria busca al usuario, hay que simular (mockear) esa búsqueda
         Usuario usuarioMock = new Usuario();
+
         usuarioMock.setId(1L);
+
         when(usuarioDAO.findById(1L)).thenReturn(java.util.Optional.of(usuarioMock));
         when(categoriaDAO.save(categoria)).thenReturn(guardada);
         
-        // CORRECCIÓN: Ahora le pasamos el ID del usuario (ejemplo: 1L)
         Long id = gestDatosService.guardarCategoria(categoria, 1L);
         
         assertThat(id).isEqualTo(1L);
     }
 
+    /**
+     * @brief Comprueba el comportamiento cuando un usuario no tiene tareas.
+     */
     @Test
     void obtenerTareasPorUsuario_listaVacia() {
+
         Usuario usuario = new Usuario();
+
         usuario.setId(1L);
 
         when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
@@ -165,11 +216,16 @@ class GestDatosServiceTest {
         assertThat(resultado).isEmpty();
     }
 
-
+    /**
+     * @brief Comprueba el guardado de usuario sin nombre.
+     */
     @Test
     void guardarUsuario_sinUsername() {
+
         Usuario usuario = new Usuario();
+
         Usuario guardado = new Usuario();
+
         guardado.setId(2L);
         
         when(usuarioDAO.save(usuario)).thenReturn(guardado);
@@ -179,17 +235,23 @@ class GestDatosServiceTest {
         assertThat(resultado.getId()).isEqualTo(2L);
     }
 
-
+    /**
+     * @brief Comprueba el guardado correcto de un calendario.
+     */
     @Test
     void guardarCalendario_ok() {
+
         Calendario calendario = new Calendario();
+
         Usuario usuario = new Usuario();
+
         usuario.setId(1L);
 
         when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
         when(calendarioDAO.findByPropietarioId(1L)).thenReturn(null);
 
         Calendario guardado = new Calendario();
+
         guardado.setId(1L);
 
         when(calendarioDAO.save(calendario)).thenReturn(guardado);
@@ -199,9 +261,12 @@ class GestDatosServiceTest {
         assertThat(id).isEqualTo(1L);
     }
 
-
+    /**
+     * @brief Comprueba que no se puedan crear calendarios duplicados.
+     */
     @Test
     void guardarCalendario_yaExiste() {
+
         Calendario calendario = new Calendario();
 
         when(usuarioDAO.findById(1L)).thenReturn(Optional.of(new Usuario()));
@@ -212,11 +277,16 @@ class GestDatosServiceTest {
         });
     }
 
-
+    /**
+     * @brief Comprueba la eliminación de tareas.
+     */
     @Test
     void eliminarTarea_ok() {
+
         Usuario usuario = new Usuario();
+
         usuario.setId(1L);
+
         usuario.setTareas(new java.util.ArrayList<>()); 
 
         when(usuarioDAO.findByTareas_Id(1L)).thenReturn(List.of(usuario));
@@ -224,14 +294,18 @@ class GestDatosServiceTest {
         gestDatosService.eliminarTarea(1L);
     }
 
-
-
+    /**
+     * @brief Comprueba la eliminación de usuarios.
+     */
     @Test
     void eliminarUsuario_ok() {
+
         Usuario usuario = new Usuario();
+
         usuario.setId(1L);
 
         Tarea tarea = new Tarea();
+
         tarea.setUsuarios(new java.util.ArrayList<>(List.of(usuario))); 
 
         when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
@@ -240,14 +314,18 @@ class GestDatosServiceTest {
         gestDatosService.eliminarUsuario(1L);
     }
 
-
-
+    /**
+     * @brief Comprueba la modificación de tareas.
+     */
     @Test
     void modificarTarea_ok() {
+
         Tarea tarea = new Tarea();
+
         tarea.setId(1L);
 
         Tarea modificada = new Tarea();
+
         modificada.setTitulo("nuevo");
 
         when(tareaDAO.findById(1L)).thenReturn(Optional.of(tarea));
@@ -257,13 +335,18 @@ class GestDatosServiceTest {
         assertThat(resultado).isNotNull();
     }
 
-
+    /**
+     * @brief Comprueba la modificación de calendarios.
+     */
     @Test
     void modificarCalendario_ok() {
+
         Calendario calendario = new Calendario();
+
         calendario.setId(1L);
 
         Calendario modificado = new Calendario();
+
         modificado.setNombre("nuevo");
 
         when(calendarioDAO.findById(1L)).thenReturn(Optional.of(calendario));
@@ -273,12 +356,16 @@ class GestDatosServiceTest {
         assertThat(res).isNotNull();
     }
 
-
-
+    /**
+     * @brief Comprueba la obtención de la categoría de una tarea.
+     */
     @Test
     void obtenerCategoriaPorTarea_ok() {
+
         Tarea tarea = new Tarea();
+
         Categoria categoria = new Categoria();
+
         tarea.setCategoria(categoria);
 
         when(tareaDAO.findById(1L)).thenReturn(Optional.of(tarea));
@@ -287,6 +374,5 @@ class GestDatosServiceTest {
 
         assertThat(res).isNotNull();
     }
-
 
 }
