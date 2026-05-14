@@ -161,7 +161,7 @@ Si has modificado el Dockerfile, dependencias o configuraciones de entorno:
 docker-compose up --build
 ```
 
-La aplicación estará disponible en: http://localhost:8080
+La aplicación estará disponible en: http://localhost:8082
 
 ### Detener los contenedores
 
