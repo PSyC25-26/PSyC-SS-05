@@ -300,3 +300,11 @@ Aplicación disponible en: http://localhost:8080
 ## Estado esperado
 
 La aplicación debe permitir iniciar sesión, gestionar tareas, visualizar el calendario, gestionar categorías, almacenar información en MySQL, ejecutar tests correctamente y generar informes de calidad.
+
+## Documentación del Proyecto
+
+La documentación técnica detallada, incluyendo la arquitectura del sistema, la guía de inicio rápido y la referencia de la API REST, está disponible en el siguiente enlace:
+
+[**Portal de Documentación (Sphinx)**](https://psyc25-26.github.io/PSyC-SS-05/sphinx/)
+
+---
