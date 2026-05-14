@@ -130,13 +130,6 @@ La primera ejecución puede tardar varios minutos.
 mvn spring-boot:run
 ```
 
-Si todo funciona correctamente aparecerá:
-
-```
-Tomcat started on port 8080
-Started RestServiceApplication
-```
-
 Abrir en el navegador: http://localhost:8080
 
 ---
@@ -168,7 +161,7 @@ Si has modificado el Dockerfile, dependencias o configuraciones de entorno:
 docker-compose up --build
 ```
 
-La aplicación estará disponible en: http://localhost:8080
+La aplicación estará disponible en: http://localhost:8082
 
 ### Detener los contenedores
 
