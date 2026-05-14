@@ -160,6 +160,29 @@
                 <version>${exec.maven.plugin.version}</version>
             </plugin>
 
+
+
+            <plugin>
+                <groupId>com.soebes.maven.plugins</groupId>
+                <artifactId>doxygen-maven-plugin</artifactId>
+                <version>1.1.0</version>
+
+                <configuration>
+                    <configurationFile>
+                        src/main/resources/Doxyfile
+                    </configurationFile>
+                </configuration>
+
+            <executions>
+                <execution>
+                    <phase>site</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
         </plugins>
     </build>
 
