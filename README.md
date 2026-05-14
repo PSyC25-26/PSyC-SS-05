@@ -21,6 +21,8 @@ Instalar con configuración por defecto.
 Descargar:
 
 https://code.visualstudio.com/
+
+
 3. Java JDK 21
 
 Descargar:
