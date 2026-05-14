@@ -9,6 +9,15 @@ Paso 3: Ejecutar la aplicación. Inicia el servidor usando el Wrapper de Maven. 
 
 Paso 4: Verificar. Espera a ver el logo de Spring Boot en la consola indicando que ha arrancado sin errores. La API ya estará funcionando y lista para recibir peticiones en http://localhost:8080/gestDatos.
 
+Ejecución de pruebas (TEST):
+Paso 1: Abre tu terminal y muévete al directorio del backend ejecutando el comando: cd PSyC-SS-05/rest-service.
+        Depende del test que quieras probar, ejecutar el siguiente comando:
+
+    TEST UNITARIOS y de INTEGARCIÓN: mvn test
+
+    TEST DE ACEPTACIÓN: mvn test -P playwright
+
+    TEST DE RENDIMIENTO: mvn test -P performance
 
 ## Product Backlog
 
