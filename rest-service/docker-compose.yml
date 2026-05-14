@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: db_calidad
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Mapeamos tu script SQL para que se ejecute al iniciar el contenedor por primera vez
+      - ./src/main/resources/db_calidad.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p1234"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
+
+  spring-app:
+    build: .
+    container_name: spring-boot-app
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # Cambiamos 'localhost' por 'mysql' (el nombre del servicio de arriba)
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/db_calidad?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    ports:
+      - "8082:8080"
+
+volumes:
+  mysql_data:
+    driver: local

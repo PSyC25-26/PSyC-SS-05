@@ -1,149 +1,107 @@
-#PSyC Quality Manager
+# PSyC Quality Manager
 
-Aplicación de gestión de tareas y calendario desarrollada con Java, Spring Boot, Vaadin, MySQL, Maven
+Aplicación de gestión de tareas y calendario desarrollada con Java, Spring Boot, Vaadin, MySQL y Maven.
 
-El proyecto incluye:gestión de usuarios, creación y edición de tareas, categorías, calendario, tests automáticos,
-integración continua (CI) y generación de informes de calidad.
-Requisitos previos
+El proyecto incluye gestión de usuarios, creación y edición de tareas, categorías, calendario, tests automáticos, integración continua (CI) y generación de informes de calidad.
+
+---
+
+## Requisitos previos
 
 Antes de empezar es necesario instalar:
 
-1. Git
+### 1. Git
 
-Descargar:
-
-https://git-scm.com/downloads
+Descargar: https://git-scm.com/downloads
 
 Instalar con configuración por defecto.
 
-2. Visual Studio Code
+### 2. Visual Studio Code
 
-Descargar:
+Descargar: https://code.visualstudio.com/
 
-https://code.visualstudio.com/
+### 3. Java JDK 21
 
-Ejecución de pruebas (TEST):
-Paso 1: Abre tu terminal y muévete al directorio del backend ejecutando el comando: cd PSyC-SS-05/rest-service.
-        Depende del test que quieras probar, ejecutar el siguiente comando:
+Descargar: https://adoptium.net/
 
-    TEST UNITARIOS y de INTEGARCIÓN: mvn test
-
-    TEST DE ACEPTACIÓN: mvn test -P playwright
-
-    TEST DE RENDIMIENTO: mvn test -P performance
-
-3. Java JDK 21
-
-Descargar:
-
-https://adoptium.net/
-
-Instalar:
-
-Temurin 21
-Windows x64
+Instalar Temurin 21 (Windows x64).
 
 Comprobar instalación:
 
+```
 java -version
+```
 
 Debe aparecer Java 21.
 
-4. Maven
+### 4. Maven
 
-Descargar:
+Descargar: https://maven.apache.org/download.cgi (Binary zip archive)
 
-https://maven.apache.org/download.cgi
-
-Descargar Binary zip archive.
-
-Configuración
-Descomprimir en:
-C:\Maven
-Añadir al PATH:
-C:\Maven\bin
-Reiniciar el ordenador.
+Descomprimir en `C:\Maven` y añadir `C:\Maven\bin` al PATH. Reiniciar el ordenador.
 
 Comprobar instalación:
 
+```
 mvn -version
-5. MySQL + MySQL Workbench
+```
 
-Descargar:
+### 5. MySQL + MySQL Workbench
 
-https://dev.mysql.com/downloads/installer/
+Descargar: https://dev.mysql.com/downloads/installer/
 
-Instalar:
+Instalar MySQL Server y MySQL Workbench.
 
-MySQL Server
-MySQL Workbench
+Durante la instalación usar:
 
-Durante instalación:
-
-usuario: root
+```
+usuario:    root
 contraseña: 1234
-6. Node.js
+```
 
-Descargar:
+### 6. Node.js
 
-https://nodejs.org/
+Descargar: https://nodejs.org/ (versión LTS)
 
-Instalar versión LTS.
-
-MUY IMPORTANTE:
-marcar:
-
-Add to PATH
-
-Reiniciar el ordenador.
+> **Importante:** marcar la opción **Add to PATH** durante la instalación. Reiniciar el ordenador.
 
 Comprobar instalación:
 
+```
 node -v
-Descargar el proyecto
+```
 
-Abrir terminal y ejecutar:
+---
 
+## Instalación
+
+### Descargar el proyecto
+
+```
 git clone https://github.com/PSyC25-26/PSyC-SS-05.git
-
-Entrar en el proyecto:
-
 cd PSyC-SS-05
-Abrir proyecto en Visual Studio Code
+```
 
-Abrir VS Code.
+### Abrir en Visual Studio Code
 
-Seleccionar:
+Ir a **File → Open Folder** y seleccionar la carpeta del proyecto.
 
-File → Open Folder
+### Configurar MySQL
 
-Elegir la carpeta del proyecto.
+Abrir MySQL Workbench, conectarse con usuario `root` / contraseña `1234` y ejecutar:
 
-Configuración de MySQL
-
-Abrir MySQL Workbench.
-
-Conectarse usando:
-
-usuario: root
-contraseña: 1234
-Crear la base de datos
-
-Abrir una pestaña SQL y ejecutar:
-
+```sql
 CREATE DATABASE db_calidad;
-Configuración del proyecto
+```
 
-Abrir:
+### Configurar el proyecto
 
-rest-service/src/main/resources/application.properties
+Abrir `rest-service/src/main/resources/application.properties` y comprobar:
 
-Comprobar configuración:
-
+```properties
 spring.application.name=rest-service
 
 spring.datasource.url=jdbc:mysql://localhost:3306/db_calidad?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-
 spring.datasource.username=root
 spring.datasource.password=1234
 
@@ -152,141 +110,166 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=true
 
 server.port=8080
-Instalación de dependencias
+```
 
-Abrir terminal dentro de:
+### Instalar dependencias
 
-PSyC-SS-05/rest-service
+Dentro de `PSyC-SS-05/rest-service` ejecutar:
 
-Ejecutar:
-
+```
 mvn clean install
+```
 
 La primera ejecución puede tardar varios minutos.
 
-Ejecutar la aplicación
+---
 
-Ejecutar:
+## Ejecutar la aplicación
 
+```
 mvn spring-boot:run
+```
 
 Si todo funciona correctamente aparecerá:
 
+```
 Tomcat started on port 8080
 Started RestServiceApplication
-Abrir la aplicación
+```
 
-Abrir navegador:
+Abrir en el navegador: http://localhost:8080
 
-http://localhost:8080
-Registro e inicio de sesión
-Crear usuario
+---
 
-Registrar un usuario desde la interfaz.
+## Lanzamiento con Docker
 
-Iniciar sesión
+Alternativa al método manual: lanza toda la aplicación con un único comando, sin necesidad de instalar Java, Maven, MySQL ni Node.js.
 
-IMPORTANTE:
-el login utiliza el campo username, no el email.
+Requisito: tener instalado **Docker Desktop** → https://www.docker.com/products/docker-desktop
 
-Ejemplo:
+Comprobar instalación:
 
-Campo	Valor
-Username	maria
-Password	1234
-Verificar usuarios en MySQL
+```
+docker -v
+docker compose version
+```
 
-Abrir MySQL Workbench y ejecutar:
+### Iniciar los contenedores
 
+Si solo necesitas arrancar los contenedores sin reconstruirlos:
+
+```
+docker-compose up
+```
+
+Si has modificado el Dockerfile, dependencias o configuraciones de entorno:
+
+```
+docker-compose up --build
+```
+
+La aplicación estará disponible en: http://localhost:8080
+
+### Detener los contenedores
+
+```
+docker-compose down
+```
+
+Documentación adicional disponible en `docker_essentials.md`.
+
+---
+
+## Registro e inicio de sesión
+
+Registrar un usuario desde la interfaz y luego iniciar sesión.
+
+> **Importante:** el login utiliza el campo `username`, no el email.
+
+| Campo    | Ejemplo |
+|----------|---------|
+| Username | maria   |
+| Password | 1234    |
+
+Para verificar usuarios en MySQL Workbench:
+
+```sql
 USE db_calidad;
-
 SELECT * FROM usuario;
-Ejecutar tests
+```
 
-El proyecto incluye:
+---
 
-unit tests,
-integration tests,
-pruebas de rendimiento.
-Ejecutar todos los tests
+## Tests
 
-Dentro de rest-service ejecutar:
+El proyecto incluye tests unitarios, de integración, de aceptación y de rendimiento.
 
+Entrar en el directorio `PSyC-SS-05/rest-service` y ejecutar según el tipo:
+
+```
+# Unitarios e integración
 mvn test
-Ejecutar build completo con tests
+
+# Aceptación (Playwright)
+mvn test -P playwright
+
+# Rendimiento
+mvn test -P performance
+
+# Build completo con todos los tests
 mvn clean package
-Informes de cobertura JaCoCo
+```
 
-Después de ejecutar:
+### Informes de cobertura JaCoCo
 
-mvn clean package
+Después de `mvn clean package` se genera el informe en:
 
-Se genera el informe en:
-
+```
 rest-service/target/site/jacoco/index.html
+```
 
-Abrir ese archivo en navegador para ver:
+Abrir ese archivo en el navegador para ver cobertura de clases, métodos cubiertos y porcentaje de tests.
 
-cobertura de clases,
-métodos cubiertos,
-porcentaje de tests.
-Integración continua (CI)
+---
 
-El proyecto utiliza workflows automáticos definidos en:
+## Integración continua (CI)
 
-.github/workflows/
+El proyecto utiliza workflows automáticos definidos en `.github/workflows/` que incluyen compilación automática, ejecución de tests y generación de informes.
 
-Incluyen:
+También incluye configuración Jenkins mediante `Jenkinsfile` para builds automáticos e integración continua.
 
-compilación automática,
-ejecución de tests,
-generación de informes.
-Jenkins
+---
 
-El proyecto incluye configuración Jenkins mediante:
+## Problemas comunes
 
-Jenkinsfile
+**Error: puerto ocupado** (`Port 8080 was already in use`)
 
-Permite:
-
-builds automáticos,
-ejecución de tests,
-integración continua.
-Problemas comunes
-Error: puerto ocupado
-
-Ejemplo:
-
-Port 8080 was already in use
-
-Solución:
-
+```
 netstat -ano | findstr :8080
-
-Después:
-
 taskkill /PID NUMERO /F
-Error: node command not found
+```
 
-Node.js no está correctamente instalado.
+**Error: `node` command not found**
 
-Reinstalar Node.js marcando:
+Node.js no está correctamente instalado. Reinstalarlo marcando **Add to PATH** y reiniciar Windows.
 
-Add to PATH
+**Error: `No plugin found for prefix 'vaadin'`**
 
-y reiniciar Windows.
-
-Error: No plugin found for prefix 'vaadin'
-
-Ejecutar:
-
+```
 mvn clean install
-Error: no POM in this directory
+```
 
-Entrar en:
+**Error: `no POM in this directory`**
 
+```
 cd rest-service
-Estructura del proyecto
+```
+
+---
+
+## Estructura del proyecto
+
+```
 rest-service/
 │
 ├── src/
@@ -294,40 +277,33 @@ rest-service/
 │   └── test/
 │
 ├── target/
-│
 ├── pom.xml
-│
 └── application.properties
-Tecnologías utilizadas
-Java 21
-Spring Boot
-Vaadin
-Maven
-MySQL
-JUnit
-JaCoCo
-Jenkins
-GitHub Actions
-Playwright
-Comandos importantes
-Compilar
-mvn clean install
-Ejecutar aplicación
-mvn spring-boot:run
-Ejecutar tests
-mvn test
-Generar paquete completo
-mvn clean package
-Abrir aplicación
-http://localhost:8080
-Estado esperado
+```
 
-La aplicación debe permitir:
+---
 
-iniciar sesión,
-gestionar tareas,
-visualizar calendario,
-gestionar categorías,
-almacenar información en MySQL,
-ejecutar tests correctamente,
-generar informes de calidad.
+## Tecnologías utilizadas
+
+Java 21 · Spring Boot · Vaadin · Maven · MySQL · JUnit · JaCoCo · Jenkins · GitHub Actions · Playwright
+
+---
+
+## Comandos de referencia rápida
+
+| Acción                  | Comando                     |
+|-------------------------|-----------------------------|
+| Compilar                | `mvn clean install`         |
+| Ejecutar aplicación     | `mvn spring-boot:run`       |
+| Ejecutar tests          | `mvn test`                  |
+| Generar paquete         | `mvn clean package`         |
+| Arrancar con Docker     | `docker-compose up`         |
+| Reconstruir con Docker  | `docker-compose up --build` |
+
+Aplicación disponible en: http://localhost:8080
+
+---
+
+## Estado esperado
+
+La aplicación debe permitir iniciar sesión, gestionar tareas, visualizar el calendario, gestionar categorías, almacenar información en MySQL, ejecutar tests correctamente y generar informes de calidad.
