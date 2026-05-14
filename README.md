@@ -130,13 +130,6 @@ La primera ejecución puede tardar varios minutos.
 mvn spring-boot:run
 ```
 
-Si todo funciona correctamente aparecerá:
-
-```
-Tomcat started on port 8080
-Started RestServiceApplication
-```
-
 Abrir en el navegador: http://localhost:8080
 
 ---
