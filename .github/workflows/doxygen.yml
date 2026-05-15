@@ -34,3 +34,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./rest-service/target/doxygen/html
+        keep_files: true              
+        destination_dir: doxygen
