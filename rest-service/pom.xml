@@ -25,7 +25,6 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -39,12 +38,10 @@
     </dependencyManagement>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,11 +76,11 @@
             <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Esto lo hago para el calendario -->
+        <!-- Calendario -->
         <dependency>
             <groupId>org.vaadin.stefan</groupId>
             <artifactId>fullcalendar2</artifactId>
-            <version>6.4.0</version> 
+            <version>6.4.0</version>
         </dependency>
 
         <dependency>
@@ -105,17 +102,16 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Esto se utiliza para los tests de Playwright -->
+        <!-- Tests de Playwright -->
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
             <version>1.44.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
-    <!-- Esto lo hago para hacer el calendario -->
+    <!-- Repositorio para el calendario -->
     <repositories>
         <repository>
             <id>vaadin-addons</id>
@@ -159,36 +155,29 @@
                 </executions>
             </plugin>
 
-            <!-- Esto se utiliza porque es necesario para que los binarios de los navegadores de Playwright puedan ser instalados a traves de Maven -->
+            <!-- Necesario para instalar binarios de navegadores de Playwright via Maven -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec.maven.plugin.version}</version>
             </plugin>
 
-
-
             <plugin>
                 <groupId>com.soebes.maven.plugins</groupId>
                 <artifactId>doxygen-maven-plugin</artifactId>
                 <version>1.1.0</version>
-
                 <configuration>
-                    <configurationFile>
-                        src/main/resources/Doxyfile
-                    </configurationFile>
+                    <configurationFile>src/main/resources/Doxyfile</configurationFile>
                 </configuration>
-
-            <executions>
-                <execution>
-                    <phase>site</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
+                <executions>
+                    <execution>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -240,4 +229,5 @@
             </build>
         </profile>
     </profiles>
+
 </project>
