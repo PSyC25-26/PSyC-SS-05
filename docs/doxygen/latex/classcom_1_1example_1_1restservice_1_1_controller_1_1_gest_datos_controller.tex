@@ -1,0 +1,348 @@
+\doxysection{com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller}{}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller}\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+
+
+Controlador REST para la gestión de usuarios, tareas, categorías y calendarios.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a16f5e528f404b0a427c9785bbe4190c8}{Gest\+Datos\+Controller}} (Gest\+Datos\+Service gest\+Datos\+Service)
+\begin{DoxyCompactList}\small\item\em Constructor del controlador. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Long $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a008acbc52b556b7c58c8f544a2c92e66}{guardar\+Usuario}} (@Request\+Body Usuario usuario)
+\begin{DoxyCompactList}\small\item\em Guarda un nuevo usuario en la base de datos. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Long $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a59a32f085f4221e0d31a6f272122b3dd}{guardar\+Tarea}} (@Request\+Param("{}id\+Usuarios"{}) List$<$ Long $>$ id\+Usuarios, @Request\+Body Tarea tarea)
+\begin{DoxyCompactList}\small\item\em Guarda una nueva tarea. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Long $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a11e12bb0ec243e0971b2e3ea4a14a268}{guardar\+Calendario}} (@Path\+Variable("{}id\+Usuario"{}) Long id\+Usuario, @Request\+Body Calendario calendario)
+\begin{DoxyCompactList}\small\item\em Guarda un calendario asociado a un usuario. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Long $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aa21d0d66ce78644af1e3a0a86526eab7}{guardar\+Categoria}} (@Path\+Variable("{}id\+Usuario"{}) Long id\+Usuario, @Request\+Body Categoria categoria)
+\begin{DoxyCompactList}\small\item\em Guarda una categoría asociada a un usuario. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Void $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a1d0b6a95d132bf98206f8343b09ad942}{eliminar\+Usuario}} (@Path\+Variable("{}id\+Usuario"{}) Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Elimina un usuario del sistema. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Void $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6d079c15f406a5dd8cd52b9353250ee7}{eliminar\+Tarea}} (@Path\+Variable("{}id\+Tarea"{}) Long id\+Tarea)
+\begin{DoxyCompactList}\small\item\em Elimina una tarea existente. \end{DoxyCompactList}\item 
+Response\+Entity$<$ List$<$ Usuario $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_ad91366cb991386052a7ec9a93ef82ced}{obtener\+Usuarios}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene todos los usuarios registrados. \end{DoxyCompactList}\item 
+Response\+Entity$<$ List$<$ Tarea $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aa279f48ecc1349ffc6de357ebe524c52}{obtener\+Tareas\+Por\+Usuario}} (@Path\+Variable("{}id\+Usuario"{}) Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene las tareas asociadas a un usuario. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Calendario $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a128e94276dd0df0d9ec763c88594da2a}{obtener\+Calendario\+Por\+Usuario}} (@Path\+Variable("{}id\+Usuario"{}) Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene el calendario asociado a un usuario. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Categoria $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aaf5c03d81751bc6c9829233ceba586ad}{obtener\+Categoria\+Por\+Tarea}} (@Path\+Variable("{}id\+Tarea"{}) Long id\+Tarea)
+\begin{DoxyCompactList}\small\item\em Obtiene la categoría asociada a una tarea. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Tarea $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6e53411ae860253fc95da9209cc62bc3}{modificar\+Tarea}} (@Path\+Variable("{}id\+Tarea"{}) Long id\+Tarea, @Request\+Body Tarea tarea\+Modificada)
+\begin{DoxyCompactList}\small\item\em Modifica una tarea existente. \end{DoxyCompactList}\item 
+Response\+Entity$<$ Calendario $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6fd683f1a6ad9ea8d0a93466551551c0}{modificar\+Calendario}} (@Path\+Variable("{}id\+Calendario"{}) Long id\+Calendario, @Request\+Body Calendario calendario\+Modificado)
+\begin{DoxyCompactList}\small\item\em Modifica un calendario existente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controlador REST para la gestión de usuarios, tareas, categorías y calendarios. 
+
+Esta clase expone los endpoints necesarios para realizar operaciones CRUD sobre las distintas entidades del sistema. 
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00029}{29}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a16f5e528f404b0a427c9785bbe4190c8}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a16f5e528f404b0a427c9785bbe4190c8} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!GestDatosController@{GestDatosController}}
+\index{GestDatosController@{GestDatosController}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{GestDatosController()}{GestDatosController()}}
+{\footnotesize\ttfamily com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+Gest\+Datos\+Controller (\begin{DoxyParamCaption}\item[{Gest\+Datos\+Service}]{gest\+Datos\+Service }\end{DoxyParamCaption})}
+
+
+
+Constructor del controlador. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gest\+Datos\+Service} & servicio encargado de la lógica de negocio. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00037}{37}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6d079c15f406a5dd8cd52b9353250ee7}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6d079c15f406a5dd8cd52b9353250ee7} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!eliminarTarea@{eliminarTarea}}
+\index{eliminarTarea@{eliminarTarea}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{eliminarTarea()}{eliminarTarea()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Void $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+eliminar\+Tarea (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Tarea"{}) Long}]{id\+Tarea }\end{DoxyParamCaption})}
+
+
+
+Elimina una tarea existente. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Tarea} & identificador de la tarea a eliminar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+respuesta HTTP sin contenido. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00173}{173}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a1d0b6a95d132bf98206f8343b09ad942}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a1d0b6a95d132bf98206f8343b09ad942} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!eliminarUsuario@{eliminarUsuario}}
+\index{eliminarUsuario@{eliminarUsuario}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{eliminarUsuario()}{eliminarUsuario()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Void $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+eliminar\+Usuario (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Usuario"{}) Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Elimina un usuario del sistema. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario a eliminar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+respuesta HTTP sin contenido. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00151}{151}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a11e12bb0ec243e0971b2e3ea4a14a268}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a11e12bb0ec243e0971b2e3ea4a14a268} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!guardarCalendario@{guardarCalendario}}
+\index{guardarCalendario@{guardarCalendario}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{guardarCalendario()}{guardarCalendario()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Long $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+guardar\+Calendario (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Usuario"{}) Long}]{id\+Usuario,  }\item[{@Request\+Body Calendario}]{calendario }\end{DoxyParamCaption})}
+
+
+
+Guarda un calendario asociado a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario propietario. \\
+\hline
+{\em calendario} & calendario a almacenar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador del calendario creado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00106}{106}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aa21d0d66ce78644af1e3a0a86526eab7}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aa21d0d66ce78644af1e3a0a86526eab7} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!guardarCategoria@{guardarCategoria}}
+\index{guardarCategoria@{guardarCategoria}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{guardarCategoria()}{guardarCategoria()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Long $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+guardar\+Categoria (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Usuario"{}) Long}]{id\+Usuario,  }\item[{@Request\+Body Categoria}]{categoria }\end{DoxyParamCaption})}
+
+
+
+Guarda una categoría asociada a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+{\em categoria} & categoría que se desea almacenar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador de la categoría creada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00130}{130}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a59a32f085f4221e0d31a6f272122b3dd}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a59a32f085f4221e0d31a6f272122b3dd} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!guardarTarea@{guardarTarea}}
+\index{guardarTarea@{guardarTarea}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{guardarTarea()}{guardarTarea()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Long $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+guardar\+Tarea (\begin{DoxyParamCaption}\item[{@Request\+Param("{}id\+Usuarios"{}) List$<$ Long $>$}]{id\+Usuarios,  }\item[{@Request\+Body Tarea}]{tarea }\end{DoxyParamCaption})}
+
+
+
+Guarda una nueva tarea. 
+
+La tarea se asocia a los usuarios cuyos identificadores se reciben en la petición.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuarios} & lista de identificadores de usuarios. \\
+\hline
+{\em tarea} & tarea que se desea almacenar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador de la tarea creada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00082}{82}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a008acbc52b556b7c58c8f544a2c92e66}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a008acbc52b556b7c58c8f544a2c92e66} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!guardarUsuario@{guardarUsuario}}
+\index{guardarUsuario@{guardarUsuario}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{guardarUsuario()}{guardarUsuario()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Long $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+guardar\+Usuario (\begin{DoxyParamCaption}\item[{@Request\+Body Usuario}]{usuario }\end{DoxyParamCaption})}
+
+
+
+Guarda un nuevo usuario en la base de datos. 
+
+Este método recibe un usuario mediante una petición HTTP POST y delega la operación al servicio correspondiente.
+
+
+\begin{DoxyParams}{Parameters}
+{\em usuario} & usuario recibido en la petición. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador del usuario creado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00051}{51}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6fd683f1a6ad9ea8d0a93466551551c0}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6fd683f1a6ad9ea8d0a93466551551c0} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!modificarCalendario@{modificarCalendario}}
+\index{modificarCalendario@{modificarCalendario}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{modificarCalendario()}{modificarCalendario()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Calendario $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+modificar\+Calendario (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Calendario"{}) Long}]{id\+Calendario,  }\item[{@Request\+Body Calendario}]{calendario\+Modificado }\end{DoxyParamCaption})}
+
+
+
+Modifica un calendario existente. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Calendario} & identificador del calendario. \\
+\hline
+{\em calendario\+Modificado} & nuevos datos del calendario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calendario modificado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00290}{290}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6e53411ae860253fc95da9209cc62bc3}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a6e53411ae860253fc95da9209cc62bc3} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!modificarTarea@{modificarTarea}}
+\index{modificarTarea@{modificarTarea}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{modificarTarea()}{modificarTarea()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Tarea $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+modificar\+Tarea (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Tarea"{}) Long}]{id\+Tarea,  }\item[{@Request\+Body Tarea}]{tarea\+Modificada }\end{DoxyParamCaption})}
+
+
+
+Modifica una tarea existente. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Tarea} & identificador de la tarea. \\
+\hline
+{\em tarea\+Modificada} & nuevos datos de la tarea. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tarea modificada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00267}{267}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a128e94276dd0df0d9ec763c88594da2a}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_a128e94276dd0df0d9ec763c88594da2a} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!obtenerCalendarioPorUsuario@{obtenerCalendarioPorUsuario}}
+\index{obtenerCalendarioPorUsuario@{obtenerCalendarioPorUsuario}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{obtenerCalendarioPorUsuario()}{obtenerCalendarioPorUsuario()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Calendario $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+obtener\+Calendario\+Por\+Usuario (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Usuario"{}) Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene el calendario asociado a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calendario del usuario. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00230}{230}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aaf5c03d81751bc6c9829233ceba586ad}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aaf5c03d81751bc6c9829233ceba586ad} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!obtenerCategoriaPorTarea@{obtenerCategoriaPorTarea}}
+\index{obtenerCategoriaPorTarea@{obtenerCategoriaPorTarea}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{obtenerCategoriaPorTarea()}{obtenerCategoriaPorTarea()}}
+{\footnotesize\ttfamily Response\+Entity$<$ Categoria $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+obtener\+Categoria\+Por\+Tarea (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Tarea"{}) Long}]{id\+Tarea }\end{DoxyParamCaption})}
+
+
+
+Obtiene la categoría asociada a una tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Tarea} & identificador de la tarea. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+categoría asociada a la tarea. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00248}{248}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aa279f48ecc1349ffc6de357ebe524c52}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_aa279f48ecc1349ffc6de357ebe524c52} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!obtenerTareasPorUsuario@{obtenerTareasPorUsuario}}
+\index{obtenerTareasPorUsuario@{obtenerTareasPorUsuario}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{obtenerTareasPorUsuario()}{obtenerTareasPorUsuario()}}
+{\footnotesize\ttfamily Response\+Entity$<$ List$<$ Tarea $>$ $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+obtener\+Tareas\+Por\+Usuario (\begin{DoxyParamCaption}\item[{@Path\+Variable("{}id\+Usuario"{}) Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene las tareas asociadas a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de tareas del usuario. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00212}{212}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_ad91366cb991386052a7ec9a93ef82ced}\label{classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller_ad91366cb991386052a7ec9a93ef82ced} 
+\index{com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}!obtenerUsuarios@{obtenerUsuarios}}
+\index{obtenerUsuarios@{obtenerUsuarios}!com.example.restservice.Controller.GestDatosController@{com.example.restservice.Controller.GestDatosController}}
+\doxysubsubsection{\texorpdfstring{obtenerUsuarios()}{obtenerUsuarios()}}
+{\footnotesize\ttfamily Response\+Entity$<$ List$<$ Usuario $>$ $>$ com.\+example.\+restservice.\+Controller.\+Gest\+Datos\+Controller.\+obtener\+Usuarios (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene todos los usuarios registrados. 
+
+\begin{DoxyReturn}{Returns}
+lista de usuarios almacenados. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_controller_8java_source_l00194}{194}} of file \mbox{\hyperlink{_gest_datos_controller_8java_source}{Gest\+Datos\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restservice/\+Controller/\mbox{\hyperlink{_gest_datos_controller_8java}{Gest\+Datos\+Controller.\+java}}\end{DoxyCompactItemize}

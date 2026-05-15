@@ -1,0 +1,125 @@
+\doxysection{Tarea.\+java}
+\hypertarget{_tarea_8java_source}{}\label{_tarea_8java_source}\index{src/main/java/com/example/restservice/Entity/Tarea.java@{src/main/java/com/example/restservice/Entity/Tarea.java}}
+\mbox{\hyperlink{_tarea_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restservice.Entity;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.time.LocalDateTime;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00007}00007\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.fasterxml.jackson.annotation.JsonIgnoreProperties;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00017}00017\ @Entity}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00018}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{00018}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}}\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00023}00023\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00024}00024\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00030}00030\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ String\ titulo;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00036}00036\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{private}\ String\ descripcion;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00042}00042\ \ \ \ \ @Column\ (nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{private}\ LocalDateTime\ fechaInicio;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00048}00048\ \ \ \ \ @Column\ (nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{private}\ LocalDateTime\ fechaFin;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00054}00054\ \ \ \ \ @ManyToOne}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ Se\ pone\ el\ nullable\ =\ false\ para\ que\ no\ se\ pueda\ crear\ una\ tarea\ sin\ una\ categoria\ asignada,\ es\ decir,\ que\ la\ categoria\ sea\ obligatoria.}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00056}00056\ \ \ \ \ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}categoria\_id"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}}\ categoria;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00062}00062\ \ \ \ \ @ManyToMany}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00063}00063\ \ \ \ \ @JoinTable(}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Esto\ se\ pone\ para\ que\ se\ pueda\ buscar\ los\ usuarios\ por\ el\ id\ de\ la\ tarea,\ }}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ es\ decir,\ los\ usuarios\ que\ tienen\ esa\ tarea\ asignada.}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//El\ inverse\ es\ para\ que\ se\ pueda\ buscar\ las\ tareas\ por\ el\ id\ del\ usuario,\ }}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ es\ decir,\ el\ propietario\ de\ las\ tareas}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ name\ =\ \textcolor{stringliteral}{"{}tarea\_usuario"{}},}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ joinColumns\ =\ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}tarea\_id"{}}),}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ inverseJoinColumns\ =\ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}usuario\_id"{}})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00071}00071\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00072}00072\ \ \ \ \ @JsonIgnoreProperties(\textcolor{stringliteral}{"{}tareas"{}})}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{private}\ List<Usuario>\ usuarios;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00078}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6c9f7a963adb40acd4fe43d491dee55d}{00078}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6c9f7a963adb40acd4fe43d491dee55d}{Tarea}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00091}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a733fcba0c8e21eae16de94ea3db28780}{00091}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a733fcba0c8e21eae16de94ea3db28780}{Tarea}}(Long\ \textcolor{keywordtype}{id},\ String\ titulo,\ String\ descripcion,\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}}\ categoria,\ List<Usuario>\ usuarios,\ LocalDateTime\ fechaInicio,\ LocalDateTime\ fechaFin)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ this.titulo\ =\ titulo;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ this.descripcion\ =\ descripcion;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ this.categoria\ =\ categoria;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ this.usuarios\ =\ usuarios;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ this.fechaInicio\ =\ fechaInicio;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ this.fechaFin\ =\ fechaFin;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00101}00101\ \ \ \ \ \textcolor{comment}{//\ Getters\ y\ setters}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00108}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a566e06cb1df5cc1288f4072f1c9fac94}{00108}}\ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a566e06cb1df5cc1288f4072f1c9fac94}{getId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ id;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00117}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a46a4ba8e98461db84ab3e821ceb78810}{00117}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a46a4ba8e98461db84ab3e821ceb78810}{setId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00126}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7c2ceba8ebcae49314a937d7cc164685}{00126}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7c2ceba8ebcae49314a937d7cc164685}{getTitulo}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ titulo;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00135}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7f49f3dbd0ba741ae8c04f486a33805c}{00135}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7f49f3dbd0ba741ae8c04f486a33805c}{setTitulo}}(String\ titulo)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00136}00136\ \ \ \ \ \ \ \ \ this.titulo\ =\ titulo;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00137}00137\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00144}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a253775450fca12ab5586aec3b40941ee}{00144}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a253775450fca12ab5586aec3b40941ee}{getDescripcion}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ descripcion;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00153}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a5bf28f6e7cfd7a79449a9c48815136b1}{00153}}\ \ \ \ \ \textcolor{keyword}{public}\ LocalDateTime\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a5bf28f6e7cfd7a79449a9c48815136b1}{getFechaInicio}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fechaInicio;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00155}00155\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00162}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a10820cf0b0730efde69047345e4c63e1}{00162}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a10820cf0b0730efde69047345e4c63e1}{setFechaInicio}}(LocalDateTime\ fechaInicio)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00163}00163\ \ \ \ \ \ \ \ \ this.fechaInicio\ =\ fechaInicio;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00164}00164\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00171}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6175251aedf55d2dbbde0bb5e2a3ff0d}{00171}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6175251aedf55d2dbbde0bb5e2a3ff0d}{setDescripcion}}(String\ descripcion)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00172}00172\ \ \ \ \ \ \ \ \ this.descripcion\ =\ descripcion;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00173}00173\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00180}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0470a6ee6bd251e36c421dc752f71345}{00180}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0470a6ee6bd251e36c421dc752f71345}{getCategoria}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ categoria;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00182}00182\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00189}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0b2ede1530ef053d91d1813297e60598}{00189}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0b2ede1530ef053d91d1813297e60598}{setCategoria}}(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}}\ categoria)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00190}00190\ \ \ \ \ \ \ \ \ this.categoria\ =\ categoria;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00191}00191\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00198}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a363501fd9b260ca5783ddac5b79e3d8a}{00198}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Usuario>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a363501fd9b260ca5783ddac5b79e3d8a}{getUsuarios}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ usuarios;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00200}00200\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00207}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_af9e8b907616a04d50293526d25e48e4f}{00207}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_af9e8b907616a04d50293526d25e48e4f}{setUsuarios}}(List<Usuario>\ usuarios)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00208}00208\ \ \ \ \ \ \ \ \ this.usuarios\ =\ usuarios;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00216}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_ab0ef1fc88a8f5ff9594daa9434281606}{00216}}\ \ \ \ \ \textcolor{keyword}{public}\ LocalDateTime\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_ab0ef1fc88a8f5ff9594daa9434281606}{getFechaFin}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00217}00217\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fechaFin;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00218}00218\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00225}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a312ac88dc5879d5133686d7d3f431651}{00225}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a312ac88dc5879d5133686d7d3f431651}{setFechaFin}}(LocalDateTime\ fechaFin)\ \{}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00226}00226\ \ \ \ \ \ \ \ \ this.fechaFin\ =\ fechaFin;}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00227}00227\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00229}00229\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_tarea_8java_source_l00230}00230\ \}}
+
+\end{DoxyCode}

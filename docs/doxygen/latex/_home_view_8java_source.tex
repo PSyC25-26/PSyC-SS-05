@@ -1,0 +1,60 @@
+\doxysection{Home\+View.\+java}
+\hypertarget{_home_view_8java_source}{}\label{_home_view_8java_source}\index{src/main/java/com/example/restservice/UI/HomeView.java@{src/main/java/com/example/restservice/UI/HomeView.java}}
+\mbox{\hyperlink{_home_view_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restservice.UI;\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.vaadin.flow.component.UI;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.Button;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.ButtonVariant;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.vaadin.flow.component.html.H1;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.HorizontalLayout;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.VerticalLayout;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.vaadin.flow.router.Route;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.vaadin.flow.server.VaadinSession;}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00020}00020\ @Route(\textcolor{stringliteral}{"{}"{}})\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00021}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view}{00021}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view}{HomeView}}\ extends\ VerticalLayout\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view_a6048760b6be80c7c6808b1f2132c8b50}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view_a6048760b6be80c7c6808b1f2132c8b50}{HomeView}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ setSizeFull();}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ setAlignItems(Alignment.CENTER);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ setJustifyContentMode(JustifyContentMode.CENTER);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ H1\ titulo\ =\ \textcolor{keyword}{new}\ H1(\textcolor{stringliteral}{"{}Bienvenido\ a\ la\ Aplicación"{}});}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ HorizontalLayout\ botones\ =\ \textcolor{keyword}{new}\ HorizontalLayout();}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Botón\ para\ ir\ al\ Login}}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ Button\ btnLogin\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Iniciar\ Sesión"{}},\ e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ UI.getCurrent().navigate(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view}{LoginView}}.class);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ btnLogin.addThemeVariants(ButtonVariant.LUMO\_PRIMARY);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Botón\ para\ ir\ al\ Registro}}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ Button\ btnRegistro\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Registrar\ Usuario"{}},\ e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ UI.getCurrent().navigate(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_registro_view}{RegistroView}}.class);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Verificación\ simple:\ si\ ya\ hay\ una\ sesión,\ mostrar\ un\ botón\ para\ ir\ a\ tu\ app}}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (VaadinSession.getCurrent().getAttribute(\textcolor{stringliteral}{"{}usuarioId"{}})\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ Button\ btnIrApp\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Ir\ a\ mi\ panel"{}},\ e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ botones.add(btnIrApp);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ botones.add(btnLogin,\ btnRegistro);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ add(titulo,\ botones);}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_home_view_8java_source_l00065}00065\ \}}
+
+\end{DoxyCode}

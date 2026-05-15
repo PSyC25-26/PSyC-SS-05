@@ -1,0 +1,146 @@
+\doxysection{Categoria\+View.\+java}
+\hypertarget{_categoria_view_8java_source}{}\label{_categoria_view_8java_source}\index{src/main/java/com/example/restservice/UI/CategoriaView.java@{src/main/java/com/example/restservice/UI/CategoriaView.java}}
+\mbox{\hyperlink{_categoria_view_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restservice_1_1_u_i}{00001}}\ \textcolor{keyword}{package\ }com.example.restservice.UI;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.Arrays;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.example.restservice.Entity.Categoria;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.example.restservice.Service.GestDatosService;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.Button;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.vaadin.flow.component.formlayout.FormLayout;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.vaadin.flow.component.html.Div;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.vaadin.flow.component.html.H2;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00012}00012\ \textcolor{keyword}{import}\ com.vaadin.flow.component.html.Span;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00013}00013\ \textcolor{keyword}{import}\ com.vaadin.flow.component.notification.Notification;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00014}00014\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.HorizontalLayout;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00015}00015\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.VerticalLayout;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00016}00016\ \textcolor{keyword}{import}\ com.vaadin.flow.component.select.Select;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00017}00017\ \textcolor{keyword}{import}\ com.vaadin.flow.component.textfield.TextField;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00018}00018\ \textcolor{keyword}{import}\ com.vaadin.flow.data.renderer.ComponentRenderer;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00019}00019\ \textcolor{keyword}{import}\ com.vaadin.flow.router.PageTitle;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00020}00020\ \textcolor{keyword}{import}\ com.vaadin.flow.router.Route;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00029}00029\ @PageTitle(\textcolor{stringliteral}{"{}Categorías"{}})}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00030}00030\ @Route(value\ =\ \textcolor{stringliteral}{"{}categorias"{}},\ layout\ =\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_main_layout}{MainLayout}}.class)}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00031}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_categoria_view}{00031}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_categoria_view}{CategoriaView}}\ extends\ VerticalLayout\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ GestDatosService\ service;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ TextField\ nombreField\ =\ \textcolor{keyword}{new}\ TextField(\textcolor{stringliteral}{"{}Nombre\ de\ la\ categoría"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ Select<ColorPredefinido>\ colorSelector\ =\ \textcolor{keyword}{new}\ Select<>();}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }ColorPredefinido\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ String\ nombre;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ String\ hex;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ ColorPredefinido(String\ nombre,\ String\ hex)\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ this.nombre\ =\ nombre;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ this.hex\ =\ hex;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00085}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_categoria_view_aecea6f12fb6ddf09fa1f9bc9a8d288cc}{00085}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_categoria_view_aecea6f12fb6ddf09fa1f9bc9a8d288cc}{CategoriaView}}(GestDatosService\ service)\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ this.service\ =\ service;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ setAlignItems(Alignment.CENTER);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ nombreField.setId(\textcolor{stringliteral}{"{}nombre-\/categoria"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ List<ColorPredefinido>\ paletaColores\ =\ Arrays.asList(}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Vibrantes\ /\ Llamativos}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Rojo\ Fuego"{}},\ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#FF3333"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Naranja\ Neón"{}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#FF9933"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Amarillo\ Eléctrico"{}},\ \ \ \textcolor{stringliteral}{"{}\#FFFF33"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Verde\ Lima"{}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#33FF33"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Cian\ Brillante"{}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#33FFFF"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Magenta"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#FF33FF"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tonos\ Pastel}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Rosa\ Pastel"{}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#FFB3BA"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Melocotón"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#FFDFBA"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Amarillo\ Vainilla"{}},\ \ \ \ \ \textcolor{stringliteral}{"{}\#FFFFBA"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Verde\ Menta"{}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#BAFFC9"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Azul\ Hielo"{}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#BAE1FF"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Lavanda\ Suave"{}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#D7BDE2"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tonos\ Profundos\ /\ Oscuros}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Rojo\ Vino"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#800000"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Verde\ Bosque"{}},\ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#006400"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Azul\ Marino"{}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#000080"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Berenjena"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#4B0082"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Gris\ Antracita"{}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#2F4F4F"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Marrón\ Chocolate"{}},\ \ \ \ \ \ \textcolor{stringliteral}{"{}\#8B4513"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Colores\ Clásicos\ /\ Corporativos}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Azul\ Cobalto"{}},\ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#2E86C1"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Rojo\ Carmesí"{}},\ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#E74C3C"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Verde\ Esmeralda"{}},\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#27AE60"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Naranja\ Zanahoria"{}},\ \ \ \ \ \textcolor{stringliteral}{"{}\#D35400"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Amatista"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#9B59B6"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Especiales\ /\ Tonos\ Tierra}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Ocre"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#CC7722"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Turquesa\ Oscuro"{}},\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#008B8B"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Oro\ Viejo"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#DAA520"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Verde\ Oliva"{}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#808000"{}}),}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ColorPredefinido(\textcolor{stringliteral}{"{}Rosa\ Coral"{}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\#F08080"{}})}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00131}00131\ \ \ \ \ \ \ \ \ colorSelector.setLabel(\textcolor{stringliteral}{"{}Color\ para\ el\ calendario"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ colorSelector.setItems(paletaColores);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ colorSelector.setValue(paletaColores.get(2));}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ colorSelector.setId(\textcolor{stringliteral}{"{}color-\/categoria"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00136}00136\ \ \ \ \ \ \ \ \ colorSelector.setRenderer(\textcolor{keyword}{new}\ ComponentRenderer<>(color\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ Div\ colorBox\ =\ \textcolor{keyword}{new}\ Div();}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ colorBox.setWidth(\textcolor{stringliteral}{"{}20px"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ colorBox.setHeight(\textcolor{stringliteral}{"{}20px"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ colorBox.getStyle().set(\textcolor{stringliteral}{"{}background-\/color"{}},\ color.hex);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ colorBox.getStyle().set(\textcolor{stringliteral}{"{}border-\/radius"{}},\ \textcolor{stringliteral}{"{}4px"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ colorBox.getStyle().set(\textcolor{stringliteral}{"{}border"{}},\ \textcolor{stringliteral}{"{}1px\ solid\ \#ccc"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ Span\ colorName\ =\ \textcolor{keyword}{new}\ Span(color.nombre);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ HorizontalLayout\ layout\ =\ \textcolor{keyword}{new}\ HorizontalLayout(colorBox,\ colorName);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ layout.setAlignItems(Alignment.CENTER);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ layout.setSpacing(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ layout;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00150}00150\ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00155}00155\ \ \ \ \ \ \ \ \ Button\ btnCrear\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Añadir\ Categoría"{}},\ e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nombreField.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Notification.show(\textcolor{stringliteral}{"{}El\ nombre\ es\ obligatorio"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ Recuperamos\ el\ ID\ del\ usuario\ logueado}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ Long\ usuarioId\ =\ (Long)\ com.vaadin.flow.server.VaadinSession.getCurrent().getAttribute(\textcolor{stringliteral}{"{}usuarioId"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usuarioId\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Categoria\ nueva\ =\ \textcolor{keyword}{new}\ Categoria();}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nueva.setNombre(nombreField.getValue());}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nueva.setColor(colorSelector.getValue().hex);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Pasamos\ el\ usuarioId\ al\ servicio}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ service.guardarCategoria(nueva,\ usuarioId);}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Notification.show(\textcolor{stringliteral}{"{}Categoría\ '"{}}\ +\ nueva.getNombre()\ +\ \textcolor{stringliteral}{"{}'\ creada!"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nombreField.clear();}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ colorSelector.setValue(paletaColores.get(2));}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00176}00176\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Botón\ de\ guardar\ —\ ID\ "{}btn-\/guardar-\/categoria"{}\ para\ que\ el\ test\ lo\ encuentre}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00179}00179\ \ \ \ \ \ \ \ \ btnCrear.setId(\textcolor{stringliteral}{"{}btn-\/guardar-\/categoria"{}});}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00181}00181\ \ \ \ \ \ \ \ \ add(\textcolor{keyword}{new}\ H2(\textcolor{stringliteral}{"{}Crear\ Nueva\ Categoría"{}}),\ \textcolor{keyword}{new}\ FormLayout(nombreField,\ colorSelector,\ btnCrear));}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00183}00183\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_categoria_view_8java_source_l00184}00184\ \}}
+
+\end{DoxyCode}

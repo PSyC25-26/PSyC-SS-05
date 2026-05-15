@@ -1,0 +1,31 @@
+\doxysection{Gest\+Datos\+Cliente.\+java}
+\hypertarget{_gest_datos_cliente_8java_source}{}\label{_gest_datos_cliente_8java_source}\index{src/main/java/com/example/restservice/Cliente/GestDatosCliente.java@{src/main/java/com/example/restservice/Cliente/GestDatosCliente.java}}
+\mbox{\hyperlink{_gest_datos_cliente_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restservice_1_1_cliente}{00001}}\ \textcolor{keyword}{package\ }com.example.restservice.Cliente;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.restservice.Entity.Usuario;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.web.client.RestTemplate;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00015}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_cliente_1_1_gest_datos_cliente}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_cliente_1_1_gest_datos_cliente}{GestDatosCliente}}\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ RestTemplate\ restTemplate;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ String\ baseUrl;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00034}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_cliente_1_1_gest_datos_cliente_ac4284a9ff378a60604439651b3172882}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_cliente_1_1_gest_datos_cliente_ac4284a9ff378a60604439651b3172882}{GestDatosCliente}}(String\ baseUrl)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ this.restTemplate\ =\ \textcolor{keyword}{new}\ RestTemplate();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ this.baseUrl\ =\ baseUrl;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00047}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_cliente_1_1_gest_datos_cliente_a81e5e10eda5a6eb0e362e54c74c9a66c}{00047}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Usuario>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_cliente_1_1_gest_datos_cliente_a81e5e10eda5a6eb0e362e54c74c9a66c}{obtenerUsuarios}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ restTemplate.getForObject(}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ baseUrl\ +\ \textcolor{stringliteral}{"{}/gestDatos/obtenerUsuarios"{}},}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ List.class}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_cliente_8java_source_l00053}00053\ \}}
+
+\end{DoxyCode}

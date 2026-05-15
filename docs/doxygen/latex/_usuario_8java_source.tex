@@ -1,0 +1,124 @@
+\doxysection{Usuario.\+java}
+\hypertarget{_usuario_8java_source}{}\label{_usuario_8java_source}\index{src/main/java/com/example/restservice/Entity/Usuario.java@{src/main/java/com/example/restservice/Entity/Usuario.java}}
+\mbox{\hyperlink{_usuario_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restservice.Entity;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.fasterxml.jackson.annotation.JsonIgnoreProperties;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00007}00007\ \textcolor{keyword}{import}\ jakarta.persistence.CascadeType;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00008}00008\ \textcolor{keyword}{import}\ jakarta.persistence.Column;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00009}00009\ \textcolor{keyword}{import}\ jakarta.persistence.Entity;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00010}00010\ \textcolor{keyword}{import}\ jakarta.persistence.EnumType;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00011}00011\ \textcolor{keyword}{import}\ jakarta.persistence.Enumerated;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00012}00012\ \textcolor{keyword}{import}\ jakarta.persistence.GeneratedValue;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00013}00013\ \textcolor{keyword}{import}\ jakarta.persistence.GenerationType;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00014}00014\ \textcolor{keyword}{import}\ jakarta.persistence.Id;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00015}00015\ \textcolor{keyword}{import}\ jakarta.persistence.ManyToMany;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00016}00016\ \textcolor{keyword}{import}\ jakarta.persistence.OneToOne;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00017}00017\ \textcolor{keyword}{import}\ jakarta.persistence.Table;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00026}00026\ @Entity}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00027}00027\ @Table(name\ =\ \textcolor{stringliteral}{"{}usuarios"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{00028}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00033}\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{TipoUsuario}}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00034}\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario_a9e9be693ba750aa700bc31cd2b86dd7e}{00034}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario_a9e9be693ba750aa700bc31cd2b86dd7e}{PARTICULAR}},}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ EMPRESA}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00036}\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario_ae176fe7347f988643b71eabefc62acdc}{00036}}\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00041}00041\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00042}00042\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00043}00043\ \ \ \ \ private\ Long\ \textcolor{keywordtype}{id};}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00048}00048\ \ \ \ \ @Column(nullable\ =\ false,\ unique\ =\ true)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00049}00049\ \ \ \ \ private\ String\ username;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00054}00054\ \ \ \ \ @Column(nullable\ =\ false,\ unique\ =\ true)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00055}00055\ \ \ \ \ private\ String\ email;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00060}00060\ \ \ \ \ @Column(nullable\ =\ false)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00061}00061\ \ \ \ \ private\ String\ password;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00066}00066\ \ \ \ \ @OneToOne(mappedBy\ =\ "{}propietario"{},\ cascade\ =\ CascadeType.ALL,\ orphanRemoval\ =\ true)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00067}00067\ \ \ \ \ private\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}}\ calendario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00072}00072\ \ \ \ \ @ManyToMany(mappedBy\ =\ "{}usuarios"{})}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00073}00073\ \ \ \ \ @JsonIgnoreProperties("{}usuarios"{})}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00074}00074\ \ \ \ \ private\ List<\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}}>\ tareas;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00079}00079\ \ \ \ \ @Enumerated(EnumType.STRING)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00080}00080\ \ \ \ \ @Column(nullable\ =\ false)}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00081}00081\ \ \ \ \ private\ \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{TipoUsuario}}\ tipoUsuario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00086}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a08651a2c39b9930201c6f7a3db78d113}{00086}}\ \ \ \ \ public\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00097}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ab3ff0e5652d1deac5b078e620569b885}{00097}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ab3ff0e5652d1deac5b078e620569b885}{Usuario}}(Long\ \textcolor{keywordtype}{id},\ String\ username,\ String\ email,\ \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{TipoUsuario}}\ tipoUsuario,\ List<Tarea>\ tareas)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ this.username\ =\ username;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ this.email\ =\ email;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00101}00101\ \ \ \ \ \ \ \ \ this.tipoUsuario\ =\ tipoUsuario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ this.tareas\ =\ tareas;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00103}00103\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00110}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9152185d9a70dcdcf9d80617fc640726}{00110}}\ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9152185d9a70dcdcf9d80617fc640726}{getId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ id;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00119}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9d08458649334ce39ad774a59e537034}{00119}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9d08458649334ce39ad774a59e537034}{setId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00128}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a26e924795a500ef769dfb151efbe9bb5}{00128}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a26e924795a500ef769dfb151efbe9bb5}{getUsername}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ username;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00130}00130\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00137}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a48bd8fd1bce85c3ff85b760bca07678b}{00137}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a48bd8fd1bce85c3ff85b760bca07678b}{setUsername}}(String\ username)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00138}00138\ \ \ \ \ \ \ \ \ this.username\ =\ username;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00139}00139\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00146}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a73cff6165076449f752d9f3a390147ca}{00146}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a73cff6165076449f752d9f3a390147ca}{getEmail}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ email;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00148}00148\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00155}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a5a01f4e3aa55ff3f25dbbcf92a41eaee}{00155}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Tarea>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a5a01f4e3aa55ff3f25dbbcf92a41eaee}{getTareas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tareas;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00157}00157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00164}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a008be66b01d00a3d9ae1e7dffeebe78f}{00164}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a008be66b01d00a3d9ae1e7dffeebe78f}{setEmail}}(String\ email)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00165}00165\ \ \ \ \ \ \ \ \ this.email\ =\ email;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00166}00166\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00173}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ae8b34473ad2a94ee7aacaf4915367417}{00173}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{TipoUsuario}}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ae8b34473ad2a94ee7aacaf4915367417}{getTipoUsuario}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tipoUsuario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00182}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a3c4bb41af1ca825dfadd12ccceabcabf}{00182}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a3c4bb41af1ca825dfadd12ccceabcabf}{setTipoUsuario}}(\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{TipoUsuario}}\ tipoUsuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00183}00183\ \ \ \ \ \ \ \ \ this.tipoUsuario\ =\ tipoUsuario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00184}00184\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00191}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aa7ba0ac4fbd48709d179df24bb91780f}{00191}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aa7ba0ac4fbd48709d179df24bb91780f}{setTareas}}(List<Tarea>\ tareas)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00192}00192\ \ \ \ \ \ \ \ \ this.tareas\ =\ tareas;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00193}00193\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00200}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a62506bd119d9d43d21cb0b1e0e5dcfe8}{00200}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a62506bd119d9d43d21cb0b1e0e5dcfe8}{getCalendario}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calendario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00202}00202\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00209}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a375c301362c4b5f19ba27d4043875056}{00209}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a375c301362c4b5f19ba27d4043875056}{setCalendario}}(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}}\ calendario)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00210}00210\ \ \ \ \ \ \ \ \ this.calendario\ =\ calendario;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00218}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a8d79826a64e32b640ec354e4dff1f45d}{00218}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a8d79826a64e32b640ec354e4dff1f45d}{getPassword}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this.password;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00227}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aabbf797c7b7c1c559f85692b0f596bf8}{00227}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aabbf797c7b7c1c559f85692b0f596bf8}{setPassword}}(String\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00228}00228\ \ \ \ \ \ \ \ \ this.password\ =\ password;}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00229}00229\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00230}00230\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_usuario_8java_source_l00231}00231\ \}}
+
+\end{DoxyCode}

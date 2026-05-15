@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestDatosService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest-service</a> &gt; <a href="index.source.html" class="el_package">com.example.restservice.Service</a> &gt; <span class="el_source">GestDatosService.java</span></div><h1>GestDatosService.java</h1><pre class="source lang-java linenums">package com.example.restservice.Service;
+
+import org.springframework.stereotype.Service;
+import com.example.restservice.Entity.*;
+import com.vaadin.flow.data.provider.DataProvider;
+
+import java.util.List;
+import java.util.ArrayList;
+import jakarta.transaction.Transactional;
+
+import com.example.restservice.Dao.*;
+
+
+/**
+ * @brief Servicio principal encargado de gestionar la lógica
+ * de negocio del sistema.
+ * 
+ * Esta clase coordina las operaciones relacionadas con usuarios,
+ * tareas, categorías y calendarios.
+ */
+@Service
+public class GestDatosService {
+
+    private final UsuarioDAO usuarioDAO;
+    private final CategoriaDAO categoriaDAO;
+    private final TareaDAO tareaDAO;
+    private final CalendarioDAO calendarioDAO;
+
+    /**
+     * @brief Constructor del servicio.
+     * 
+     * @param usuarioDAO acceso a datos de usuarios.
+     * @param categoriaDAO acceso a datos de categorías.
+     * @param tareaDAO acceso a datos de tareas.
+     * @param calendarioDAO acceso a datos de calendarios.
+     */
+<span class="fc" id="L37">    public GestDatosService(UsuarioDAO usuarioDAO, CategoriaDAO categoriaDAO, TareaDAO tareaDAO, CalendarioDAO calendarioDAO) {</span>
+<span class="fc" id="L38">        this.usuarioDAO = usuarioDAO;</span>
+<span class="fc" id="L39">        this.categoriaDAO = categoriaDAO;</span>
+<span class="fc" id="L40">        this.tareaDAO = tareaDAO;</span>
+<span class="fc" id="L41">        this.calendarioDAO = calendarioDAO;</span>
+<span class="fc" id="L42">    }</span>
+
+    
+    /**
+     * @brief Guarda una tarea asociada a varios usuarios.
+     * 
+     * @param tarea tarea a almacenar.
+     * @param idUsuarios lista de identificadores de usuarios.
+     * @return identificador de la tarea creada.
+     */
+    public long guardarTarea(Tarea tarea, List&lt;Long&gt; idUsuarios){ // &lt;-- Cambiado a List&lt;Long&gt;
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (tarea == null) {</span>
+<span class="fc" id="L54">            throw new IllegalArgumentException(&quot;La tarea no puede ser nula&quot;);</span>
+        }
+
+<span class="pc bpc" id="L57" title="2 of 6 branches missed.">        if (tarea.getFechaInicio() != null &amp;&amp; tarea.getFechaFin() != null &amp;&amp; tarea.getFechaInicio().isAfter(tarea.getFechaFin())) {</span>
+<span class="fc" id="L58">            throw new IllegalArgumentException(&quot;La fecha de inicio no puede ser posterior a la fecha de fin&quot;);</span>
+        }
+
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (tarea.getUsuarios() == null) {</span>
+<span class="fc" id="L62">            tarea.setUsuarios(new ArrayList&lt;&gt;());</span>
+        }
+
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (Long id : idUsuarios) {</span>
+<span class="fc" id="L66">            Usuario usuario = usuarioDAO.findById(id).</span>
+<span class="pc" id="L67">                orElseThrow(() -&gt; new IllegalArgumentException(&quot;Usuario con ID &quot; + id + &quot; no encontrado&quot;));</span>
+            
+<span class="fc" id="L69">            tarea.getUsuarios().add(usuario); // Añadimos cada usuario a la tarea</span>
+<span class="fc" id="L70">        }</span>
+
+<span class="fc" id="L72">        Tarea tareaGuardada = tareaDAO.save(tarea);</span>
+<span class="fc" id="L73">        return tareaGuardada.getId();</span>
+    }
+
+    /**
+     * @brief Guarda un calendario asociado a un usuario.
+     * 
+     * @param calendario calendario a almacenar.
+     * @param idUsuario identificador del usuario propietario.
+     * @return identificador del calendario creado.
+     */
+    public long guardarCalendario(Calendario calendario, Long idUsuario) {
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (calendario == null) {</span>
+<span class="nc" id="L85">            throw new IllegalArgumentException(&quot;El calendario no puede ser nulo&quot;);</span>
+        }
+
+<span class="fc" id="L88">        Usuario propietario = usuarioDAO.findById(idUsuario).</span>
+<span class="pc" id="L89">            orElseThrow(() -&gt; new IllegalArgumentException(&quot;Usuario no encontrado&quot;));</span>
+
+<span class="fc" id="L91">        Calendario calendarioExistente = calendarioDAO.findByPropietarioId(idUsuario);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (calendarioExistente != null) {</span>
+<span class="fc" id="L93">            throw new IllegalArgumentException(&quot;Este usuario ya tiene un calendario asignado. Solo se permite uno.&quot;);</span>
+        }
+
+<span class="fc" id="L96">        calendario.setPropietario(propietario);</span>
+<span class="fc" id="L97">        Calendario calendarioGuardado = calendarioDAO.save(calendario);</span>
+<span class="fc" id="L98">        return calendarioGuardado.getId();</span>
+    }
+
+    /**
+     * @brief Guarda una nueva categoría.
+     * 
+     * @param categoria categoría a almacenar.
+     * @param idUsuario identificador del usuario propietario.
+     * @return identificador de la categoría creada.
+     */
+    public long guardarCategoria(Categoria categoria, Long idUsuario) {
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (categoria == null) {</span>
+<span class="fc" id="L110">            throw new IllegalArgumentException(&quot;La categoría no puede ser nula&quot;);</span>
+        }
+
+        // Buscamos el usuario en la BD y se lo asignamos a la categoría
+<span class="pc" id="L114">        Usuario propietario = usuarioDAO.findById(idUsuario).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Usuario no encontrado&quot;));</span>
+<span class="fc" id="L115">        categoria.setUsuario(propietario);</span>
+        
+<span class="fc" id="L117">        Categoria categoriaGuardada = categoriaDAO.save(categoria);</span>
+<span class="fc" id="L118">        return categoriaGuardada.getId();</span>
+    }
+
+    /**
+     * @brief Obtiene las categorías asociadas a un usuario.
+     * 
+     * @param idUsuario identificador del usuario.
+     * @return lista de categorías.
+     */
+    public List&lt;Categoria&gt; obtenerCategoriasPorUsuario(Long idUsuario) {
+<span class="fc" id="L128">        return categoriaDAO.findByUsuario_Id(idUsuario);</span>
+    }
+
+
+    /**
+     * @brief Elimina una tarea del sistema.
+     * 
+     * @param idTarea identificador de la tarea.
+     */
+    @Transactional
+    public void eliminarTarea (Long idTarea){
+
+<span class="fc" id="L140">        List &lt;Usuario&gt; usuarios = usuarioDAO.findByTareas_Id(idTarea);</span>
+
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        for (Usuario usuario : usuarios){</span>
+<span class="fc" id="L143">            usuario.getTareas().removeIf(tarea -&gt; tarea.getId().equals(idTarea));</span>
+<span class="fc" id="L144">        }</span>
+        
+<span class="fc" id="L146">        tareaDAO.deleteById(idTarea);</span>
+<span class="fc" id="L147">    }</span>
+
+    /**
+     * @brief Obtiene las tareas asociadas a un usuario.
+     * 
+     * @param idUsuario identificador del usuario.
+     * @return lista de tareas del usuario.
+     */
+    public List &lt;Tarea&gt; obtenerTareasPorUsuario (Long idUsuario){
+
+<span class="fc" id="L157">        Usuario usuario = usuarioDAO.findById(idUsuario).</span>
+<span class="fc" id="L158">            orElseThrow(() -&gt; new IllegalArgumentException(&quot;Usuario no encontrado&quot;));</span>
+        
+<span class="fc" id="L160">        List &lt;Tarea&gt; tareas = tareaDAO.findByUsuarios_Id(idUsuario);</span>
+        
+<span class="fc" id="L162">        return tareas; </span>
+    }
+
+    /**
+     * @brief Obtiene la categoría asociada a una tarea.
+     * 
+     * @param idTarea identificador de la tarea.
+     * @return categoría asociada.
+     */
+    public Categoria obtenerCategoriaPorTarea (Long idTarea){
+
+<span class="fc" id="L173">        Tarea tarea = tareaDAO.findById(idTarea).</span>
+<span class="pc" id="L174">            orElseThrow(() -&gt; new IllegalArgumentException(&quot;Tarea no encontrada&quot;));</span>
+        
+<span class="fc" id="L176">        Categoria categoria = tarea.getCategoria();</span>
+<span class="fc" id="L177">        return categoria;</span>
+    }
+
+
+    /**
+     * @brief Elimina un usuario del sistema.
+     * 
+     * @param idUsuario identificador del usuario.
+     */
+    @Transactional
+    public void eliminarUsuario (Long idUsuario){
+
+<span class="fc" id="L189">        Usuario usuario = usuarioDAO.findById(idUsuario).</span>
+<span class="pc" id="L190">            orElseThrow(() -&gt; new IllegalArgumentException(&quot;Usuario no encontrado&quot;));</span>
+
+<span class="fc" id="L192">        List&lt;Tarea&gt; tareasDelUsuario = tareaDAO.findByUsuarios_Id(idUsuario);</span>
+
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        for (Tarea tarea : tareasDelUsuario) {</span>
+<span class="fc" id="L195">            tarea.getUsuarios().removeIf(u -&gt; u.getId().equals(idUsuario));</span>
+            
+            
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">            if (tarea.getUsuarios().isEmpty()) {</span>
+<span class="fc" id="L199">                tareaDAO.delete(tarea);</span>
+            } else {
+<span class="nc" id="L201">                tareaDAO.save(tarea); </span>
+            }
+<span class="fc" id="L203">        }</span>
+
+<span class="fc" id="L205">        usuarioDAO.delete(usuario);</span>
+<span class="fc" id="L206">    }</span>
+
+    /**
+     * @brief Carga todos los usuarios almacenados.
+     * 
+     * @return lista de usuarios.
+     */
+    public List &lt;Usuario&gt; cargarUsuarios(){
+
+<span class="fc" id="L215">        ArrayList &lt;Usuario&gt; usuariosCargados = new ArrayList&lt;Usuario&gt;();</span>
+
+<span class="fc" id="L217">        Iterable &lt;Usuario&gt; usuariosBD = usuarioDAO.findAll();</span>
+
+<span class="fc bfc" id="L219" title="All 2 branches covered.">        for (Usuario usuario : usuariosBD){</span>
+<span class="fc" id="L220">            usuariosCargados.add(usuario);</span>
+<span class="fc" id="L221">        }</span>
+
+<span class="fc" id="L223">        return usuariosCargados;</span>
+    }
+
+    /**
+     * @brief Obtiene las tareas asociadas a un usuario.
+     * 
+     * @param idUsuario identificador del usuario.
+     * @return lista de tareas.
+     */
+    public List &lt;Tarea&gt; cargarTareasPorUsuario (Long idUsuario){
+
+<span class="fc" id="L234">        List &lt;Tarea&gt; tareas = tareaDAO.findByUsuarios_Id(idUsuario);</span>
+
+<span class="fc" id="L236">        return tareas;</span>
+    }
+
+    /**
+     * @brief Obtiene el calendario asociado a un usuario.
+     * 
+     * @param idUsuario identificador del usuario.
+     * @return calendario asociado.
+     */
+    public Calendario cargarCalendarioPorUsuario (long idUsuario){
+
+<span class="fc" id="L247">        Calendario calendario = calendarioDAO.findByPropietarioId(idUsuario);</span>
+
+<span class="fc" id="L249">        return calendario;</span>
+    }
+
+    /**
+     * @brief Modifica una tarea existente.
+     * 
+     * @param idTarea identificador de la tarea.
+     * @param tareaModificada nuevos datos de la tarea.
+     * @return tarea modificada.
+     */
+    public Tarea modificarTarea (Long idTarea, Tarea tareaModificada){
+
+<span class="fc" id="L261">        Tarea tarea = tareaDAO.findById(idTarea).</span>
+<span class="pc" id="L262">            orElseThrow(() -&gt; new IllegalArgumentException(&quot;Tarea no encontrada&quot;));</span>
+
+        // Actualizar los campos de la tarea existente con los valores de tareaModificada
+<span class="fc" id="L265">        tarea.setId(idTarea);</span>
+<span class="fc" id="L266">        tarea.setTitulo(tareaModificada.getTitulo());</span>
+<span class="fc" id="L267">        tarea.setDescripcion(tareaModificada.getDescripcion());</span>
+<span class="fc" id="L268">        tarea.setFechaInicio(tareaModificada.getFechaInicio());</span>
+<span class="fc" id="L269">        tarea.setFechaFin(tareaModificada.getFechaFin());</span>
+<span class="fc" id="L270">        tarea.setCategoria(tareaModificada.getCategoria());</span>
+
+<span class="fc" id="L272">        tareaDAO.save(tarea);</span>
+
+<span class="fc" id="L274">        return tarea;</span>
+    }
+
+    /**
+     * @brief Obtiene todas las tareas almacenadas.
+     * 
+     * @return lista de tareas.
+     */
+    public List&lt;Tarea&gt; cargarTareas() {
+<span class="fc" id="L283">        return (List&lt;Tarea&gt;) tareaDAO.findAll();</span>
+    }
+
+    /**
+     * @brief Obtiene todas las categorías almacenadas.
+     * 
+     * @return lista de categorías.
+     */
+    public List&lt;Categoria&gt; cargarCategorias() {
+<span class="nc" id="L292">        return (List&lt;Categoria&gt;) categoriaDAO.findAll();</span>
+    }
+
+    /**
+     * @brief Modifica un calendario existente.
+     * 
+     * @param idCalendario identificador del calendario.
+     * @param calendarioModificado nuevos datos del calendario.
+     * @return calendario modificado.
+     */
+    public Calendario modificarCalendario(Long idCalendario, Calendario calendarioModificado){
+
+<span class="fc" id="L304">        Calendario calendario = calendarioDAO.findById(idCalendario).</span>
+<span class="pc" id="L305">            orElseThrow(() -&gt; new IllegalArgumentException(&quot;Calendario no encontrado&quot;));</span>
+        
+<span class="fc" id="L307">        calendario.setNombre(calendarioModificado.getNombre());</span>
+
+<span class="fc" id="L309">        calendarioDAO.save(calendario);</span>
+
+<span class="fc" id="L311">        return calendario;</span>
+    }
+
+    // En GestDatosService.java
+    public List&lt;Tarea&gt; listarTodasLasTareas() {
+<span class="nc" id="L316">        return (List&lt;Tarea&gt;) tareaDAO.findAll();</span>
+    }
+
+    public void guardarTarea(Tarea tarea) {
+<span class="fc" id="L320">        tareaDAO.save(tarea);</span>
+<span class="fc" id="L321">    }</span>
+
+    public void eliminarTarea(Tarea tarea) {
+<span class="fc" id="L324">        tareaDAO.delete(tarea);</span>
+<span class="fc" id="L325">    }</span>
+
+    public DataProvider&lt;Tarea, Void&gt; getAllTareas() {
+        // TODO Auto-generated method stub
+<span class="nc" id="L329">        throw new UnsupportedOperationException(&quot;Unimplemented method 'getAllTareas'&quot;);</span>
+    }
+    
+    /**
+     * @brief Guarda un usuario en la base de datos.
+     * 
+     * @param usuario usuario a almacenar.
+     * @return usuario guardado.
+     */
+    public Usuario guardarUsuario(Usuario usuario) {
+
+        // Añadimos la comprobación para que pase el test
+<span class="fc bfc" id="L341" title="All 2 branches covered.">        if (usuario == null) {</span>
+<span class="fc" id="L342">            throw new IllegalArgumentException(&quot;El usuario no puede ser nulo&quot;);</span>
+        }
+        
+        // Usamos tu UsuarioDAO real
+<span class="fc" id="L346">        return usuarioDAO.save(usuario);</span>
+    }
+
+    /**
+     * @brief Autentica un usuario en el sistema.
+     * 
+     * @param username nombre de usuario.
+     * @param password contraseña del usuario.
+     * @return usuario autenticado o null si no existe.
+     */
+    public Usuario autenticarUsuario(String username, String password) {
+
+        // Usamos tu usuarioDAO para traer todos los usuarios
+<span class="fc" id="L359">        Iterable&lt;Usuario&gt; todosLosUsuarios = usuarioDAO.findAll();</span>
+        
+<span class="pc bpc" id="L361" title="1 of 2 branches missed.">        for (Usuario u : todosLosUsuarios) {</span>
+<span class="pc bpc" id="L362" title="2 of 4 branches missed.">            if (u.getUsername().equals(username) &amp;&amp; u.getPassword().equals(password)) {</span>
+<span class="fc" id="L363">                return u; // Coinciden usuario y contraseña</span>
+            }
+<span class="nc" id="L365">        }</span>
+
+<span class="nc" id="L367">        return null; // No coinciden</span>
+    }
+
+    /**
+     * @brief Obtiene tareas filtradas por categoría.
+     * 
+     * @param categoria categoría utilizada como filtro.
+     * @return lista de tareas asociadas a la categoría.
+     */
+    public List&lt;Tarea&gt; obtenerTareasPorCategoria(Categoria categoria) {
+
+<span class="nc bnc" id="L378" title="All 2 branches missed.">        if (categoria == null) {</span>
+<span class="nc" id="L379">            return listarTodasLasTareas();</span>
+        }
+
+<span class="nc" id="L382">        return tareaDAO.findByCategoria(categoria);</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

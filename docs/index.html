@@ -1,0 +1,315 @@
+<h1 id="psyc-quality-manager">PSyC Quality Manager</h1>
+<p>Aplicación de gestión de tareas y calendario desarrollada con Java,
+Spring Boot, Vaadin, MySQL y Maven.</p>
+<p>El proyecto incluye gestión de usuarios, creación y edición de
+tareas, categorías, calendario, tests automáticos, integración continua
+(CI) y generación de informes de calidad.</p>
+<hr />
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<p>Antes de empezar es necesario instalar:</p>
+<h3 id="git">1. Git</h3>
+<p>Descargar: https://git-scm.com/downloads</p>
+<p>Instalar con configuración por defecto.</p>
+<h3 id="visual-studio-code">2. Visual Studio Code</h3>
+<p>Descargar: https://code.visualstudio.com/</p>
+<h3 id="java-jdk-21">3. Java JDK 21</h3>
+<p>Descargar: https://adoptium.net/</p>
+<p>Instalar Temurin 21 (Windows x64).</p>
+<p>Comprobar instalación:</p>
+<pre><code>java -version</code></pre>
+<p>Debe aparecer Java 21.</p>
+<h3 id="maven">4. Maven</h3>
+<p>Descargar: https://maven.apache.org/download.cgi (Binary zip
+archive)</p>
+<p>Descomprimir en <code>C:\Maven</code> y añadir
+<code>C:\Maven\bin</code> al PATH. Reiniciar el ordenador.</p>
+<p>Comprobar instalación:</p>
+<pre><code>mvn -version</code></pre>
+<h3 id="mysql-mysql-workbench">5. MySQL + MySQL Workbench</h3>
+<p>Descargar: https://dev.mysql.com/downloads/installer/</p>
+<p>Instalar MySQL Server y MySQL Workbench.</p>
+<p>Durante la instalación usar:</p>
+<pre><code>usuario:    root
+contraseña: 1234</code></pre>
+<h3 id="node.js">6. Node.js</h3>
+<p>Descargar: https://nodejs.org/ (versión LTS)</p>
+<blockquote>
+<p><strong>Importante:</strong> marcar la opción <strong>Add to
+PATH</strong> durante la instalación. Reiniciar el ordenador.</p>
+</blockquote>
+<p>Comprobar instalación:</p>
+<pre><code>node -v</code></pre>
+<hr />
+<h2 id="instalación">Instalación</h2>
+<h3 id="descargar-el-proyecto">Descargar el proyecto</h3>
+<pre><code>git clone https://github.com/PSyC25-26/PSyC-SS-05.git
+cd PSyC-SS-05</code></pre>
+<h3 id="abrir-en-visual-studio-code">Abrir en Visual Studio Code</h3>
+<p>Ir a <strong>File → Open Folder</strong> y seleccionar la carpeta del
+proyecto.</p>
+<h3 id="configurar-mysql">Configurar MySQL</h3>
+<p>Abrir MySQL Workbench, conectarse con usuario <code>root</code> /
+contraseña <code>1234</code> y ejecutar:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> db_calidad;</span></code></pre></div>
+<h3 id="configurar-el-proyecto">Configurar el proyecto</h3>
+<p>Abrir
+<code>rest-service/src/main/resources/application.properties</code> y
+comprobar:</p>
+<pre class="properties"><code>spring.application.name=rest-service
+
+spring.datasource.url=jdbc:mysql://localhost:3306/db_calidad?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true
+spring.datasource.username=root
+spring.datasource.password=1234
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.show-sql=true
+
+server.port=8080</code></pre>
+<h3 id="instalar-dependencias">Instalar dependencias</h3>
+<p>Dentro de <code>PSyC-SS-05/rest-service</code> ejecutar:</p>
+<pre><code>mvn clean install</code></pre>
+<p>La primera ejecución puede tardar varios minutos.</p>
+<hr />
+<h2 id="ejecutar-la-aplicación">Ejecutar la aplicación</h2>
+<pre><code>mvn spring-boot:run</code></pre>
+<p>Abrir en el navegador: http://localhost:8080</p>
+<hr />
+<h2 id="lanzamiento-con-docker">Lanzamiento con Docker</h2>
+<p>Alternativa al método manual: lanza toda la aplicación con un único
+comando, sin necesidad de instalar Java, Maven, MySQL ni Node.js.</p>
+<p>Requisito: tener instalado <strong>Docker Desktop</strong> →
+https://www.docker.com/products/docker-desktop</p>
+<p>Comprobar instalación:</p>
+<pre><code>docker -v
+docker compose version</code></pre>
+<h3 id="iniciar-los-contenedores">Iniciar los contenedores</h3>
+<p>Si solo necesitas arrancar los contenedores sin reconstruirlos:</p>
+<pre><code>docker-compose up</code></pre>
+<p>Si has modificado el Dockerfile, dependencias o configuraciones de
+entorno:</p>
+<pre><code>docker-compose up --build</code></pre>
+<p>La aplicación estará disponible en: http://localhost:8082</p>
+<h3 id="detener-los-contenedores">Detener los contenedores</h3>
+<pre><code>docker-compose down</code></pre>
+<p>Documentación adicional disponible en
+<code>docker_essentials.md</code>.</p>
+<hr />
+<h2 id="registro-e-inicio-de-sesión">Registro e inicio de sesión</h2>
+<p>Registrar un usuario desde la interfaz y luego iniciar sesión.</p>
+<blockquote>
+<p><strong>Importante:</strong> el login utiliza el campo
+<code>username</code>, no el email.</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>Campo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Username</td>
+<td>maria</td>
+</tr>
+<tr class="even">
+<td>Password</td>
+<td>1234</td>
+</tr>
+</tbody>
+</table>
+<p>Para verificar usuarios en MySQL Workbench:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">USE</span> db_calidad;</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> usuario;</span></code></pre></div>
+<hr />
+<h2 id="tests">Tests</h2>
+<p>El proyecto incluye tests unitarios, de integración, de aceptación y
+de rendimiento.</p>
+<p>Entrar en el directorio <code>PSyC-SS-05/rest-service</code> y
+ejecutar según el tipo:</p>
+<pre><code># Unitarios e integración
+mvn test
+
+# Aceptación (Playwright)
+mvn test -P playwright
+
+# Rendimiento
+mvn test -P performance
+
+# Build completo con todos los tests
+mvn clean package</code></pre>
+<h3 id="informes-de-cobertura-jacoco">Informes de cobertura JaCoCo</h3>
+<p>Después de <code>mvn clean package</code> se genera el informe
+en:</p>
+<pre><code>rest-service/target/site/jacoco/index.html</code></pre>
+<p>Abrir ese archivo en el navegador para ver cobertura de clases,
+métodos cubiertos y porcentaje de tests.</p>
+<hr />
+<h2 id="integración-continua-ci">Integración continua (CI)</h2>
+<p>El proyecto utiliza workflows automáticos definidos en
+<code>.github/workflows/</code> que incluyen compilación automática,
+ejecución de tests y generación de informes.</p>
+<p>También incluye configuración Jenkins mediante
+<code>Jenkinsfile</code> para builds automáticos e integración
+continua.</p>
+<hr />
+<h2 id="problemas-comunes">Problemas comunes</h2>
+<p><strong>Error: puerto ocupado</strong>
+(<code>Port 8080 was already in use</code>)</p>
+<pre><code>netstat -ano | findstr :8080
+taskkill /PID NUMERO /F</code></pre>
+<p><strong>Error: <code>node</code> command not found</strong></p>
+<p>Node.js no está correctamente instalado. Reinstalarlo marcando
+<strong>Add to PATH</strong> y reiniciar Windows.</p>
+<p><strong>Error:
+<code>No plugin found for prefix 'vaadin'</code></strong></p>
+<pre><code>mvn clean install</code></pre>
+<p><strong>Error: <code>no POM in this directory</code></strong></p>
+<pre><code>cd rest-service</code></pre>
+<hr />
+<h2 id="estructura-del-proyecto">Estructura del proyecto</h2>
+<pre><code>rest-service/
+│
+├── src/
+│   ├── main/
+│   └── test/
+│
+├── target/
+├── pom.xml
+└── application.properties</code></pre>
+<hr />
+<h2 id="tecnologías-utilizadas">Tecnologías utilizadas</h2>
+<p>Java 21 · Spring Boot · Vaadin · Maven · MySQL · JUnit · JaCoCo ·
+Jenkins · GitHub Actions · Playwright</p>
+<hr />
+<h2 id="comandos-de-referencia-rápida">Comandos de referencia
+rápida</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Acción</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compilar</td>
+<td><code>mvn clean install</code></td>
+</tr>
+<tr class="even">
+<td>Ejecutar aplicación</td>
+<td><code>mvn spring-boot:run</code></td>
+</tr>
+<tr class="odd">
+<td>Ejecutar tests</td>
+<td><code>mvn test</code></td>
+</tr>
+<tr class="even">
+<td>Generar paquete</td>
+<td><code>mvn clean package</code></td>
+</tr>
+<tr class="odd">
+<td>Arrancar con Docker</td>
+<td><code>docker-compose up</code></td>
+</tr>
+<tr class="even">
+<td>Reconstruir con Docker</td>
+<td><code>docker-compose up --build</code></td>
+</tr>
+</tbody>
+</table>
+<p>Aplicación disponible en: http://localhost:8080</p>
+<hr />
+<h2 id="estado-esperado">Estado esperado</h2>
+<p>La aplicación debe permitir iniciar sesión, gestionar tareas,
+visualizar el calendario, gestionar categorías, almacenar información en
+MySQL, ejecutar tests correctamente y generar informes de calidad.</p>
+<h2 id="documentación-del-proyecto-con-sphinx">Documentación del
+Proyecto con Sphinx</h2>
+<p>La documentación técnica detallada, incluyendo la arquitectura del
+sistema, la guía de inicio rápido y la referencia de la API REST, está
+disponible en el siguiente enlace:</p>
+<p><a
+href="https://psyc25-26.github.io/PSyC-SS-05/sphinx/"><strong>Portal de
+Documentación (Sphinx)</strong></a></p>
+<hr />
+<h2 id="documentación-automática-con-doxygen">Documentación automática
+con Doxygen</h2>
+<p>El proyecto incluye documentación automática generada mediante
+<strong>Doxygen</strong> integrado con <strong>Maven</strong>. La
+documentación se genera automáticamente utilizando comentarios en
+formato Doxygen añadidos al código fuente del proyecto.</p>
+<h3 id="herramientas-utilizadas">Herramientas utilizadas</h3>
+<ul>
+<li>Doxygen</li>
+<li>Graphviz</li>
+<li>Maven</li>
+<li>GitHub Actions</li>
+<li>GitHub Pages</li>
+<li>LaTeX / MiKTeX (generación PDF)</li>
+</ul>
+<hr />
+<h3 id="instalación-de-dependencias-para-documentación">Instalación de
+dependencias para documentación</h3>
+<h4 id="doxygen">Doxygen</h4>
+<p>Descargar: https://www.doxygen.nl/download.html</p>
+<p>Comprobar instalación:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">doxygen</span> <span class="at">--version</span></span></code></pre></div>
+<h4 id="graphviz">Graphviz</h4>
+<p>Descargar: https://graphviz.org/download/</p>
+<blockquote>
+<p><strong>Importante:</strong> marcar la opción <strong>Add Graphviz to
+PATH</strong> durante la instalación.</p>
+</blockquote>
+<p>Comprobar instalación:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dot</span> <span class="at">-V</span></span></code></pre></div>
+<h4 id="miktex">MiKTeX</h4>
+<p>Descargar: https://miktex.org/download</p>
+<hr />
+<h3 id="generar-documentación-html">Generar documentación HTML</h3>
+<p>Desde <code>PSyC-SS-05/rest-service</code> ejecutar:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> doxygen:report</span></code></pre></div>
+<p>La documentación HTML se genera en:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode txt"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>target/doxygen/html</span></code></pre></div>
+<p>Abrir:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode txt"><code class="sourceCode default"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>target/doxygen/html/index.html</span></code></pre></div>
+<hr />
+<h3 id="generar-documentación-pdf">Generar documentación PDF</h3>
+<p>Tras ejecutar:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> doxygen:report</span></code></pre></div>
+<p>acceder a:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode txt"><code class="sourceCode default"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>target/doxygen/latex</span></code></pre></div>
+<p>y ejecutar:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">make.bat</span></span></code></pre></div>
+<p>El PDF generado será:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode txt"><code class="sourceCode default"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>refman.pdf</span></code></pre></div>
+<hr />
+<h3 id="github-actions-y-github-pages">GitHub Actions y GitHub
+Pages</h3>
+<p>El proyecto incluye automatización completa de la documentación
+mediante GitHub Actions.</p>
+<p>Workflow utilizado:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode txt"><code class="sourceCode default"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>.github/workflows/doxygen.yml</span></code></pre></div>
+<p>Cada push realizado sobre la rama principal genera
+automáticamente:</p>
+<ul>
+<li>documentación Doxygen</li>
+<li>integración Maven</li>
+<li>despliegue automático en GitHub Pages</li>
+</ul>
+<p>Documentación publicada en:</p>
+<p>https://psyc25-26.github.io/PSyC-SS-05/</p>
+<hr />
