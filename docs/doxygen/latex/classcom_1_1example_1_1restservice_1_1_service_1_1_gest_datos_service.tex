@@ -1,0 +1,544 @@
+\doxysection{com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service Class Reference}
+\hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service}{}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service}\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+
+
+Servicio principal encargado de gestionar la lógica de negocio del sistema.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abba63dd502d4129d9d494b48420c9ef5}{Gest\+Datos\+Service}} (Usuario\+DAO usuario\+DAO, Categoria\+DAO categoria\+DAO, Tarea\+DAO tarea\+DAO, Calendario\+DAO calendario\+DAO)
+\begin{DoxyCompactList}\small\item\em Constructor del servicio. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a764916e4fd64377c8c318d9c9f0dde71}{guardar\+Tarea}} (Tarea tarea, List$<$ Long $>$ id\+Usuarios)
+\begin{DoxyCompactList}\small\item\em Guarda una tarea asociada a varios usuarios. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a03ace83f0cb77fa55e177b03619e65e0}{guardar\+Calendario}} (Calendario calendario, Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Guarda un calendario asociado a un usuario. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a659430593d7c28c493cff3d37f72c5d4}{guardar\+Categoria}} (Categoria categoria, Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Guarda una nueva categoría. \end{DoxyCompactList}\item 
+List$<$ Categoria $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2e2576d7a4f34a28fa882992c6e1c6e2}{obtener\+Categorias\+Por\+Usuario}} (Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene las categorías asociadas a un usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_ae21335a42f34fd089687554820ed02d3}{eliminar\+Tarea}} (Long id\+Tarea)
+\begin{DoxyCompactList}\small\item\em Elimina una tarea del sistema. \end{DoxyCompactList}\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8776126502ba80f53c5240986d12af41}{obtener\+Tareas\+Por\+Usuario}} (Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene las tareas asociadas a un usuario. \end{DoxyCompactList}\item 
+Categoria \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c2619cd620f987e423d325fd315e18b}{obtener\+Categoria\+Por\+Tarea}} (Long id\+Tarea)
+\begin{DoxyCompactList}\small\item\em Obtiene la categoría asociada a una tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abbdd679e414fec885db167174a001ed1}{eliminar\+Usuario}} (Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Elimina un usuario del sistema. \end{DoxyCompactList}\item 
+List$<$ Usuario $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_adee9f5e8c27a1e94efed7aec9cac5f30}{cargar\+Usuarios}} ()
+\begin{DoxyCompactList}\small\item\em Carga todos los usuarios almacenados. \end{DoxyCompactList}\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a66b5edf9f6f0cc8d3241114d14d8f2fd}{cargar\+Tareas\+Por\+Usuario}} (Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene las tareas asociadas a un usuario. \end{DoxyCompactList}\item 
+Calendario \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a619adfa3399ba4e649767c49c8bd9488}{cargar\+Calendario\+Por\+Usuario}} (long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene el calendario asociado a un usuario. \end{DoxyCompactList}\item 
+Tarea \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a50cb01e13dc0af0422d8f84490fff266}{modificar\+Tarea}} (Long id\+Tarea, Tarea tarea\+Modificada)
+\begin{DoxyCompactList}\small\item\em Modifica una tarea existente. \end{DoxyCompactList}\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5ac3b7494f148d2560ea29f0fc97cf8f}{cargar\+Tareas}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene todas las tareas almacenadas. \end{DoxyCompactList}\item 
+List$<$ Categoria $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a9d06dc5e1059b67aaecf127e5b62cec2}{cargar\+Categorias}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene todas las categorías almacenadas. \end{DoxyCompactList}\item 
+Calendario \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a3bb796beaeead0d4f45adcf93b2ef7a4}{modificar\+Calendario}} (Long id\+Calendario, Calendario calendario\+Modificado)
+\begin{DoxyCompactList}\small\item\em Modifica un calendario existente. \end{DoxyCompactList}\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510}{listar\+Todas\+Las\+Tareas}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_aa9da5870a494ee8d0264a64a42e9459a}{guardar\+Tarea}} (Tarea tarea)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2aec294f9aecb0110f123f0ca7dc9916}{eliminar\+Tarea}} (Tarea tarea)
+\item 
+Data\+Provider$<$ Tarea, Void $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abc5b9b75ddad38a11e79df80aa26ef86}{get\+All\+Tareas}} ()
+\item 
+Usuario \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a4070b7f05c2ede97f33f88c6360f58a6}{guardar\+Usuario}} (Usuario usuario)
+\begin{DoxyCompactList}\small\item\em Guarda un usuario en la base de datos. \end{DoxyCompactList}\item 
+Usuario \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a6a13032240ec85133d118086ad168d9c}{autenticar\+Usuario}} (String username, String password)
+\begin{DoxyCompactList}\small\item\em Autentica un usuario en el sistema. \end{DoxyCompactList}\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5b4d30ca89873c22dbcbb5c11268f2e7}{obtener\+Tareas\+Por\+Categoria}} (Categoria categoria)
+\begin{DoxyCompactList}\small\item\em Obtiene tareas filtradas por categoría. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Servicio principal encargado de gestionar la lógica de negocio del sistema. 
+
+Esta clase coordina las operaciones relacionadas con usuarios, tareas, categorías y calendarios. 
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00022}{22}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abba63dd502d4129d9d494b48420c9ef5}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abba63dd502d4129d9d494b48420c9ef5} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!GestDatosService@{GestDatosService}}
+\index{GestDatosService@{GestDatosService}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{GestDatosService()}{GestDatosService()}}
+{\footnotesize\ttfamily com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+Gest\+Datos\+Service (\begin{DoxyParamCaption}\item[{Usuario\+DAO}]{usuario\+DAO,  }\item[{Categoria\+DAO}]{categoria\+DAO,  }\item[{Tarea\+DAO}]{tarea\+DAO,  }\item[{Calendario\+DAO}]{calendario\+DAO }\end{DoxyParamCaption})}
+
+
+
+Constructor del servicio. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em usuario\+DAO} & acceso a datos de usuarios. \\
+\hline
+{\em categoria\+DAO} & acceso a datos de categorías. \\
+\hline
+{\em tarea\+DAO} & acceso a datos de tareas. \\
+\hline
+{\em calendario\+DAO} & acceso a datos de calendarios. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00037}{37}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a6a13032240ec85133d118086ad168d9c}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a6a13032240ec85133d118086ad168d9c} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!autenticarUsuario@{autenticarUsuario}}
+\index{autenticarUsuario@{autenticarUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{autenticarUsuario()}{autenticarUsuario()}}
+{\footnotesize\ttfamily Usuario com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+autenticar\+Usuario (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{String}]{password }\end{DoxyParamCaption})}
+
+
+
+Autentica un usuario en el sistema. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nombre de usuario. \\
+\hline
+{\em password} & contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+usuario autenticado o null si no existe. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00356}{356}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a619adfa3399ba4e649767c49c8bd9488}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a619adfa3399ba4e649767c49c8bd9488} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!cargarCalendarioPorUsuario@{cargarCalendarioPorUsuario}}
+\index{cargarCalendarioPorUsuario@{cargarCalendarioPorUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{cargarCalendarioPorUsuario()}{cargarCalendarioPorUsuario()}}
+{\footnotesize\ttfamily Calendario com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+cargar\+Calendario\+Por\+Usuario (\begin{DoxyParamCaption}\item[{long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene el calendario asociado a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calendario asociado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00245}{245}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a9d06dc5e1059b67aaecf127e5b62cec2}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a9d06dc5e1059b67aaecf127e5b62cec2} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!cargarCategorias@{cargarCategorias}}
+\index{cargarCategorias@{cargarCategorias}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{cargarCategorias()}{cargarCategorias()}}
+{\footnotesize\ttfamily List$<$ Categoria $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+cargar\+Categorias (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene todas las categorías almacenadas. 
+
+\begin{DoxyReturn}{Returns}
+lista de categorías. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00291}{291}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5ac3b7494f148d2560ea29f0fc97cf8f}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5ac3b7494f148d2560ea29f0fc97cf8f} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!cargarTareas@{cargarTareas}}
+\index{cargarTareas@{cargarTareas}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{cargarTareas()}{cargarTareas()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+cargar\+Tareas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene todas las tareas almacenadas. 
+
+\begin{DoxyReturn}{Returns}
+lista de tareas. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00282}{282}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a66b5edf9f6f0cc8d3241114d14d8f2fd}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a66b5edf9f6f0cc8d3241114d14d8f2fd} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!cargarTareasPorUsuario@{cargarTareasPorUsuario}}
+\index{cargarTareasPorUsuario@{cargarTareasPorUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{cargarTareasPorUsuario()}{cargarTareasPorUsuario()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+cargar\+Tareas\+Por\+Usuario (\begin{DoxyParamCaption}\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene las tareas asociadas a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de tareas. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00232}{232}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_adee9f5e8c27a1e94efed7aec9cac5f30}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_adee9f5e8c27a1e94efed7aec9cac5f30} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!cargarUsuarios@{cargarUsuarios}}
+\index{cargarUsuarios@{cargarUsuarios}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{cargarUsuarios()}{cargarUsuarios()}}
+{\footnotesize\ttfamily List$<$ Usuario $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+cargar\+Usuarios (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Carga todos los usuarios almacenados. 
+
+\begin{DoxyReturn}{Returns}
+lista de usuarios. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00213}{213}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_ae21335a42f34fd089687554820ed02d3}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_ae21335a42f34fd089687554820ed02d3} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!eliminarTarea@{eliminarTarea}}
+\index{eliminarTarea@{eliminarTarea}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{eliminarTarea()}{eliminarTarea()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+eliminar\+Tarea (\begin{DoxyParamCaption}\item[{Long}]{id\+Tarea }\end{DoxyParamCaption})}
+
+
+
+Elimina una tarea del sistema. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Tarea} & identificador de la tarea. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00138}{138}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2aec294f9aecb0110f123f0ca7dc9916}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2aec294f9aecb0110f123f0ca7dc9916} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!eliminarTarea@{eliminarTarea}}
+\index{eliminarTarea@{eliminarTarea}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{eliminarTarea()}{eliminarTarea()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+eliminar\+Tarea (\begin{DoxyParamCaption}\item[{Tarea}]{tarea }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00323}{323}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abbdd679e414fec885db167174a001ed1}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abbdd679e414fec885db167174a001ed1} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!eliminarUsuario@{eliminarUsuario}}
+\index{eliminarUsuario@{eliminarUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{eliminarUsuario()}{eliminarUsuario()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+eliminar\+Usuario (\begin{DoxyParamCaption}\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Elimina un usuario del sistema. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00187}{187}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abc5b9b75ddad38a11e79df80aa26ef86}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abc5b9b75ddad38a11e79df80aa26ef86} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!getAllTareas@{getAllTareas}}
+\index{getAllTareas@{getAllTareas}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{getAllTareas()}{getAllTareas()}}
+{\footnotesize\ttfamily Data\+Provider$<$ Tarea, Void $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+get\+All\+Tareas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00327}{327}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a03ace83f0cb77fa55e177b03619e65e0}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a03ace83f0cb77fa55e177b03619e65e0} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!guardarCalendario@{guardarCalendario}}
+\index{guardarCalendario@{guardarCalendario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{guardarCalendario()}{guardarCalendario()}}
+{\footnotesize\ttfamily long com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+guardar\+Calendario (\begin{DoxyParamCaption}\item[{Calendario}]{calendario,  }\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Guarda un calendario asociado a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em calendario} & calendario a almacenar. \\
+\hline
+{\em id\+Usuario} & identificador del usuario propietario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador del calendario creado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00083}{83}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a659430593d7c28c493cff3d37f72c5d4}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a659430593d7c28c493cff3d37f72c5d4} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!guardarCategoria@{guardarCategoria}}
+\index{guardarCategoria@{guardarCategoria}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{guardarCategoria()}{guardarCategoria()}}
+{\footnotesize\ttfamily long com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+guardar\+Categoria (\begin{DoxyParamCaption}\item[{Categoria}]{categoria,  }\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Guarda una nueva categoría. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em categoria} & categoría a almacenar. \\
+\hline
+{\em id\+Usuario} & identificador del usuario propietario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador de la categoría creada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00108}{108}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_aa9da5870a494ee8d0264a64a42e9459a}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_aa9da5870a494ee8d0264a64a42e9459a} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!guardarTarea@{guardarTarea}}
+\index{guardarTarea@{guardarTarea}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{guardarTarea()}{guardarTarea()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+guardar\+Tarea (\begin{DoxyParamCaption}\item[{Tarea}]{tarea }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00319}{319}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a764916e4fd64377c8c318d9c9f0dde71}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a764916e4fd64377c8c318d9c9f0dde71} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!guardarTarea@{guardarTarea}}
+\index{guardarTarea@{guardarTarea}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{guardarTarea()}{guardarTarea()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily long com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+guardar\+Tarea (\begin{DoxyParamCaption}\item[{Tarea}]{tarea,  }\item[{List$<$ Long $>$}]{id\+Usuarios }\end{DoxyParamCaption})}
+
+
+
+Guarda una tarea asociada a varios usuarios. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tarea} & tarea a almacenar. \\
+\hline
+{\em id\+Usuarios} & lista de identificadores de usuarios. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+identificador de la tarea creada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00052}{52}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a4070b7f05c2ede97f33f88c6360f58a6}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a4070b7f05c2ede97f33f88c6360f58a6} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!guardarUsuario@{guardarUsuario}}
+\index{guardarUsuario@{guardarUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{guardarUsuario()}{guardarUsuario()}}
+{\footnotesize\ttfamily Usuario com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+guardar\+Usuario (\begin{DoxyParamCaption}\item[{Usuario}]{usuario }\end{DoxyParamCaption})}
+
+
+
+Guarda un usuario en la base de datos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em usuario} & usuario a almacenar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+usuario guardado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00338}{338}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!listarTodasLasTareas@{listarTodasLasTareas}}
+\index{listarTodasLasTareas@{listarTodasLasTareas}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{listarTodasLasTareas()}{listarTodasLasTareas()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+listar\+Todas\+Las\+Tareas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00315}{315}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a3bb796beaeead0d4f45adcf93b2ef7a4}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a3bb796beaeead0d4f45adcf93b2ef7a4} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!modificarCalendario@{modificarCalendario}}
+\index{modificarCalendario@{modificarCalendario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{modificarCalendario()}{modificarCalendario()}}
+{\footnotesize\ttfamily Calendario com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+modificar\+Calendario (\begin{DoxyParamCaption}\item[{Long}]{id\+Calendario,  }\item[{Calendario}]{calendario\+Modificado }\end{DoxyParamCaption})}
+
+
+
+Modifica un calendario existente. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Calendario} & identificador del calendario. \\
+\hline
+{\em calendario\+Modificado} & nuevos datos del calendario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calendario modificado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00302}{302}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a50cb01e13dc0af0422d8f84490fff266}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a50cb01e13dc0af0422d8f84490fff266} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!modificarTarea@{modificarTarea}}
+\index{modificarTarea@{modificarTarea}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{modificarTarea()}{modificarTarea()}}
+{\footnotesize\ttfamily Tarea com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+modificar\+Tarea (\begin{DoxyParamCaption}\item[{Long}]{id\+Tarea,  }\item[{Tarea}]{tarea\+Modificada }\end{DoxyParamCaption})}
+
+
+
+Modifica una tarea existente. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Tarea} & identificador de la tarea. \\
+\hline
+{\em tarea\+Modificada} & nuevos datos de la tarea. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tarea modificada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00259}{259}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c2619cd620f987e423d325fd315e18b}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c2619cd620f987e423d325fd315e18b} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!obtenerCategoriaPorTarea@{obtenerCategoriaPorTarea}}
+\index{obtenerCategoriaPorTarea@{obtenerCategoriaPorTarea}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{obtenerCategoriaPorTarea()}{obtenerCategoriaPorTarea()}}
+{\footnotesize\ttfamily Categoria com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+obtener\+Categoria\+Por\+Tarea (\begin{DoxyParamCaption}\item[{Long}]{id\+Tarea }\end{DoxyParamCaption})}
+
+
+
+Obtiene la categoría asociada a una tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Tarea} & identificador de la tarea. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+categoría asociada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00171}{171}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2e2576d7a4f34a28fa882992c6e1c6e2}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2e2576d7a4f34a28fa882992c6e1c6e2} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!obtenerCategoriasPorUsuario@{obtenerCategoriasPorUsuario}}
+\index{obtenerCategoriasPorUsuario@{obtenerCategoriasPorUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{obtenerCategoriasPorUsuario()}{obtenerCategoriasPorUsuario()}}
+{\footnotesize\ttfamily List$<$ Categoria $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+obtener\+Categorias\+Por\+Usuario (\begin{DoxyParamCaption}\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene las categorías asociadas a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de categorías. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00127}{127}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5b4d30ca89873c22dbcbb5c11268f2e7}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5b4d30ca89873c22dbcbb5c11268f2e7} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!obtenerTareasPorCategoria@{obtenerTareasPorCategoria}}
+\index{obtenerTareasPorCategoria@{obtenerTareasPorCategoria}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{obtenerTareasPorCategoria()}{obtenerTareasPorCategoria()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+obtener\+Tareas\+Por\+Categoria (\begin{DoxyParamCaption}\item[{Categoria}]{categoria }\end{DoxyParamCaption})}
+
+
+
+Obtiene tareas filtradas por categoría. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em categoria} & categoría utilizada como filtro. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de tareas asociadas a la categoría. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00376}{376}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5b4d30ca89873c22dbcbb5c11268f2e7_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8776126502ba80f53c5240986d12af41}\label{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8776126502ba80f53c5240986d12af41} 
+\index{com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}!obtenerTareasPorUsuario@{obtenerTareasPorUsuario}}
+\index{obtenerTareasPorUsuario@{obtenerTareasPorUsuario}!com.example.restservice.Service.GestDatosService@{com.example.restservice.Service.GestDatosService}}
+\doxysubsubsection{\texorpdfstring{obtenerTareasPorUsuario()}{obtenerTareasPorUsuario()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Service.\+Gest\+Datos\+Service.\+obtener\+Tareas\+Por\+Usuario (\begin{DoxyParamCaption}\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene las tareas asociadas a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de tareas del usuario. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_gest_datos_service_8java_source_l00155}{155}} of file \mbox{\hyperlink{_gest_datos_service_8java_source}{Gest\+Datos\+Service.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restservice/\+Service/\mbox{\hyperlink{_gest_datos_service_8java}{Gest\+Datos\+Service.\+java}}\end{DoxyCompactItemize}

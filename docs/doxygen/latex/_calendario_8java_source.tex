@@ -1,0 +1,55 @@
+\doxysection{Calendario.\+java}
+\hypertarget{_calendario_8java_source}{}\label{_calendario_8java_source}\index{src/main/java/com/example/restservice/Entity/Calendario.java@{src/main/java/com/example/restservice/Entity/Calendario.java}}
+\mbox{\hyperlink{_calendario_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restservice_1_1_entity}{00001}}\ \textcolor{keyword}{package\ }com.example.restservice.Entity;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00002}00002\ \textcolor{keyword}{import}\ com.fasterxml.jackson.annotation.JsonIgnore;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00013}00013\ @Entity}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00014}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}}\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00019}00019\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00020}00020\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ String\ nombre;\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ Cada\ usuario\ tiene\ un\ calendario,\ y\ cada\ calendario\ tiene\ un\ usuario}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00035}00035\ \ \ \ \ @OneToOne}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00036}00036\ \ \ \ \ @JsonIgnore}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00037}00037\ \ \ \ \ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}propietario\_id"{}},\ nullable\ =\ \textcolor{keyword}{false},\ unique\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}}\ propietario;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ getters\ y\ setters}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00048}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_af214552a91120f9cd9de072eb8658e02}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_af214552a91120f9cd9de072eb8658e02}{getId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ id;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00057}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_ae88d78f4843bd275b9d8b826ed5094f6}{00057}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_ae88d78f4843bd275b9d8b826ed5094f6}{setId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00066}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_afebdee84626d3409fa5ce62427e4deca}{00066}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_afebdee84626d3409fa5ce62427e4deca}{getNombre}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nombre;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00075}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_a8754904552f0b2272627e300369b630e}{00075}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_a8754904552f0b2272627e300369b630e}{setNombre}}(String\ nombre)\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ this.nombre\ =\ nombre;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00084}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_ac11834cd87539efd5140621dd5add14c}{00084}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_ac11834cd87539efd5140621dd5add14c}{getPropietario}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ propietario;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00093}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_a1572aad0347d7cb7d47ea9b0ad1afbe5}{00093}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario_a1572aad0347d7cb7d47ea9b0ad1afbe5}{setPropietario}}(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}}\ propietario)\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ this.propietario\ =\ propietario;}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_calendario_8java_source_l00097}00097\ \}}
+
+\end{DoxyCode}

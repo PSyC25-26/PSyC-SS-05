@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Categoria.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest-service</a> &gt; <a href="index.source.html" class="el_package">com.example.restservice.Entity</a> &gt; <span class="el_source">Categoria.java</span></div><h1>Categoria.java</h1><pre class="source lang-java linenums">package com.example.restservice.Entity;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+/**
+ * @brief Entidad que representa una categoría de tareas.
+ * 
+ * Las categorías permiten clasificar las tareas del sistema
+ * y pueden estar asociadas a un usuario concreto.
+ */
+@Entity
+@Table(name = &quot;categorias&quot;)
+public class Categoria {
+
+    /**
+     * @brief Identificador único de la categoría.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /**
+     * @brief Nombre de la categoría.
+     */
+    @Column(nullable = false)
+    private String nombre;
+
+    /**
+     * @brief Color asociado a la categoría.
+     * 
+     * Se utiliza para identificar visualmente las tareas.
+     */
+    @Column(nullable = true)
+    private String color; // Ej: &quot;#FF0000&quot; para tareas urgentes
+
+    /**
+     * @brief Usuario propietario de la categoría.
+     */
+    // // Relación opcional: Si quieres que las categorías sean propias de cada usuario
+    @ManyToOne
+    @JoinColumn(name = &quot;usuario_id&quot;, nullable = false)
+    @JsonIgnore // Para evitar bucles infinitos al devolver JSON
+    private Usuario usuario;
+
+    /**
+     * @brief Lista de tareas asociadas a la categoría.
+     */
+    // Relación bidireccional (opcional): Para saber qué tareas tienen esta categoría
+    @OneToMany(mappedBy = &quot;categoria&quot;)
+    @JsonIgnore
+    private List&lt;Tarea&gt; tareas;
+
+    /**
+     * @brief Constructor vacío requerido por JPA.
+     */
+    // Constructores vacíos y con parámetros
+<span class="fc" id="L69">    public Categoria() {}</span>
+
+    /**
+     * @brief Constructor parametrizado de categoría.
+     * 
+     * @param nombre nombre de la categoría.
+     * @param color color asociado.
+     * @param usuario usuario propietario.
+     */
+<span class="nc" id="L78">    public Categoria(String nombre, String color, Usuario usuario) {</span>
+<span class="nc" id="L79">        this.nombre = nombre;</span>
+<span class="nc" id="L80">        this.color = color;</span>
+        // this.usuario = usuario;
+<span class="nc" id="L82">    }</span>
+
+    // Getters y Setters...
+
+    /**
+     * @brief Obtiene el identificador de la categoría.
+     * 
+     * @return identificador de la categoría.
+     */
+    public Long getId() {
+<span class="fc" id="L92">        return id;</span>
+    }
+
+    /**
+     * @brief Establece el identificador de la categoría.
+     * 
+     * @param id identificador de la categoría.
+     */
+    public void setId(Long id) {
+<span class="fc" id="L101">        this.id = id;</span>
+<span class="fc" id="L102">    }</span>
+
+    /**
+     * @brief Obtiene el nombre de la categoría.
+     * 
+     * @return nombre de la categoría.
+     */
+    public String getNombre() {
+<span class="fc" id="L110">        return nombre;</span>
+    }
+
+    /**
+     * @brief Establece el nombre de la categoría.
+     * 
+     * @param nombre nombre de la categoría.
+     */
+    public void setNombre(String nombre) {
+<span class="fc" id="L119">        this.nombre = nombre;</span>
+<span class="fc" id="L120">    }</span>
+
+    /**
+     * @brief Obtiene el color asociado a la categoría.
+     * 
+     * @return color de la categoría.
+     */
+    public String getColor() {
+<span class="fc" id="L128">        return color;</span>
+    }
+
+    /**
+     * @brief Establece el color asociado a la categoría.
+     * 
+     * @param color color de la categoría.
+     */
+    public void setColor(String color) {
+<span class="fc" id="L137">        this.color = color;</span>
+<span class="fc" id="L138">    }</span>
+
+    /**
+     * @brief Obtiene el usuario propietario de la categoría.
+     * 
+     * @return usuario propietario.
+     */
+    public Usuario getUsuario() {
+<span class="nc" id="L146">        return usuario;</span>
+    }
+
+    /**
+     * @brief Establece el usuario propietario de la categoría.
+     * 
+     * @param usuario usuario propietario.
+     */
+    public void setUsuario(Usuario usuario) {
+<span class="fc" id="L155">        this.usuario = usuario;</span>
+<span class="fc" id="L156">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

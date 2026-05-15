@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+rest-service,com.example.restservice.Controller,GestDatosController,96,209,0,0,36,52,0,13,0,13
+rest-service,com.example.restservice,RestServiceApplication,5,3,0,0,2,1,1,1,1,1
+rest-service,com.example.restservice.Service,GestDatosService,74,416,10,26,10,96,20,31,11,22
+rest-service,com.example.restservice.Entity,Tarea,24,52,0,0,9,22,1,15,1,15
+rest-service,com.example.restservice.Entity,Calendario,3,21,0,0,1,9,1,6,1,6
+rest-service,com.example.restservice.Entity,Categoria,12,28,0,0,5,12,2,8,2,8
+rest-service,com.example.restservice.Entity,Usuario.TipoUsuario,0,15,0,0,0,3,0,1,0,1
+rest-service,com.example.restservice.Entity,Usuario,18,52,0,0,7,22,1,15,1,15
+rest-service,com.example.restservice.Cliente,GestDatosCliente,0,22,0,0,0,5,0,2,0,2

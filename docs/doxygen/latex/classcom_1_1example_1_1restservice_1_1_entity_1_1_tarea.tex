@@ -1,0 +1,359 @@
+\doxysection{com.\+example.\+restservice.\+Entity.\+Tarea Class Reference}
+\hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+
+
+Entidad que representa una tarea del sistema.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6c9f7a963adb40acd4fe43d491dee55d}{Tarea}} ()
+\begin{DoxyCompactList}\small\item\em Constructor vacío requerido por JPA. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a733fcba0c8e21eae16de94ea3db28780}{Tarea}} (Long id, String titulo, String descripcion, \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}} categoria, List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}} $>$ usuarios, Local\+Date\+Time fecha\+Inicio, Local\+Date\+Time fecha\+Fin)
+\begin{DoxyCompactList}\small\item\em Constructor parametrizado de tarea. \end{DoxyCompactList}\item 
+Long \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a566e06cb1df5cc1288f4072f1c9fac94}{get\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el identificador de la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a46a4ba8e98461db84ab3e821ceb78810}{set\+Id}} (Long id)
+\begin{DoxyCompactList}\small\item\em Establece el identificador de la tarea. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7c2ceba8ebcae49314a937d7cc164685}{get\+Titulo}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el título de la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7f49f3dbd0ba741ae8c04f486a33805c}{set\+Titulo}} (String titulo)
+\begin{DoxyCompactList}\small\item\em Establece el título de la tarea. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a253775450fca12ab5586aec3b40941ee}{get\+Descripcion}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la descripción de la tarea. \end{DoxyCompactList}\item 
+Local\+Date\+Time \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a5bf28f6e7cfd7a79449a9c48815136b1}{get\+Fecha\+Inicio}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la fecha de inicio de la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a10820cf0b0730efde69047345e4c63e1}{set\+Fecha\+Inicio}} (Local\+Date\+Time fecha\+Inicio)
+\begin{DoxyCompactList}\small\item\em Establece la fecha de inicio de la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6175251aedf55d2dbbde0bb5e2a3ff0d}{set\+Descripcion}} (String descripcion)
+\begin{DoxyCompactList}\small\item\em Establece la descripción de la tarea. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}} \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0470a6ee6bd251e36c421dc752f71345}{get\+Categoria}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la categoría asociada a la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0b2ede1530ef053d91d1813297e60598}{set\+Categoria}} (\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}} categoria)
+\begin{DoxyCompactList}\small\item\em Establece la categoría de la tarea. \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a363501fd9b260ca5783ddac5b79e3d8a}{get\+Usuarios}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene los usuarios asociados a la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_af9e8b907616a04d50293526d25e48e4f}{set\+Usuarios}} (List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}} $>$ usuarios)
+\begin{DoxyCompactList}\small\item\em Establece los usuarios asociados a la tarea. \end{DoxyCompactList}\item 
+Local\+Date\+Time \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_ab0ef1fc88a8f5ff9594daa9434281606}{get\+Fecha\+Fin}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la fecha de finalización de la tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a312ac88dc5879d5133686d7d3f431651}{set\+Fecha\+Fin}} (Local\+Date\+Time fecha\+Fin)
+\begin{DoxyCompactList}\small\item\em Establece la fecha de finalización de la tarea. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entidad que representa una tarea del sistema. 
+
+Una tarea contiene información relacionada con su título, descripción, fechas, categoría y usuarios asociados. 
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00018}{18}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6c9f7a963adb40acd4fe43d491dee55d}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6c9f7a963adb40acd4fe43d491dee55d} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!Tarea@{Tarea}}
+\index{Tarea@{Tarea}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{Tarea()}{Tarea()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily com.\+example.\+restservice.\+Entity.\+Tarea.\+Tarea (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor vacío requerido por JPA. 
+
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00078}{78}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a733fcba0c8e21eae16de94ea3db28780}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a733fcba0c8e21eae16de94ea3db28780} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!Tarea@{Tarea}}
+\index{Tarea@{Tarea}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{Tarea()}{Tarea()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily com.\+example.\+restservice.\+Entity.\+Tarea.\+Tarea (\begin{DoxyParamCaption}\item[{Long}]{id,  }\item[{String}]{titulo,  }\item[{String}]{descripcion,  }\item[{\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}}}]{categoria,  }\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}} $>$}]{usuarios,  }\item[{Local\+Date\+Time}]{fecha\+Inicio,  }\item[{Local\+Date\+Time}]{fecha\+Fin }\end{DoxyParamCaption})}
+
+
+
+Constructor parametrizado de tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador de la tarea. \\
+\hline
+{\em titulo} & título de la tarea. \\
+\hline
+{\em descripcion} & descripción de la tarea. \\
+\hline
+{\em categoria} & categoría asociada. \\
+\hline
+{\em usuarios} & lista de usuarios asociados. \\
+\hline
+{\em fecha\+Inicio} & fecha de inicio. \\
+\hline
+{\em fecha\+Fin} & fecha de finalización. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00091}{91}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0470a6ee6bd251e36c421dc752f71345}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0470a6ee6bd251e36c421dc752f71345} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getCategoria@{getCategoria}}
+\index{getCategoria@{getCategoria}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getCategoria()}{getCategoria()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}} com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Categoria (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene la categoría asociada a la tarea. 
+
+\begin{DoxyReturn}{Returns}
+categoría asociada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00180}{180}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a253775450fca12ab5586aec3b40941ee}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a253775450fca12ab5586aec3b40941ee} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getDescripcion@{getDescripcion}}
+\index{getDescripcion@{getDescripcion}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getDescripcion()}{getDescripcion()}}
+{\footnotesize\ttfamily String com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Descripcion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene la descripción de la tarea. 
+
+\begin{DoxyReturn}{Returns}
+descripción de la tarea. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00144}{144}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_ab0ef1fc88a8f5ff9594daa9434281606}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_ab0ef1fc88a8f5ff9594daa9434281606} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getFechaFin@{getFechaFin}}
+\index{getFechaFin@{getFechaFin}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getFechaFin()}{getFechaFin()}}
+{\footnotesize\ttfamily Local\+Date\+Time com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Fecha\+Fin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene la fecha de finalización de la tarea. 
+
+\begin{DoxyReturn}{Returns}
+fecha de finalización. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00216}{216}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a5bf28f6e7cfd7a79449a9c48815136b1}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a5bf28f6e7cfd7a79449a9c48815136b1} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getFechaInicio@{getFechaInicio}}
+\index{getFechaInicio@{getFechaInicio}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getFechaInicio()}{getFechaInicio()}}
+{\footnotesize\ttfamily Local\+Date\+Time com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Fecha\+Inicio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene la fecha de inicio de la tarea. 
+
+\begin{DoxyReturn}{Returns}
+fecha de inicio. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00153}{153}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a566e06cb1df5cc1288f4072f1c9fac94}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a566e06cb1df5cc1288f4072f1c9fac94} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getId@{getId}}
+\index{getId@{getId}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily Long com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el identificador de la tarea. 
+
+\begin{DoxyReturn}{Returns}
+identificador de la tarea. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00108}{108}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7c2ceba8ebcae49314a937d7cc164685}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7c2ceba8ebcae49314a937d7cc164685} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getTitulo@{getTitulo}}
+\index{getTitulo@{getTitulo}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getTitulo()}{getTitulo()}}
+{\footnotesize\ttfamily String com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Titulo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el título de la tarea. 
+
+\begin{DoxyReturn}{Returns}
+título de la tarea. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00126}{126}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a363501fd9b260ca5783ddac5b79e3d8a}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a363501fd9b260ca5783ddac5b79e3d8a} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!getUsuarios@{getUsuarios}}
+\index{getUsuarios@{getUsuarios}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{getUsuarios()}{getUsuarios()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}} $>$ com.\+example.\+restservice.\+Entity.\+Tarea.\+get\+Usuarios (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene los usuarios asociados a la tarea. 
+
+\begin{DoxyReturn}{Returns}
+lista de usuarios. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00198}{198}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0b2ede1530ef053d91d1813297e60598}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a0b2ede1530ef053d91d1813297e60598} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setCategoria@{setCategoria}}
+\index{setCategoria@{setCategoria}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setCategoria()}{setCategoria()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Categoria (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria}{Categoria}}}]{categoria }\end{DoxyParamCaption})}
+
+
+
+Establece la categoría de la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em categoria} & categoría asociada. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00189}{189}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6175251aedf55d2dbbde0bb5e2a3ff0d}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a6175251aedf55d2dbbde0bb5e2a3ff0d} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setDescripcion@{setDescripcion}}
+\index{setDescripcion@{setDescripcion}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setDescripcion()}{setDescripcion()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Descripcion (\begin{DoxyParamCaption}\item[{String}]{descripcion }\end{DoxyParamCaption})}
+
+
+
+Establece la descripción de la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em descripcion} & descripción de la tarea. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00171}{171}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a312ac88dc5879d5133686d7d3f431651}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a312ac88dc5879d5133686d7d3f431651} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setFechaFin@{setFechaFin}}
+\index{setFechaFin@{setFechaFin}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setFechaFin()}{setFechaFin()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Fecha\+Fin (\begin{DoxyParamCaption}\item[{Local\+Date\+Time}]{fecha\+Fin }\end{DoxyParamCaption})}
+
+
+
+Establece la fecha de finalización de la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fecha\+Fin} & fecha de finalización. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00225}{225}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a10820cf0b0730efde69047345e4c63e1}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a10820cf0b0730efde69047345e4c63e1} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setFechaInicio@{setFechaInicio}}
+\index{setFechaInicio@{setFechaInicio}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setFechaInicio()}{setFechaInicio()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Fecha\+Inicio (\begin{DoxyParamCaption}\item[{Local\+Date\+Time}]{fecha\+Inicio }\end{DoxyParamCaption})}
+
+
+
+Establece la fecha de inicio de la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fecha\+Inicio} & fecha de inicio. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00162}{162}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a46a4ba8e98461db84ab3e821ceb78810}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a46a4ba8e98461db84ab3e821ceb78810} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setId@{setId}}
+\index{setId@{setId}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Id (\begin{DoxyParamCaption}\item[{Long}]{id }\end{DoxyParamCaption})}
+
+
+
+Establece el identificador de la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador de la tarea. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00117}{117}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7f49f3dbd0ba741ae8c04f486a33805c}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_a7f49f3dbd0ba741ae8c04f486a33805c} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setTitulo@{setTitulo}}
+\index{setTitulo@{setTitulo}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setTitulo()}{setTitulo()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Titulo (\begin{DoxyParamCaption}\item[{String}]{titulo }\end{DoxyParamCaption})}
+
+
+
+Establece el título de la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em titulo} & título de la tarea. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00135}{135}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_af9e8b907616a04d50293526d25e48e4f}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea_af9e8b907616a04d50293526d25e48e4f} 
+\index{com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}!setUsuarios@{setUsuarios}}
+\index{setUsuarios@{setUsuarios}!com.example.restservice.Entity.Tarea@{com.example.restservice.Entity.Tarea}}
+\doxysubsubsection{\texorpdfstring{setUsuarios()}{setUsuarios()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Tarea.\+set\+Usuarios (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{Usuario}} $>$}]{usuarios }\end{DoxyParamCaption})}
+
+
+
+Establece los usuarios asociados a la tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em usuarios} & lista de usuarios. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_tarea_8java_source_l00207}{207}} of file \mbox{\hyperlink{_tarea_8java_source}{Tarea.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restservice/\+Entity/\mbox{\hyperlink{_tarea_8java}{Tarea.\+java}}\end{DoxyCompactItemize}

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tarea.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest-service</a> &gt; <a href="index.source.html" class="el_package">com.example.restservice.Entity</a> &gt; <span class="el_source">Tarea.java</span></div><h1>Tarea.java</h1><pre class="source lang-java linenums">package com.example.restservice.Entity;
+
+
+import java.time.LocalDateTime;
+
+
+import jakarta.persistence.*;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+/**
+ * @brief Entidad que representa una tarea del sistema.
+ * 
+ * Una tarea contiene información relacionada con su título,
+ * descripción, fechas, categoría y usuarios asociados.
+ */
+@Entity
+public class Tarea {
+
+    /**
+     * @brief Identificador único de la tarea.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /**
+     * @brief Título de la tarea.
+     */
+    @Column(nullable = false)
+    private String titulo;
+
+    /**
+     * @brief Descripción detallada de la tarea.
+     */
+    @Column(nullable = false)
+    private String descripcion;
+
+    /**
+     * @brief Fecha y hora de inicio de la tarea.
+     */
+    @Column (nullable = false)
+    private LocalDateTime fechaInicio;
+
+    /**
+     * @brief Fecha y hora de finalización de la tarea.
+     */
+    @Column (nullable = false)
+    private LocalDateTime fechaFin;
+
+    /**
+     * @brief Categoría asociada a la tarea.
+     */
+    @ManyToOne
+    // Se pone el nullable = false para que no se pueda crear una tarea sin una categoria asignada, es decir, que la categoria sea obligatoria.
+    @JoinColumn(name = &quot;categoria_id&quot;, nullable = false)
+    private Categoria categoria;
+
+    /**
+     * @brief Lista de usuarios asociados a la tarea.
+     */
+    @ManyToMany
+    @JoinTable(
+        // Esto se pone para que se pueda buscar los usuarios por el id de la tarea, 
+        // es decir, los usuarios que tienen esa tarea asignada.
+        //El inverse es para que se pueda buscar las tareas por el id del usuario, 
+        // es decir, el propietario de las tareas
+        name = &quot;tarea_usuario&quot;,
+        joinColumns = @JoinColumn(name = &quot;tarea_id&quot;),
+        inverseJoinColumns = @JoinColumn(name = &quot;usuario_id&quot;)
+    )
+    @JsonIgnoreProperties(&quot;tareas&quot;)
+    private List&lt;Usuario&gt; usuarios;
+
+    /**
+     * @brief Constructor vacío requerido por JPA.
+     */
+<span class="fc" id="L78">    public Tarea() {}</span>
+
+    /**
+     * @brief Constructor parametrizado de tarea.
+     * 
+     * @param id identificador de la tarea.
+     * @param titulo título de la tarea.
+     * @param descripcion descripción de la tarea.
+     * @param categoria categoría asociada.
+     * @param usuarios lista de usuarios asociados.
+     * @param fechaInicio fecha de inicio.
+     * @param fechaFin fecha de finalización.
+     */
+<span class="nc" id="L91">    public Tarea(Long id, String titulo, String descripcion, Categoria categoria, List&lt;Usuario&gt; usuarios, LocalDateTime fechaInicio, LocalDateTime fechaFin) {</span>
+<span class="nc" id="L92">        this.id = id;</span>
+<span class="nc" id="L93">        this.titulo = titulo;</span>
+<span class="nc" id="L94">        this.descripcion = descripcion;</span>
+<span class="nc" id="L95">        this.categoria = categoria;</span>
+<span class="nc" id="L96">        this.usuarios = usuarios;</span>
+<span class="nc" id="L97">        this.fechaInicio = fechaInicio;</span>
+<span class="nc" id="L98">        this.fechaFin = fechaFin;</span>
+<span class="nc" id="L99">    }</span>
+
+    // Getters y setters
+
+    /**
+     * @brief Obtiene el identificador de la tarea.
+     * 
+     * @return identificador de la tarea.
+     */
+    public Long getId() {
+<span class="fc" id="L109">        return id;</span>
+    }
+
+    /**
+     * @brief Establece el identificador de la tarea.
+     * 
+     * @param id identificador de la tarea.
+     */
+    public void setId(Long id) {
+<span class="fc" id="L118">        this.id = id;</span>
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * @brief Obtiene el título de la tarea.
+     * 
+     * @return título de la tarea.
+     */
+    public String getTitulo() {
+<span class="fc" id="L127">        return titulo;</span>
+    }
+
+    /**
+     * @brief Establece el título de la tarea.
+     * 
+     * @param titulo título de la tarea.
+     */
+    public void setTitulo(String titulo) {
+<span class="fc" id="L136">        this.titulo = titulo;</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * @brief Obtiene la descripción de la tarea.
+     * 
+     * @return descripción de la tarea.
+     */
+    public String getDescripcion() {
+<span class="fc" id="L145">        return descripcion;</span>
+    }
+
+    /**
+     * @brief Obtiene la fecha de inicio de la tarea.
+     * 
+     * @return fecha de inicio.
+     */
+    public LocalDateTime getFechaInicio() {
+<span class="fc" id="L154">        return fechaInicio;</span>
+    }
+
+    /**
+     * @brief Establece la fecha de inicio de la tarea.
+     * 
+     * @param fechaInicio fecha de inicio.
+     */
+    public void setFechaInicio(LocalDateTime fechaInicio) {
+<span class="fc" id="L163">        this.fechaInicio = fechaInicio;</span>
+<span class="fc" id="L164">    }</span>
+
+    /**
+     * @brief Establece la descripción de la tarea.
+     * 
+     * @param descripcion descripción de la tarea.
+     */
+    public void setDescripcion(String descripcion) {
+<span class="fc" id="L172">        this.descripcion = descripcion;</span>
+<span class="fc" id="L173">    }</span>
+
+    /**
+     * @brief Obtiene la categoría asociada a la tarea.
+     * 
+     * @return categoría asociada.
+     */
+    public Categoria getCategoria() {
+<span class="fc" id="L181">        return categoria;</span>
+    }
+
+    /**
+     * @brief Establece la categoría de la tarea.
+     * 
+     * @param categoria categoría asociada.
+     */
+    public void setCategoria(Categoria categoria) {
+<span class="fc" id="L190">        this.categoria = categoria;</span>
+<span class="fc" id="L191">    }</span>
+
+    /**
+     * @brief Obtiene los usuarios asociados a la tarea.
+     * 
+     * @return lista de usuarios.
+     */
+    public List&lt;Usuario&gt; getUsuarios() {
+<span class="fc" id="L199">        return usuarios;</span>
+    }
+
+    /**
+     * @brief Establece los usuarios asociados a la tarea.
+     * 
+     * @param usuarios lista de usuarios.
+     */
+    public void setUsuarios(List&lt;Usuario&gt; usuarios) {
+<span class="fc" id="L208">        this.usuarios = usuarios;</span>
+<span class="fc" id="L209">    }</span>
+
+    /**
+     * @brief Obtiene la fecha de finalización de la tarea.
+     * 
+     * @return fecha de finalización.
+     */
+    public LocalDateTime getFechaFin() {
+<span class="fc" id="L217">        return fechaFin;</span>
+    }
+
+    /**
+     * @brief Establece la fecha de finalización de la tarea.
+     * 
+     * @param fechaFin fecha de finalización.
+     */
+    public void setFechaFin(LocalDateTime fechaFin) {
+<span class="fc" id="L226">        this.fechaFin = fechaFin;</span>
+<span class="fc" id="L227">    }</span>
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

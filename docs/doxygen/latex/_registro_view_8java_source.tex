@@ -1,0 +1,76 @@
+\doxysection{Registro\+View.\+java}
+\hypertarget{_registro_view_8java_source}{}\label{_registro_view_8java_source}\index{src/main/java/com/example/restservice/UI/RegistroView.java@{src/main/java/com/example/restservice/UI/RegistroView.java}}
+\mbox{\hyperlink{_registro_view_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restservice.UI;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.restservice.Entity.Usuario;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.restservice.Service.GestDatosService;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.vaadin.flow.component.UI;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.Button;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.ButtonVariant;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.vaadin.flow.component.notification.Notification;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.VerticalLayout;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.vaadin.flow.component.textfield.EmailField;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.vaadin.flow.component.textfield.PasswordField;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00012}00012\ \textcolor{keyword}{import}\ com.vaadin.flow.component.textfield.TextField;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00013}00013\ \textcolor{keyword}{import}\ com.vaadin.flow.router.Route;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00021}00021\ @Route(\textcolor{stringliteral}{"{}registro"{}})}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_registro_view}{00022}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_registro_view}{RegistroView}}\ extends\ VerticalLayout\ \{}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00029}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_registro_view_a15bbaf6a4d4daadaa46173c08032fe1c}{00029}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_registro_view_a15bbaf6a4d4daadaa46173c08032fe1c}{RegistroView}}(GestDatosService\ gestDatosService)\ \{}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ setSizeFull();}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ setAlignItems(Alignment.CENTER);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ setJustifyContentMode(JustifyContentMode.CENTER);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ TextField\ usernameField\ =\ \textcolor{keyword}{new}\ TextField(\textcolor{stringliteral}{"{}Nombre\ de\ usuario"{}});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ EmailField\ emailField\ =\ \textcolor{keyword}{new}\ EmailField(\textcolor{stringliteral}{"{}Correo\ electrónico"{}});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ PasswordField\ passwordField\ =\ \textcolor{keyword}{new}\ PasswordField(\textcolor{stringliteral}{"{}Contraseña"{}});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ Button\ btnRegistrar\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Registrarse"{}},\ e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ COMPROBAR\ QUE\ NINGÚN\ CAMPO\ ESTÁ\ VACÍO}}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usernameField.isEmpty()\ ||\ emailField.isEmpty()\ ||\ passwordField.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Notification.show(\textcolor{stringliteral}{"{}Por\ favor,\ rellena\ todos\ los\ campos."{}});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ Usuario\ nuevoUsuario\ =\ \textcolor{keyword}{new}\ Usuario();}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ nuevoUsuario.setUsername(usernameField.getValue());}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ nuevoUsuario.setEmail(emailField.getValue());}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ nuevoUsuario.setPassword(passwordField.getValue());}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ nuevoUsuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gestDatosService.guardarUsuario(nuevoUsuario);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Notification.show(\textcolor{stringliteral}{"{}Usuario\ registrado\ correctamente"{}});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UI.getCurrent().navigate(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view}{LoginView}}.class);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ ex)\ \{}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Si\ la\ BD\ sigue\ quejándose\ (ej:\ el\ email\ YA\ existe\ de\ verdad)}}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Notification.show(\textcolor{stringliteral}{"{}Error:\ Ese\ nombre\ de\ usuario\ o\ email\ ya\ existe."{}});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ex.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ btnRegistrar.addThemeVariants(ButtonVariant.LUMO\_PRIMARY);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ Button\ btnVolver\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Volver\ al\ inicio"{}},\ e\ -\/>\ UI.getCurrent().navigate(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view}{HomeView}}.class));}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ add(usernameField,\ emailField,\ passwordField,\ btnRegistrar,\ btnVolver);}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_registro_view_8java_source_l00081}00081\ \}}
+
+\end{DoxyCode}

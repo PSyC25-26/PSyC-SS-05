@@ -1,0 +1,360 @@
+\doxysection{com.\+example.\+restservice.\+Entity.\+Usuario Class Reference}
+\hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}{}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario}\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+
+
+Entidad que representa un usuario del sistema.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}}
+\begin{DoxyCompactList}\small\item\em Enumeración de tipos de usuario. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a08651a2c39b9930201c6f7a3db78d113}{Usuario}} ()
+\begin{DoxyCompactList}\small\item\em Constructor vacío requerido por JPA. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ab3ff0e5652d1deac5b078e620569b885}{Usuario}} (Long id, String username, String email, \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}} tipo\+Usuario, List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}} $>$ tareas)
+\begin{DoxyCompactList}\small\item\em Constructor parametrizado de usuario. \end{DoxyCompactList}\item 
+Long \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9152185d9a70dcdcf9d80617fc640726}{get\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el identificador del usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9d08458649334ce39ad774a59e537034}{set\+Id}} (Long id)
+\begin{DoxyCompactList}\small\item\em Establece el identificador del usuario. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a26e924795a500ef769dfb151efbe9bb5}{get\+Username}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el nombre de usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a48bd8fd1bce85c3ff85b760bca07678b}{set\+Username}} (String username)
+\begin{DoxyCompactList}\small\item\em Establece el nombre de usuario. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a73cff6165076449f752d9f3a390147ca}{get\+Email}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el correo electrónico. \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a5a01f4e3aa55ff3f25dbbcf92a41eaee}{get\+Tareas}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene las tareas asociadas al usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a008be66b01d00a3d9ae1e7dffeebe78f}{set\+Email}} (String email)
+\begin{DoxyCompactList}\small\item\em Establece el correo electrónico. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}} \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ae8b34473ad2a94ee7aacaf4915367417}{get\+Tipo\+Usuario}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el tipo de usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a3c4bb41af1ca825dfadd12ccceabcabf}{set\+Tipo\+Usuario}} (\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}} tipo\+Usuario)
+\begin{DoxyCompactList}\small\item\em Establece el tipo de usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aa7ba0ac4fbd48709d179df24bb91780f}{set\+Tareas}} (List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}} $>$ tareas)
+\begin{DoxyCompactList}\small\item\em Establece las tareas asociadas al usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}} \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a62506bd119d9d43d21cb0b1e0e5dcfe8}{get\+Calendario}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el calendario del usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a375c301362c4b5f19ba27d4043875056}{set\+Calendario}} (\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}} calendario)
+\begin{DoxyCompactList}\small\item\em Establece el calendario del usuario. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a8d79826a64e32b640ec354e4dff1f45d}{get\+Password}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la contraseña del usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aabbf797c7b7c1c559f85692b0f596bf8}{set\+Password}} (String password)
+\begin{DoxyCompactList}\small\item\em Establece la contraseña del usuario. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entidad que representa un usuario del sistema. 
+
+La clase Usuario almacena la información relacionada con los usuarios registrados en la aplicación, incluyendo credenciales, calendario y tareas asociadas. 
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00028}{28}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a08651a2c39b9930201c6f7a3db78d113}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a08651a2c39b9930201c6f7a3db78d113} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!Usuario@{Usuario}}
+\index{Usuario@{Usuario}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{Usuario()}{Usuario()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily com.\+example.\+restservice.\+Entity.\+Usuario.\+Usuario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor vacío requerido por JPA. 
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00086}{86}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ab3ff0e5652d1deac5b078e620569b885}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ab3ff0e5652d1deac5b078e620569b885} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!Usuario@{Usuario}}
+\index{Usuario@{Usuario}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{Usuario()}{Usuario()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily com.\+example.\+restservice.\+Entity.\+Usuario.\+Usuario (\begin{DoxyParamCaption}\item[{Long}]{id,  }\item[{String}]{username,  }\item[{String}]{email,  }\item[{\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}}}]{tipo\+Usuario,  }\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}} $>$}]{tareas }\end{DoxyParamCaption})}
+
+
+
+Constructor parametrizado de usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador del usuario. \\
+\hline
+{\em username} & nombre de usuario. \\
+\hline
+{\em email} & correo electrónico. \\
+\hline
+{\em tipo\+Usuario} & tipo de usuario. \\
+\hline
+{\em tareas} & lista de tareas asociadas. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00097}{97}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a62506bd119d9d43d21cb0b1e0e5dcfe8}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a62506bd119d9d43d21cb0b1e0e5dcfe8} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getCalendario@{getCalendario}}
+\index{getCalendario@{getCalendario}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getCalendario()}{getCalendario()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}} com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Calendario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el calendario del usuario. 
+
+\begin{DoxyReturn}{Returns}
+calendario asociado. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00200}{200}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a73cff6165076449f752d9f3a390147ca}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a73cff6165076449f752d9f3a390147ca} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getEmail@{getEmail}}
+\index{getEmail@{getEmail}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getEmail()}{getEmail()}}
+{\footnotesize\ttfamily String com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Email (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el correo electrónico. 
+
+\begin{DoxyReturn}{Returns}
+correo electrónico. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00146}{146}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9152185d9a70dcdcf9d80617fc640726}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9152185d9a70dcdcf9d80617fc640726} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getId@{getId}}
+\index{getId@{getId}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily Long com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el identificador del usuario. 
+
+\begin{DoxyReturn}{Returns}
+identificador del usuario. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00110}{110}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a8d79826a64e32b640ec354e4dff1f45d}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a8d79826a64e32b640ec354e4dff1f45d} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getPassword@{getPassword}}
+\index{getPassword@{getPassword}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getPassword()}{getPassword()}}
+{\footnotesize\ttfamily String com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene la contraseña del usuario. 
+
+\begin{DoxyReturn}{Returns}
+contraseña almacenada. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00218}{218}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a5a01f4e3aa55ff3f25dbbcf92a41eaee}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a5a01f4e3aa55ff3f25dbbcf92a41eaee} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getTareas@{getTareas}}
+\index{getTareas@{getTareas}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getTareas()}{getTareas()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}} $>$ com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Tareas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene las tareas asociadas al usuario. 
+
+\begin{DoxyReturn}{Returns}
+lista de tareas. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00155}{155}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ae8b34473ad2a94ee7aacaf4915367417}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_ae8b34473ad2a94ee7aacaf4915367417} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getTipoUsuario@{getTipoUsuario}}
+\index{getTipoUsuario@{getTipoUsuario}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getTipoUsuario()}{getTipoUsuario()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}} com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Tipo\+Usuario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el tipo de usuario. 
+
+\begin{DoxyReturn}{Returns}
+tipo de usuario. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00173}{173}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a26e924795a500ef769dfb151efbe9bb5}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a26e924795a500ef769dfb151efbe9bb5} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!getUsername@{getUsername}}
+\index{getUsername@{getUsername}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{getUsername()}{getUsername()}}
+{\footnotesize\ttfamily String com.\+example.\+restservice.\+Entity.\+Usuario.\+get\+Username (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtiene el nombre de usuario. 
+
+\begin{DoxyReturn}{Returns}
+nombre de usuario. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00128}{128}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a375c301362c4b5f19ba27d4043875056}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a375c301362c4b5f19ba27d4043875056} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setCalendario@{setCalendario}}
+\index{setCalendario@{setCalendario}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setCalendario()}{setCalendario()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Calendario (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario}{Calendario}}}]{calendario }\end{DoxyParamCaption})}
+
+
+
+Establece el calendario del usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em calendario} & calendario asociado. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00209}{209}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a008be66b01d00a3d9ae1e7dffeebe78f}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a008be66b01d00a3d9ae1e7dffeebe78f} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setEmail@{setEmail}}
+\index{setEmail@{setEmail}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setEmail()}{setEmail()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Email (\begin{DoxyParamCaption}\item[{String}]{email }\end{DoxyParamCaption})}
+
+
+
+Establece el correo electrónico. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & correo electrónico. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00164}{164}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9d08458649334ce39ad774a59e537034}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a9d08458649334ce39ad774a59e537034} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setId@{setId}}
+\index{setId@{setId}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Id (\begin{DoxyParamCaption}\item[{Long}]{id }\end{DoxyParamCaption})}
+
+
+
+Establece el identificador del usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00119}{119}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aabbf797c7b7c1c559f85692b0f596bf8}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aabbf797c7b7c1c559f85692b0f596bf8} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setPassword@{setPassword}}
+\index{setPassword@{setPassword}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setPassword()}{setPassword()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Password (\begin{DoxyParamCaption}\item[{String}]{password }\end{DoxyParamCaption})}
+
+
+
+Establece la contraseña del usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00227}{227}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aa7ba0ac4fbd48709d179df24bb91780f}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_aa7ba0ac4fbd48709d179df24bb91780f} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setTareas@{setTareas}}
+\index{setTareas@{setTareas}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setTareas()}{setTareas()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Tareas (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_entity_1_1_tarea}{Tarea}} $>$}]{tareas }\end{DoxyParamCaption})}
+
+
+
+Establece las tareas asociadas al usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tareas} & lista de tareas. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00191}{191}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a3c4bb41af1ca825dfadd12ccceabcabf}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a3c4bb41af1ca825dfadd12ccceabcabf} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setTipoUsuario@{setTipoUsuario}}
+\index{setTipoUsuario@{setTipoUsuario}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setTipoUsuario()}{setTipoUsuario()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Tipo\+Usuario (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario}{Tipo\+Usuario}}}]{tipo\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Establece el tipo de usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tipo\+Usuario} & tipo de usuario. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00182}{182}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a48bd8fd1bce85c3ff85b760bca07678b}\label{classcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_a48bd8fd1bce85c3ff85b760bca07678b} 
+\index{com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}!setUsername@{setUsername}}
+\index{setUsername@{setUsername}!com.example.restservice.Entity.Usuario@{com.example.restservice.Entity.Usuario}}
+\doxysubsubsection{\texorpdfstring{setUsername()}{setUsername()}}
+{\footnotesize\ttfamily void com.\+example.\+restservice.\+Entity.\+Usuario.\+set\+Username (\begin{DoxyParamCaption}\item[{String}]{username }\end{DoxyParamCaption})}
+
+
+
+Establece el nombre de usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & nombre de usuario. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_usuario_8java_source_l00137}{137}} of file \mbox{\hyperlink{_usuario_8java_source}{Usuario.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restservice/\+Entity/\mbox{\hyperlink{_usuario_8java}{Usuario.\+java}}\end{DoxyCompactItemize}

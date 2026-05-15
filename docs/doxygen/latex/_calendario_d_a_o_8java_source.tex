@@ -1,0 +1,21 @@
+\doxysection{Calendario\+DAO.\+java}
+\hypertarget{_calendario_d_a_o_8java_source}{}\label{_calendario_d_a_o_8java_source}\index{src/main/java/com/example/restservice/Dao/CalendarioDAO.java@{src/main/java/com/example/restservice/Dao/CalendarioDAO.java}}
+\mbox{\hyperlink{_calendario_d_a_o_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restservice_1_1_dao}{00001}}\ \textcolor{keyword}{package\ }com.example.restservice.Dao;}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.data.repository.CrudRepository;}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.restservice.Entity.Calendario;}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.stereotype.Repository;}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00015}00015\ @Repository}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00016}\mbox{\hyperlink{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_calendario_d_a_o}{00016}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\mbox{\hyperlink{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_calendario_d_a_o}{CalendarioDAO}}\ \textcolor{keyword}{extends}\ CrudRepository<Calendario,\ Long>\ \{}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//Esto\ se\ pone\ para\ que\ se\ pueda\ buscar\ el\ calendario\ por\ el\ id\ del\ propietario,\ }}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ es\ decir,\ el\ usuario}}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00028}\mbox{\hyperlink{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_calendario_d_a_o_a3f0b3baec632a32231ddc9552701bf9a}{00028}}\ \ \ \ \ Calendario\ \mbox{\hyperlink{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_calendario_d_a_o_a3f0b3baec632a32231ddc9552701bf9a}{findByPropietarioId}}(Long\ idUsuario);}
+\DoxyCodeLine{\Hypertarget{_calendario_d_a_o_8java_source_l00029}00029\ \}}
+
+\end{DoxyCode}

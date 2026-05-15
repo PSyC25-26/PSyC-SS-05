@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestDatosController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest-service</a> &gt; <a href="index.source.html" class="el_package">com.example.restservice.Controller</a> &gt; <span class="el_source">GestDatosController.java</span></div><h1>GestDatosController.java</h1><pre class="source lang-java linenums">package com.example.restservice.Controller;
+import java.util.concurrent.atomic.AtomicLong;
+import com.example.restservice.Entity.*;
+import com.example.restservice.Dao.*;
+import com.example.restservice.Service.GestDatosService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
+
+
+/**
+ * @brief Controlador REST para la gestión de usuarios, tareas,
+ * categorías y calendarios.
+ * 
+ * Esta clase expone los endpoints necesarios para realizar
+ * operaciones CRUD sobre las distintas entidades del sistema.
+ */
+@RestController
+@RequestMapping(&quot;/gestDatos&quot;)
+public class GestDatosController {
+  private final GestDatosService gestDatosService;
+
+  /**
+   * @brief Constructor del controlador.
+   * 
+   * @param gestDatosService servicio encargado de la lógica de negocio.
+   */
+<span class="fc" id="L37">  public GestDatosController(GestDatosService gestDatosService) {</span>
+<span class="fc" id="L38">    this.gestDatosService = gestDatosService;</span>
+<span class="fc" id="L39">  }</span>
+
+  /**
+   * @brief Guarda un nuevo usuario en la base de datos.
+   * 
+   * Este método recibe un usuario mediante una petición HTTP POST
+   * y delega la operación al servicio correspondiente.
+   * 
+   * @param usuario usuario recibido en la petición.
+   * @return identificador del usuario creado.
+   */
+  @PostMapping(&quot;/guardarUsuario&quot;)
+  public ResponseEntity &lt;Long&gt; guardarUsuario (@RequestBody Usuario usuario) {
+    try{
+      // 1. Guardamos el usuario y recogemos el objeto Usuario devuelto
+<span class="fc" id="L54">      Usuario usuarioGuardado = gestDatosService.guardarUsuario(usuario);</span>
+      
+      // 2. Le pedimos el ID a ese usuario guardado
+<span class="fc" id="L57">      Long idUsuario = usuarioGuardado.getId();</span>
+      
+<span class="fc" id="L59">      return new ResponseEntity&lt;&gt;(idUsuario, HttpStatus.CREATED);</span>
+    }
+<span class="fc" id="L61">    catch (IllegalArgumentException e){</span>
+<span class="fc" id="L62">      e.printStackTrace();</span>
+<span class="fc" id="L63">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="nc" id="L65">    catch (Exception e){</span>
+<span class="nc" id="L66">      e.printStackTrace();</span>
+<span class="nc" id="L67">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+  
+  /**
+   * @brief Guarda una nueva tarea.
+   * 
+   * La tarea se asocia a los usuarios cuyos identificadores
+   * se reciben en la petición.
+   * 
+   * @param idUsuarios lista de identificadores de usuarios.
+   * @param tarea tarea que se desea almacenar.
+   * @return identificador de la tarea creada.
+   */
+  @PostMapping(&quot;/guardarTarea&quot;) // &lt;-- Quitamos el /{idUsuario}
+  public ResponseEntity &lt;Long&gt; guardarTarea (@RequestParam(&quot;idUsuarios&quot;) List&lt;Long&gt; idUsuarios, @RequestBody Tarea tarea) {
+    try{
+      // Pasamos la lista de idUsuarios al servicio
+<span class="fc" id="L85">      Long idTarea = gestDatosService.guardarTarea(tarea, idUsuarios);</span>
+<span class="fc" id="L86">      return new ResponseEntity&lt;&gt;(idTarea, HttpStatus.CREATED);</span>
+    }
+<span class="nc" id="L88">    catch (IllegalArgumentException e){</span>
+<span class="nc" id="L89">      e.printStackTrace();</span>
+<span class="nc" id="L90">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="nc" id="L92">    catch (Exception e){</span>
+<span class="nc" id="L93">      e.printStackTrace();</span>
+<span class="nc" id="L94">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+  
+  /**
+   * @brief Guarda un calendario asociado a un usuario.
+   * 
+   * @param idUsuario identificador del usuario propietario.
+   * @param calendario calendario a almacenar.
+   * @return identificador del calendario creado.
+   */
+  @PostMapping(&quot;/guardarCalendario/{idUsuario}&quot;)
+  public ResponseEntity &lt;Long&gt; guardarCalendario (@PathVariable(&quot;idUsuario&quot;) Long idUsuario, @RequestBody Calendario calendario) {
+    try{
+      // Le pasamos el calendario y el id del usuario al servicio
+<span class="fc" id="L109">      Long idCalendario = gestDatosService.guardarCalendario(calendario, idUsuario);</span>
+<span class="fc" id="L110">      return new ResponseEntity&lt;&gt;(idCalendario, HttpStatus.CREATED);</span>
+    }
+<span class="fc" id="L112">    catch (IllegalArgumentException e){</span>
+<span class="fc" id="L113">      e.printStackTrace(); </span>
+<span class="fc" id="L114">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="nc" id="L116">    catch (Exception e){</span>
+<span class="nc" id="L117">      e.printStackTrace();</span>
+<span class="nc" id="L118">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Guarda una categoría asociada a un usuario.
+   * 
+   * @param idUsuario identificador del usuario.
+   * @param categoria categoría que se desea almacenar.
+   * @return identificador de la categoría creada.
+   */
+  @PostMapping(&quot;/guardarCategoria/{idUsuario}&quot;)
+  public ResponseEntity&lt;Long&gt; guardarCategoria(@PathVariable(&quot;idUsuario&quot;) Long idUsuario, @RequestBody Categoria categoria) {
+    try {
+      // Ahora sí recibimos el idUsuario por la URL
+<span class="fc" id="L133">      Long idCategoria = gestDatosService.guardarCategoria(categoria, idUsuario);</span>
+<span class="fc" id="L134">      return new ResponseEntity&lt;&gt;(idCategoria, HttpStatus.CREATED);</span>
+<span class="fc" id="L135">    } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L136">      e.printStackTrace();</span>
+<span class="fc" id="L137">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L138">    } catch (Exception e) {</span>
+<span class="nc" id="L139">      e.printStackTrace();</span>
+<span class="nc" id="L140">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+  
+  /**
+   * @brief Elimina un usuario del sistema.
+   * 
+   * @param idUsuario identificador del usuario a eliminar.
+   * @return respuesta HTTP sin contenido.
+   */
+  @DeleteMapping(&quot;/eliminarUsuario/{idUsuario}&quot;)
+  public ResponseEntity &lt;Void&gt; eliminarUsuario (@PathVariable (&quot;idUsuario&quot;) Long idUsuario) {
+    try{
+<span class="fc" id="L153">      gestDatosService.eliminarUsuario(idUsuario);</span>
+<span class="fc" id="L154">      return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+    }
+<span class="fc" id="L156">    catch (IllegalArgumentException e){</span>
+<span class="fc" id="L157">      e.printStackTrace();</span>
+<span class="fc" id="L158">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="fc" id="L160">    catch (Exception e){</span>
+<span class="fc" id="L161">      e.printStackTrace();</span>
+<span class="fc" id="L162">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Elimina una tarea existente.
+   * 
+   * @param idTarea identificador de la tarea a eliminar.
+   * @return respuesta HTTP sin contenido.
+   */
+  @DeleteMapping(&quot;/eliminarTarea/{idTarea}&quot;)
+  public ResponseEntity &lt;Void&gt; eliminarTarea (@PathVariable (&quot;idTarea&quot;) Long idTarea) {
+    try{
+<span class="fc" id="L175">      gestDatosService.eliminarTarea(idTarea);</span>
+<span class="fc" id="L176">      return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+    }
+<span class="fc" id="L178">    catch (IllegalArgumentException e){</span>
+<span class="fc" id="L179">      e.printStackTrace();</span>
+<span class="fc" id="L180">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="nc" id="L182">    catch (Exception e){</span>
+<span class="nc" id="L183">      e.printStackTrace();</span>
+<span class="nc" id="L184">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Obtiene todos los usuarios registrados.
+   * 
+   * @return lista de usuarios almacenados.
+   */
+  @GetMapping(&quot;/obtenerUsuarios&quot;)
+  public ResponseEntity &lt;List&lt;Usuario&gt;&gt; obtenerUsuarios(){
+    try{
+<span class="fc" id="L196">      List &lt;Usuario&gt; usuarios = gestDatosService.cargarUsuarios();</span>
+<span class="fc" id="L197">      return new ResponseEntity&lt;&gt;(usuarios, HttpStatus.OK);</span>
+    }
+<span class="fc" id="L199">    catch (Exception e){</span>
+<span class="fc" id="L200">      e.printStackTrace();</span>
+<span class="fc" id="L201">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Obtiene las tareas asociadas a un usuario.
+   * 
+   * @param idUsuario identificador del usuario.
+   * @return lista de tareas del usuario.
+   */
+  @GetMapping (&quot;/obtenerTareasPorUsuario/{idUsuario}&quot;)
+  public ResponseEntity &lt;List&lt;Tarea&gt;&gt; obtenerTareasPorUsuario(@PathVariable (&quot;idUsuario&quot;) Long idUsuario){
+    try{
+<span class="fc" id="L214">      List &lt;Tarea&gt; tareas = gestDatosService.cargarTareasPorUsuario(idUsuario);</span>
+<span class="fc" id="L215">      return new ResponseEntity&lt;&gt;(tareas, HttpStatus.OK);</span>
+    }
+<span class="nc" id="L217">    catch (Exception e){</span>
+<span class="nc" id="L218">      e.printStackTrace();</span>
+<span class="nc" id="L219">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Obtiene el calendario asociado a un usuario.
+   * 
+   * @param idUsuario identificador del usuario.
+   * @return calendario del usuario.
+   */
+  @GetMapping (&quot;/obtenerCalendario/{idUsuario}&quot;)
+  public ResponseEntity &lt;Calendario&gt; obtenerCalendarioPorUsuario(@PathVariable (&quot;idUsuario&quot;) Long idUsuario){
+    try{
+<span class="fc" id="L232">      Calendario calendario = gestDatosService.cargarCalendarioPorUsuario(idUsuario);</span>
+<span class="fc" id="L233">      return new ResponseEntity&lt;&gt;(calendario, HttpStatus.OK);</span>
+    }
+<span class="nc" id="L235">    catch (Exception e){</span>
+<span class="nc" id="L236">      e.printStackTrace();</span>
+<span class="nc" id="L237">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Obtiene la categoría asociada a una tarea.
+   * 
+   * @param idTarea identificador de la tarea.
+   * @return categoría asociada a la tarea.
+   */
+  @GetMapping (&quot;/obtenerCategoriaPorTarea/{idTarea}&quot;)
+  public ResponseEntity &lt;Categoria&gt; obtenerCategoriaPorTarea(@PathVariable (&quot;idTarea&quot;) Long idTarea){
+    try{
+<span class="fc" id="L250">      Categoria categoria = gestDatosService.obtenerCategoriaPorTarea(idTarea);</span>
+<span class="fc" id="L251">      return new ResponseEntity&lt;&gt;(categoria, HttpStatus.OK);</span>
+    }
+<span class="nc" id="L253">    catch (Exception e){</span>
+<span class="nc" id="L254">      e.printStackTrace();</span>
+<span class="nc" id="L255">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Modifica una tarea existente.
+   * 
+   * @param idTarea identificador de la tarea.
+   * @param tareaModificada nuevos datos de la tarea.
+   * @return tarea modificada.
+   */
+  @PutMapping (&quot;/modificarTarea/{idTarea}&quot;)
+  public ResponseEntity &lt;Tarea&gt; modificarTarea(@PathVariable (&quot;idTarea&quot;) Long idTarea, @RequestBody Tarea tareaModificada){
+    try{
+<span class="fc" id="L269">      Tarea tarea = gestDatosService.modificarTarea(idTarea, tareaModificada);</span>
+<span class="fc" id="L270">      return new ResponseEntity&lt;&gt;(tarea, HttpStatus.OK);</span>
+    }
+<span class="nc" id="L272">    catch (IllegalArgumentException e){</span>
+<span class="nc" id="L273">      e.printStackTrace();</span>
+<span class="nc" id="L274">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="nc" id="L276">    catch (Exception e){</span>
+<span class="nc" id="L277">      e.printStackTrace();</span>
+<span class="nc" id="L278">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+
+  /**
+   * @brief Modifica un calendario existente.
+   * 
+   * @param idCalendario identificador del calendario.
+   * @param calendarioModificado nuevos datos del calendario.
+   * @return calendario modificado.
+   */
+  @PutMapping (&quot;/modificarCalendario/{idCalendario}&quot;)
+  public ResponseEntity &lt;Calendario&gt; modificarCalendario(@PathVariable (&quot;idCalendario&quot;) Long idCalendario, @RequestBody Calendario calendarioModificado){
+    try{
+<span class="fc" id="L292">      Calendario calendario = gestDatosService.modificarCalendario(idCalendario, calendarioModificado);</span>
+<span class="fc" id="L293">      return new ResponseEntity&lt;&gt;(calendario, HttpStatus.OK);</span>
+    }
+<span class="fc" id="L295">    catch (IllegalArgumentException e){</span>
+<span class="fc" id="L296">      e.printStackTrace();</span>
+<span class="fc" id="L297">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+<span class="nc" id="L299">    catch (Exception e){</span>
+<span class="nc" id="L300">      e.printStackTrace();</span>
+<span class="nc" id="L301">      return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

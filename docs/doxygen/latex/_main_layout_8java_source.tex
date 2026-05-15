@@ -1,0 +1,84 @@
+\doxysection{Main\+Layout.\+java}
+\hypertarget{_main_layout_8java_source}{}\label{_main_layout_8java_source}\index{src/main/java/com/example/restservice/UI/MainLayout.java@{src/main/java/com/example/restservice/UI/MainLayout.java}}
+\mbox{\hyperlink{_main_layout_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restservice.UI;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.vaadin.flow.component.UI;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.vaadin.flow.component.applayout.AppLayout;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.vaadin.flow.component.applayout.DrawerToggle;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.Button;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.ButtonVariant;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.vaadin.flow.component.html.H1;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.FlexComponent;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.HorizontalLayout;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.VerticalLayout;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00012}00012\ \textcolor{keyword}{import}\ com.vaadin.flow.router.RouterLink;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00013}00013\ \textcolor{keyword}{import}\ com.vaadin.flow.server.VaadinSession;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_main_layout}{00022}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_main_layout}{MainLayout}}\ \textcolor{keyword}{extends}\ AppLayout\ \{}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00027}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_main_layout_a6184b8fbdda9962634f7e3bb3c83034a}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_main_layout_a6184b8fbdda9962634f7e3bb3c83034a}{MainLayout}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ H1\ logo\ =\ \textcolor{keyword}{new}\ H1(\textcolor{stringliteral}{"{}PSyC\ Quality\ Manager"{}});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ logo.getStyle()}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ .set(\textcolor{stringliteral}{"{}font-\/size"{}},\ \textcolor{stringliteral}{"{}var(-\/-\/lumo-\/font-\/size-\/l)"{}})}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ .set(\textcolor{stringliteral}{"{}margin"{}},\ \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ DrawerToggle\ toggleBtn\ =\ \textcolor{keyword}{new}\ DrawerToggle();}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ toggleBtn.setId(\textcolor{stringliteral}{"{}menu-\/toggle-\/btn"{}});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Botón\ de\ Cerrar\ Sesión\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ Button\ btnLogout\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Cerrar\ Sesión"{}},\ e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ Limpiamos\ el\ ID\ del\ usuario\ de\ la\ sesión}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ VaadinSession.getCurrent().setAttribute(\textcolor{stringliteral}{"{}usuarioId"{}},\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Cerramos\ la\ sesión\ de\ Vaadin\ por\ completo}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ VaadinSession.getCurrent().close();}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 3.\ Redirigimos\ explícitamente\ a\ la\ ruta\ del\ login\ (con\ la\ barra\ por\ delante)}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ UI.getCurrent().getPage().setLocation(\textcolor{stringliteral}{"{}/login"{}});\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ btnLogout.addThemeVariants(ButtonVariant.LUMO\_ERROR);}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Le\ damos\ color\ rojo\ para\ que\ destaque}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ btnLogout.getStyle().set(\textcolor{stringliteral}{"{}margin-\/left"{}},\ \textcolor{stringliteral}{"{}auto"{}});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Añadimos\ el\ botón\ al\ header}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ HorizontalLayout\ header\ =\ \textcolor{keyword}{new}\ HorizontalLayout(toggleBtn,\ logo,\ btnLogout);}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ header.setWidthFull();}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ header.addClassNames(\textcolor{stringliteral}{"{}py-\/0"{}},\ \textcolor{stringliteral}{"{}px-\/m"{}});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ addToNavbar(header);}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ VerticalLayout\ menu\ =\ \textcolor{keyword}{new}\ VerticalLayout();}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Todos\ los\ enlaces\ con\ sus\ IDs\ correctos\ para\ los\ tests}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ menu.add(}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ createMenuLink(\textcolor{stringliteral}{"{}Inicio"{}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}menu-\/link-\/inicio"{}},\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_inicio_view}{InicioView}}.class),}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ createMenuLink(\textcolor{stringliteral}{"{}Tareas"{}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}menu-\/link-\/tareas"{}},\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_tarea_view}{TareaView}}.class),}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ createMenuLink(\textcolor{stringliteral}{"{}Categorías"{}},\ \ \ \ \ \textcolor{stringliteral}{"{}menu-\/link-\/categorias"{}},\ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_categoria_view}{CategoriaView}}.class),}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ createMenuLink(\textcolor{stringliteral}{"{}Configuración"{}},\ \ \textcolor{stringliteral}{"{}menu-\/link-\/configuracion"{}},\ \ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_inicio_view}{InicioView}}.class)}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ addToDrawer(menu);}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{private}\ RouterLink\ createMenuLink(String\ viewName,\ String\ \textcolor{keywordtype}{id},\ Class<?\ extends\ com.vaadin.flow.component.Component>\ viewClass)\ \{}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ RouterLink\ link\ =\ \textcolor{keyword}{new}\ RouterLink(viewName,\ viewClass);}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ link.setId(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ link;}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_main_layout_8java_source_l00096}00096\ \}}
+
+\end{DoxyCode}

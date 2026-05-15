@@ -1,0 +1,53 @@
+\doxysection{Login\+View.\+java}
+\hypertarget{_login_view_8java_source}{}\label{_login_view_8java_source}\index{src/main/java/com/example/restservice/UI/LoginView.java@{src/main/java/com/example/restservice/UI/LoginView.java}}
+\mbox{\hyperlink{_login_view_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restservice.UI;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.restservice.Entity.Usuario;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.restservice.Service.GestDatosService;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.vaadin.flow.component.UI;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.vaadin.flow.component.button.Button;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.vaadin.flow.component.login.LoginForm;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.vaadin.flow.component.orderedlayout.VerticalLayout;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.vaadin.flow.router.Route;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.vaadin.flow.server.VaadinSession;}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00019}00019\ @Route(\textcolor{stringliteral}{"{}login"{}})}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00020}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view}{00020}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view}{LoginView}}\ extends\ VerticalLayout\ \{}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00027}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view_a8c6f80f1d8baa369f5c84c4fe3495186}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view_a8c6f80f1d8baa369f5c84c4fe3495186}{LoginView}}(GestDatosService\ gestDatosService)\ \{}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ setSizeFull();}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ setAlignItems(Alignment.CENTER);}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ setJustifyContentMode(JustifyContentMode.CENTER);}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ LoginForm\ loginForm\ =\ \textcolor{keyword}{new}\ LoginForm();}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ loginForm.setForgotPasswordButtonVisible(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ loginForm.addLoginListener(e\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ Usuario\ usuario\ =\ gestDatosService.autenticarUsuario(e.getUsername(),\ e.getPassword());}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usuario\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VaadinSession.getCurrent().setAttribute(\textcolor{stringliteral}{"{}usuarioId"{}},\ usuario.getId());}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Navegamos\ directamente\ a\ InicioView}}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UI.getCurrent().navigate(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_inicio_view}{InicioView}}.class);\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loginForm.setError(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ Button\ btnVolver\ =\ \textcolor{keyword}{new}\ Button(\textcolor{stringliteral}{"{}Volver\ al\ inicio"{}},\ e\ -\/>\ UI.getCurrent().navigate(\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view}{HomeView}}.class));}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ add(loginForm,\ btnVolver);}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_login_view_8java_source_l00059}00059\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['eliminartarea_0',['eliminartarea',['../classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller.html#a6d079c15f406a5dd8cd52b9353250ee7',1,'com.example.restservice.Controller.GestDatosController.eliminarTarea()'],['../classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#ae21335a42f34fd089687554820ed02d3',1,'com.example.restservice.Service.GestDatosService.eliminarTarea(Long idTarea)'],['../classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a2aec294f9aecb0110f123f0ca7dc9916',1,'com.example.restservice.Service.GestDatosService.eliminarTarea(Tarea tarea)']]],
+  ['eliminarusuario_1',['eliminarusuario',['../classcom_1_1example_1_1restservice_1_1_controller_1_1_gest_datos_controller.html#a1d0b6a95d132bf98206f8343b09ad942',1,'com.example.restservice.Controller.GestDatosController.eliminarUsuario()'],['../classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#abbdd679e414fec885db167174a001ed1',1,'com.example.restservice.Service.GestDatosService.eliminarUsuario()']]],
+  ['empresa_2',['EMPRESA',['../enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario.html#ae176fe7347f988643b71eabefc62acdc',1,'com::example::restservice::Entity::Usuario::TipoUsuario']]]
+];

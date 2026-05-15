@@ -9,30 +9,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '21'
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
 
-    - name: Install Doxygen
-      run: sudo apt-get install -y doxygen
+      - name: Install Doxygen and Graphviz
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
 
-    - name: Install Graphviz
-      run: sudo apt-get install -y graphviz
+      - name: Generate documentation
+        working-directory: rest-service
+        run: mvn doxygen:report
 
-    - name: Generate documentation
-      run: |
-        cd rest-service
-        mvn doxygen:report
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./rest-service/target/doxygen/html
-        keep_files: true              
-        destination_dir: doxygen
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./rest-service/target/doxygen/html
+          keep_files: true
+          destination_dir: doxygen

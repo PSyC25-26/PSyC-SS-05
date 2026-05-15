@@ -1,0 +1,87 @@
+\doxysection{com.\+example.\+restservice.\+Dao.\+Tarea\+DAO Interface Reference}
+\hypertarget{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o}{}\label{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o}\index{com.example.restservice.Dao.TareaDAO@{com.example.restservice.Dao.TareaDAO}}
+
+
+Interfaz DAO para la gestión de tareas.  
+
+
+
+
+Inheritance diagram for com.\+example.\+restservice.\+Dao.\+Tarea\+DAO\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for com.\+example.\+restservice.\+Dao.\+Tarea\+DAO\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o_a2d1b8303335332bea9ed7395ea130fd3}{find\+By\+Usuarios\+\_\+\+Id}} (Long id\+Usuario)
+\begin{DoxyCompactList}\small\item\em Obtiene las tareas asociadas a un usuario. \end{DoxyCompactList}\item 
+List$<$ Tarea $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o_aaf0f6734a5a82721dce65dbe11d9874e}{find\+By\+Categoria}} (Categoria categoria)
+\begin{DoxyCompactList}\small\item\em Obtiene las tareas asociadas a una categoría. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaz DAO para la gestión de tareas. 
+
+Proporciona operaciones de acceso a datos relacionadas con la entidad Tarea. 
+
+Definition at line \mbox{\hyperlink{_tarea_d_a_o_8java_source_l00015}{15}} of file \mbox{\hyperlink{_tarea_d_a_o_8java_source}{Tarea\+DAO.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o_aaf0f6734a5a82721dce65dbe11d9874e}\label{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o_aaf0f6734a5a82721dce65dbe11d9874e} 
+\index{com.example.restservice.Dao.TareaDAO@{com.example.restservice.Dao.TareaDAO}!findByCategoria@{findByCategoria}}
+\index{findByCategoria@{findByCategoria}!com.example.restservice.Dao.TareaDAO@{com.example.restservice.Dao.TareaDAO}}
+\doxysubsubsection{\texorpdfstring{findByCategoria()}{findByCategoria()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Dao.\+Tarea\+DAO.\+find\+By\+Categoria (\begin{DoxyParamCaption}\item[{Categoria}]{categoria }\end{DoxyParamCaption})}
+
+
+
+Obtiene las tareas asociadas a una categoría. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em categoria} & categoría utilizada como filtro. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de tareas asociadas a la categoría. 
+\end{DoxyReturn}
+\Hypertarget{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o_a2d1b8303335332bea9ed7395ea130fd3}\label{interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o_a2d1b8303335332bea9ed7395ea130fd3} 
+\index{com.example.restservice.Dao.TareaDAO@{com.example.restservice.Dao.TareaDAO}!findByUsuarios\_Id@{findByUsuarios\_Id}}
+\index{findByUsuarios\_Id@{findByUsuarios\_Id}!com.example.restservice.Dao.TareaDAO@{com.example.restservice.Dao.TareaDAO}}
+\doxysubsubsection{\texorpdfstring{findByUsuarios\_Id()}{findByUsuarios\_Id()}}
+{\footnotesize\ttfamily List$<$ Tarea $>$ com.\+example.\+restservice.\+Dao.\+Tarea\+DAO.\+find\+By\+Usuarios\+\_\+\+Id (\begin{DoxyParamCaption}\item[{Long}]{id\+Usuario }\end{DoxyParamCaption})}
+
+
+
+Obtiene las tareas asociadas a un usuario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Usuario} & identificador del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lista de tareas asociadas al usuario. 
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restservice/\+Dao/\mbox{\hyperlink{_tarea_d_a_o_8java}{Tarea\+DAO.\+java}}\end{DoxyCompactItemize}

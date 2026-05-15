@@ -1,4 +1,4 @@
-name: Maven Site & Peformance & Integration Tests
+name: Maven Site & Performance & Integration Tests
 
 on:
   push:
@@ -45,13 +45,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Install Doxygen and Graphviz
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+
+      - name: Install pandoc
+        run: sudo apt-get install -y pandoc
+
       - name: Wait for MySQL to be ready
         run: |
           echo "Waiting for MySQL..."
           until mysqladmin ping -h 127.0.0.1 -uroot -pCalidad2026 --silent; do
             sleep 2
           done
-        
+
       - name: Run DB initialization script
         working-directory: rest-service
         run: |
@@ -61,7 +67,7 @@ jobs:
       - name: Run Unit tests and generate coverage report
         working-directory: rest-service
         run: mvn test jacoco:report
-      
+
       - name: Run Integration Tests
         working-directory: rest-service
         run: mvn -Pintegration integration-test
@@ -74,6 +80,28 @@ jobs:
         working-directory: rest-service
         run: mvn site
 
-      - name: Ensure that the performance reports are also moved into the target\site\reports folder
+      - name: Ensure that the performance reports are also moved into the target/site/reports folder
         working-directory: rest-service
         run: mvn -Pperformance resources:copy-resources@copy-perf-report
+
+      - name: Convert README.md to index.html
+        run: |
+          mkdir -p docs
+          pandoc README.md -o docs/index.html
+
+      - name: Copy site output to docs/site and doxygen output to docs/doxygen
+        run: |
+          mkdir -p docs/site
+          mkdir -p docs/doxygen
+          cp -r rest-service/target/site/* docs/site/
+          cp -r rest-service/target/doxygen/* docs/doxygen/
+
+      - name: Commit and push docs
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add -f docs
+          git commit -m "Update Maven site [CI skip]" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

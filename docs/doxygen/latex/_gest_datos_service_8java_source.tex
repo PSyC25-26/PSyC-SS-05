@@ -1,0 +1,267 @@
+\doxysection{Gest\+Datos\+Service.\+java}
+\hypertarget{_gest_datos_service_8java_source}{}\label{_gest_datos_service_8java_source}\index{src/main/java/com/example/restservice/Service/GestDatosService.java@{src/main/java/com/example/restservice/Service/GestDatosService.java}}
+\mbox{\hyperlink{_gest_datos_service_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restservice_1_1_service}{00001}}\ \textcolor{keyword}{package\ }com.example.restservice.Service;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.restservice.Entity.*;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.vaadin.flow.data.provider.DataProvider;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.util.ArrayList;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00009}00009\ \textcolor{keyword}{import}\ jakarta.transaction.Transactional;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.example.restservice.Dao.*;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00021}00021\ @Service}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service}{00022}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service}{GestDatosService}}\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ UsuarioDAO\ usuarioDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ CategoriaDAO\ categoriaDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ TareaDAO\ tareaDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ CalendarioDAO\ calendarioDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00037}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abba63dd502d4129d9d494b48420c9ef5}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abba63dd502d4129d9d494b48420c9ef5}{GestDatosService}}(UsuarioDAO\ usuarioDAO,\ CategoriaDAO\ categoriaDAO,\ TareaDAO\ tareaDAO,\ CalendarioDAO\ calendarioDAO)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ this.usuarioDAO\ =\ usuarioDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ this.categoriaDAO\ =\ categoriaDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ this.tareaDAO\ =\ tareaDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ this.calendarioDAO\ =\ calendarioDAO;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00044}00044\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00052}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a764916e4fd64377c8c318d9c9f0dde71}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a764916e4fd64377c8c318d9c9f0dde71}{guardarTarea}}(Tarea\ tarea,\ List<Long>\ idUsuarios)\{\ \textcolor{comment}{//\ <-\/-\/\ Cambiado\ a\ List<Long>}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tarea\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ tarea\ no\ puede\ ser\ nula"{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tarea.getFechaInicio()\ !=\ \textcolor{keyword}{null}\ \&\&\ tarea.getFechaFin()\ !=\ \textcolor{keyword}{null}\ \&\&\ tarea.getFechaInicio().isAfter(tarea.getFechaFin()))\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ fecha\ de\ inicio\ no\ puede\ ser\ posterior\ a\ la\ fecha\ de\ fin"{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tarea.getUsuarios()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ tarea.setUsuarios(\textcolor{keyword}{new}\ ArrayList<>());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Long\ \textcolor{keywordtype}{id}\ :\ idUsuarios)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ Usuario\ usuario\ =\ usuarioDAO.findById(\textcolor{keywordtype}{id}).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Usuario\ con\ ID\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}\ no\ encontrado"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ tarea.getUsuarios().add(usuario);\ \textcolor{comment}{//\ Añadimos\ cada\ usuario\ a\ la\ tarea}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ Tarea\ tareaGuardada\ =\ tareaDAO.save(tarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tareaGuardada.getId();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00083}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a03ace83f0cb77fa55e177b03619e65e0}{00083}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a03ace83f0cb77fa55e177b03619e65e0}{guardarCalendario}}(Calendario\ calendario,\ Long\ idUsuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (calendario\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ calendario\ no\ puede\ ser\ nulo"{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ Usuario\ propietario\ =\ usuarioDAO.findById(idUsuario).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Usuario\ no\ encontrado"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ Calendario\ calendarioExistente\ =\ calendarioDAO.findByPropietarioId(idUsuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (calendarioExistente\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Este\ usuario\ ya\ tiene\ un\ calendario\ asignado.\ Solo\ se\ permite\ uno."{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ calendario.setPropietario(propietario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ Calendario\ calendarioGuardado\ =\ calendarioDAO.save(calendario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calendarioGuardado.getId();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00108}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a659430593d7c28c493cff3d37f72c5d4}{00108}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a659430593d7c28c493cff3d37f72c5d4}{guardarCategoria}}(Categoria\ categoria,\ Long\ idUsuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (categoria\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}La\ categoría\ no\ puede\ ser\ nula"{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Buscamos\ el\ usuario\ en\ la\ BD\ y\ se\ lo\ asignamos\ a\ la\ categoría}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ Usuario\ propietario\ =\ usuarioDAO.findById(idUsuario).orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Usuario\ no\ encontrado"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ categoria.setUsuario(propietario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ Categoria\ categoriaGuardada\ =\ categoriaDAO.save(categoria);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ categoriaGuardada.getId();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00127}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2e2576d7a4f34a28fa882992c6e1c6e2}{00127}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Categoria>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2e2576d7a4f34a28fa882992c6e1c6e2}{obtenerCategoriasPorUsuario}}(Long\ idUsuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ categoriaDAO.findByUsuario\_Id(idUsuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00137}00137\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00138}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_ae21335a42f34fd089687554820ed02d3}{00138}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_ae21335a42f34fd089687554820ed02d3}{eliminarTarea}}\ (Long\ idTarea)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00140}00140\ \ \ \ \ \ \ \ \ List\ <Usuario>\ usuarios\ =\ usuarioDAO.findByTareas\_Id(idTarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Usuario\ usuario\ :\ usuarios)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ usuario.getTareas().removeIf(tarea\ -\/>\ tarea.getId().equals(idTarea));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00144}00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ tareaDAO.deleteById(idTarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00147}00147\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00155}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8776126502ba80f53c5240986d12af41}{00155}}\ \ \ \ \ \textcolor{keyword}{public}\ List\ <Tarea>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8776126502ba80f53c5240986d12af41}{obtenerTareasPorUsuario}}\ (Long\ idUsuario)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00157}00157\ \ \ \ \ \ \ \ \ Usuario\ usuario\ =\ usuarioDAO.findById(idUsuario).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Usuario\ no\ encontrado"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00159}00159\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ List\ <Tarea>\ tareas\ =\ tareaDAO.findByUsuarios\_Id(idUsuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tareas;\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00163}00163\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00171}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c2619cd620f987e423d325fd315e18b}{00171}}\ \ \ \ \ \textcolor{keyword}{public}\ Categoria\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c2619cd620f987e423d325fd315e18b}{obtenerCategoriaPorTarea}}\ (Long\ idTarea)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00173}00173\ \ \ \ \ \ \ \ \ Tarea\ tarea\ =\ tareaDAO.findById(idTarea).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Tarea\ no\ encontrada"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00175}00175\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00176}00176\ \ \ \ \ \ \ \ \ Categoria\ categoria\ =\ tarea.getCategoria();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ categoria;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00178}00178\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00186}00186\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00187}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abbdd679e414fec885db167174a001ed1}{00187}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abbdd679e414fec885db167174a001ed1}{eliminarUsuario}}\ (Long\ idUsuario)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00189}00189\ \ \ \ \ \ \ \ \ Usuario\ usuario\ =\ usuarioDAO.findById(idUsuario).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Usuario\ no\ encontrado"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00192}00192\ \ \ \ \ \ \ \ \ List<Tarea>\ tareasDelUsuario\ =\ tareaDAO.findByUsuarios\_Id(idUsuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Tarea\ tarea\ :\ tareasDelUsuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ tarea.getUsuarios().removeIf(u\ -\/>\ u.getId().equals(idUsuario));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tarea.getUsuarios().isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tareaDAO.delete(tarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tareaDAO.save(tarea);\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00203}00203\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00205}00205\ \ \ \ \ \ \ \ \ usuarioDAO.delete(usuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00206}00206\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00213}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_adee9f5e8c27a1e94efed7aec9cac5f30}{00213}}\ \ \ \ \ \textcolor{keyword}{public}\ List\ <Usuario>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_adee9f5e8c27a1e94efed7aec9cac5f30}{cargarUsuarios}}()\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00215}00215\ \ \ \ \ \ \ \ \ ArrayList\ <Usuario>\ usuariosCargados\ =\ \textcolor{keyword}{new}\ ArrayList<Usuario>();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00217}00217\ \ \ \ \ \ \ \ \ Iterable\ <Usuario>\ usuariosBD\ =\ usuarioDAO.findAll();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Usuario\ usuario\ :\ usuariosBD)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ usuariosCargados.add(usuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00221}00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ usuariosCargados;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00224}00224\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00232}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a66b5edf9f6f0cc8d3241114d14d8f2fd}{00232}}\ \ \ \ \ \textcolor{keyword}{public}\ List\ <Tarea>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a66b5edf9f6f0cc8d3241114d14d8f2fd}{cargarTareasPorUsuario}}\ (Long\ idUsuario)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00234}00234\ \ \ \ \ \ \ \ \ List\ <Tarea>\ tareas\ =\ tareaDAO.findByUsuarios\_Id(idUsuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tareas;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00237}00237\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00245}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a619adfa3399ba4e649767c49c8bd9488}{00245}}\ \ \ \ \ \textcolor{keyword}{public}\ Calendario\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a619adfa3399ba4e649767c49c8bd9488}{cargarCalendarioPorUsuario}}\ (\textcolor{keywordtype}{long}\ idUsuario)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00247}00247\ \ \ \ \ \ \ \ \ Calendario\ calendario\ =\ calendarioDAO.findByPropietarioId(idUsuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calendario;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00250}00250\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00259}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a50cb01e13dc0af0422d8f84490fff266}{00259}}\ \ \ \ \ \textcolor{keyword}{public}\ Tarea\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a50cb01e13dc0af0422d8f84490fff266}{modificarTarea}}\ (Long\ idTarea,\ Tarea\ tareaModificada)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00261}00261\ \ \ \ \ \ \ \ \ Tarea\ tarea\ =\ tareaDAO.findById(idTarea).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Tarea\ no\ encontrada"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Actualizar\ los\ campos\ de\ la\ tarea\ existente\ con\ los\ valores\ de\ tareaModificada}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00265}00265\ \ \ \ \ \ \ \ \ tarea.setId(idTarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00266}00266\ \ \ \ \ \ \ \ \ tarea.setTitulo(tareaModificada.getTitulo());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00267}00267\ \ \ \ \ \ \ \ \ tarea.setDescripcion(tareaModificada.getDescripcion());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00268}00268\ \ \ \ \ \ \ \ \ tarea.setFechaInicio(tareaModificada.getFechaInicio());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00269}00269\ \ \ \ \ \ \ \ \ tarea.setFechaFin(tareaModificada.getFechaFin());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00270}00270\ \ \ \ \ \ \ \ \ tarea.setCategoria(tareaModificada.getCategoria());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00272}00272\ \ \ \ \ \ \ \ \ tareaDAO.save(tarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tarea;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00275}00275\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00282}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5ac3b7494f148d2560ea29f0fc97cf8f}{00282}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Tarea>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5ac3b7494f148d2560ea29f0fc97cf8f}{cargarTareas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00283}00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (List<Tarea>)\ tareaDAO.findAll();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00284}00284\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00291}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a9d06dc5e1059b67aaecf127e5b62cec2}{00291}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Categoria>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a9d06dc5e1059b67aaecf127e5b62cec2}{cargarCategorias}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (List<Categoria>)\ categoriaDAO.findAll();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00293}00293\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00302}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a3bb796beaeead0d4f45adcf93b2ef7a4}{00302}}\ \ \ \ \ \textcolor{keyword}{public}\ Calendario\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a3bb796beaeead0d4f45adcf93b2ef7a4}{modificarCalendario}}(Long\ idCalendario,\ Calendario\ calendarioModificado)\{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00304}00304\ \ \ \ \ \ \ \ \ Calendario\ calendario\ =\ calendarioDAO.findById(idCalendario).}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Calendario\ no\ encontrado"{}}));}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00306}00306\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00307}00307\ \ \ \ \ \ \ \ \ calendario.setNombre(calendarioModificado.getNombre());}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00309}00309\ \ \ \ \ \ \ \ \ calendarioDAO.save(calendario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calendario;}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00314}00314\ \ \ \ \ \textcolor{comment}{//\ En\ GestDatosService.java}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00315}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510}{00315}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Tarea>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510}{listarTodasLasTareas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (List<Tarea>)\ tareaDAO.findAll();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00317}00317\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00319}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_aa9da5870a494ee8d0264a64a42e9459a}{00319}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_aa9da5870a494ee8d0264a64a42e9459a}{guardarTarea}}(Tarea\ tarea)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00320}00320\ \ \ \ \ \ \ \ \ tareaDAO.save(tarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00321}00321\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00323}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2aec294f9aecb0110f123f0ca7dc9916}{00323}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a2aec294f9aecb0110f123f0ca7dc9916}{eliminarTarea}}(Tarea\ tarea)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00324}00324\ \ \ \ \ \ \ \ \ tareaDAO.delete(tarea);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00325}00325\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00327}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abc5b9b75ddad38a11e79df80aa26ef86}{00327}}\ \ \ \ \ \textcolor{keyword}{public}\ DataProvider<Tarea,\ Void>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_abc5b9b75ddad38a11e79df80aa26ef86}{getAllTareas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO\ Auto-\/generated\ method\ stub}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ UnsupportedOperationException(\textcolor{stringliteral}{"{}Unimplemented\ method\ 'getAllTareas'"{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00330}00330\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00331}00331\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00338}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a4070b7f05c2ede97f33f88c6360f58a6}{00338}}\ \ \ \ \ \textcolor{keyword}{public}\ Usuario\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a4070b7f05c2ede97f33f88c6360f58a6}{guardarUsuario}}(Usuario\ usuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00340}00340\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Añadimos\ la\ comprobación\ para\ que\ pase\ el\ test}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usuario\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ usuario\ no\ puede\ ser\ nulo"{}});}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00343}00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00344}00344\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00345}00345\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Usamos\ tu\ UsuarioDAO\ real}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00346}00346\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ usuarioDAO.save(usuario);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00347}00347\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00356}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a6a13032240ec85133d118086ad168d9c}{00356}}\ \ \ \ \ \textcolor{keyword}{public}\ Usuario\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a6a13032240ec85133d118086ad168d9c}{autenticarUsuario}}(String\ username,\ String\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00357}00357\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Usamos\ tu\ usuarioDAO\ para\ traer\ todos\ los\ usuarios}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00359}00359\ \ \ \ \ \ \ \ \ Iterable<Usuario>\ todosLosUsuarios\ =\ usuarioDAO.findAll();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00360}00360\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00361}00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Usuario\ u\ :\ todosLosUsuarios)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (u.getUsername().equals(username)\ \&\&\ u.getPassword().equals(password))\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ u;\ \textcolor{comment}{//\ Coinciden\ usuario\ y\ contraseña}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00365}00365\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00367}00367\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};\ \textcolor{comment}{//\ No\ coinciden}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00368}00368\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00376}\mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5b4d30ca89873c22dbcbb5c11268f2e7}{00376}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Tarea>\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a5b4d30ca89873c22dbcbb5c11268f2e7}{obtenerTareasPorCategoria}}(Categoria\ categoria)\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00378}00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (categoria\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service_a8c9be5d9cc448d0e194b842aed4b8510}{listarTodasLasTareas}}();}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00380}00380\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00382}00382\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tareaDAO.findByCategoria(categoria);}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00383}00383\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00384}00384\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gest_datos_service_8java_source_l00385}00385\ \}}
+
+\end{DoxyCode}

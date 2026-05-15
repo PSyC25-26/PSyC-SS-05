@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calendario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest-service</a> &gt; <a href="index.source.html" class="el_package">com.example.restservice.Entity</a> &gt; <span class="el_source">Calendario.java</span></div><h1>Calendario.java</h1><pre class="source lang-java linenums">package com.example.restservice.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
+
+/**
+ * @brief Entidad que representa un calendario del sistema.
+ * 
+ * Cada calendario pertenece a un único usuario propietario
+ * y almacena la información relacionada con la organización
+ * de tareas.
+ */
+@Entity
+<span class="fc" id="L14">public class Calendario {</span>
+
+    /**
+     * @brief Identificador único del calendario.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /**
+     * @brief Nombre del calendario.
+     */
+    private String nombre; 
+
+
+    /**
+     * @brief Usuario propietario del calendario.
+     * 
+     * Cada usuario dispone de un único calendario asociado.
+     */
+    // Cada usuario tiene un calendario, y cada calendario tiene un usuario
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = &quot;propietario_id&quot;, nullable = false, unique = true)
+    private Usuario propietario;
+
+    
+    // getters y setters
+
+    /**
+     * @brief Obtiene el identificador del calendario.
+     * 
+     * @return identificador del calendario.
+     */
+    public Long getId() {
+<span class="fc" id="L49">        return id;</span>
+    }
+
+    /**
+     * @brief Establece el identificador del calendario.
+     * 
+     * @param id identificador del calendario.
+     */
+    public void setId(Long id) {
+<span class="fc" id="L58">        this.id = id;</span>
+<span class="fc" id="L59">    }</span>
+
+    /**
+     * @brief Obtiene el nombre del calendario.
+     * 
+     * @return nombre del calendario.
+     */
+    public String getNombre() {
+<span class="fc" id="L67">        return nombre;</span>
+    }
+
+    /**
+     * @brief Establece el nombre del calendario.
+     * 
+     * @param nombre nombre del calendario.
+     */
+    public void setNombre(String nombre) {
+<span class="fc" id="L76">        this.nombre = nombre;</span>
+<span class="fc" id="L77">    }</span>
+
+    /**
+     * @brief Obtiene el usuario propietario del calendario.
+     * 
+     * @return usuario propietario.
+     */
+    public Usuario getPropietario() {
+<span class="nc" id="L85">        return propietario;</span>
+    }
+
+    /**
+     * @brief Establece el usuario propietario del calendario.
+     * 
+     * @param propietario usuario propietario.
+     */
+    public void setPropietario(Usuario propietario) {
+<span class="fc" id="L94">        this.propietario = propietario;</span>
+<span class="fc" id="L95">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
