@@ -301,7 +301,7 @@ Aplicación disponible en: http://localhost:8080
 
 La aplicación debe permitir iniciar sesión, gestionar tareas, visualizar el calendario, gestionar categorías, almacenar información en MySQL, ejecutar tests correctamente y generar informes de calidad.
 
-## Documentación del Proyecto
+## Documentación del Proyecto con Sphinx
 
 La documentación técnica detallada, incluyendo la arquitectura del sistema, la guía de inicio rápido y la referencia de la API REST, está disponible en el siguiente enlace:
 
