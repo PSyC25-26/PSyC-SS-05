@@ -1,0 +1,26 @@
+var classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service =
+[
+    [ "GestDatosService", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#abba63dd502d4129d9d494b48420c9ef5", null ],
+    [ "autenticarUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a6a13032240ec85133d118086ad168d9c", null ],
+    [ "cargarCalendarioPorUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a619adfa3399ba4e649767c49c8bd9488", null ],
+    [ "cargarCategorias", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a9d06dc5e1059b67aaecf127e5b62cec2", null ],
+    [ "cargarTareas", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a5ac3b7494f148d2560ea29f0fc97cf8f", null ],
+    [ "cargarTareasPorUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a66b5edf9f6f0cc8d3241114d14d8f2fd", null ],
+    [ "cargarUsuarios", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#adee9f5e8c27a1e94efed7aec9cac5f30", null ],
+    [ "eliminarTarea", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#ae21335a42f34fd089687554820ed02d3", null ],
+    [ "eliminarTarea", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a2aec294f9aecb0110f123f0ca7dc9916", null ],
+    [ "eliminarUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#abbdd679e414fec885db167174a001ed1", null ],
+    [ "getAllTareas", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#abc5b9b75ddad38a11e79df80aa26ef86", null ],
+    [ "guardarCalendario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a03ace83f0cb77fa55e177b03619e65e0", null ],
+    [ "guardarCategoria", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a659430593d7c28c493cff3d37f72c5d4", null ],
+    [ "guardarTarea", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#aa9da5870a494ee8d0264a64a42e9459a", null ],
+    [ "guardarTarea", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a764916e4fd64377c8c318d9c9f0dde71", null ],
+    [ "guardarUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a4070b7f05c2ede97f33f88c6360f58a6", null ],
+    [ "listarTodasLasTareas", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a8c9be5d9cc448d0e194b842aed4b8510", null ],
+    [ "modificarCalendario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a3bb796beaeead0d4f45adcf93b2ef7a4", null ],
+    [ "modificarTarea", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a50cb01e13dc0af0422d8f84490fff266", null ],
+    [ "obtenerCategoriaPorTarea", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a8c2619cd620f987e423d325fd315e18b", null ],
+    [ "obtenerCategoriasPorUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a2e2576d7a4f34a28fa882992c6e1c6e2", null ],
+    [ "obtenerTareasPorCategoria", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a5b4d30ca89873c22dbcbb5c11268f2e7", null ],
+    [ "obtenerTareasPorUsuario", "classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a8776126502ba80f53c5240986d12af41", null ]
+];

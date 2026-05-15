@@ -1,0 +1,5 @@
+<map id="com.example.restservice.Service.GestDatosService.obtenerTareasPorCategoria" name="com.example.restservice.Service.GestDatosService.obtenerTareasPorCategoria">
+<area shape="rect" id="Node000001" title="Obtiene tareas filtradas por categoría." alt="" coords="5,5,249,60"/>
+<area shape="rect" id="Node000002" href="$classcom_1_1example_1_1restservice_1_1_service_1_1_gest_datos_service.html#a8c9be5d9cc448d0e194b842aed4b8510" title=" " alt="" coords="297,5,524,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,30,283,30,283,35,250,35"/>
+</map>
