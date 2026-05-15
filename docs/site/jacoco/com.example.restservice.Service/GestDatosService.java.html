@@ -359,10 +359,10 @@ public class GestDatosService {
 <span class="fc" id="L359">        Iterable&lt;Usuario&gt; todosLosUsuarios = usuarioDAO.findAll();</span>
         
 <span class="pc bpc" id="L361" title="1 of 2 branches missed.">        for (Usuario u : todosLosUsuarios) {</span>
-<span class="pc bpc" id="L362" title="1 of 4 branches missed.">            if (u.getUsername().equals(username) &amp;&amp; u.getPassword().equals(password)) {</span>
+<span class="pc bpc" id="L362" title="2 of 4 branches missed.">            if (u.getUsername().equals(username) &amp;&amp; u.getPassword().equals(password)) {</span>
 <span class="fc" id="L363">                return u; // Coinciden usuario y contraseña</span>
             }
-<span class="fc" id="L365">        }</span>
+<span class="nc" id="L365">        }</span>
 
 <span class="nc" id="L367">        return null; // No coinciden</span>
     }

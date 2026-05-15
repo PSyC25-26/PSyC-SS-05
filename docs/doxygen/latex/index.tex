@@ -1,0 +1,563 @@
+\chapter{PSyC Quality Manager}
+\hypertarget{index}{}\label{index}\index{PSyC Quality Manager@{PSyC Quality Manager}}
+\label{index_md__2home_2runner_2work_2_p_sy_c-_s_s-05_2_p_sy_c-_s_s-05_2_r_e_a_d_m_e}%
+\Hypertarget{index_md__2home_2runner_2work_2_p_sy_c-_s_s-05_2_p_sy_c-_s_s-05_2_r_e_a_d_m_e}%
+ Aplicación de gestión de tareas y calendario desarrollada con Java, Spring Boot, Vaadin, My\+SQL y Maven.
+
+El proyecto incluye gestión de usuarios, creación y edición de tareas, categorías, calendario, tests automáticos, integración continua (CI) y generación de informes de calidad.
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Requisitos previos}
+
+Antes de empezar es necesario instalar\+:
+
+\doxysubsection*{1. Git}
+
+Descargar\+: \href{https://git-scm.com/downloads}{\texttt{ https\+://git-\/scm.\+com/downloads}}
+
+Instalar con configuración por defecto.
+
+\doxysubsection*{2. Visual Studio Code}
+
+Descargar\+: \href{https://code.visualstudio.com/}{\texttt{ https\+://code.\+visualstudio.\+com/}}
+
+\doxysubsection*{3. Java JDK 21}
+
+Descargar\+: \href{https://adoptium.net/}{\texttt{ https\+://adoptium.\+net/}}
+
+Instalar Temurin 21 (Windows x64).
+
+Comprobar instalación\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{java\ -\/version}
+
+\end{DoxyCode}
+
+
+Debe aparecer Java 21.
+
+\doxysubsection*{4. Maven}
+
+Descargar\+: \href{https://maven.apache.org/download.cgi}{\texttt{ https\+://maven.\+apache.\+org/download.\+cgi}} (Binary zip archive)
+
+Descomprimir en {\ttfamily C\+:\textbackslash{}Maven} y añadir {\ttfamily C\+:\textbackslash{}Maven\textbackslash{}bin} al PATH. Reiniciar el ordenador.
+
+Comprobar instalación\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ -\/version}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{5. My\+SQL + My\+SQL Workbench}
+
+Descargar\+: \href{https://dev.mysql.com/downloads/installer/}{\texttt{ https\+://dev.\+mysql.\+com/downloads/installer/}}
+
+Instalar My\+SQL Server y My\+SQL Workbench.
+
+Durante la instalación usar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{usuario:\ \ \ \ root}
+\DoxyCodeLine{contraseña:\ 1234}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{6. Node.\+js}
+
+Descargar\+: \href{https://nodejs.org/}{\texttt{ https\+://nodejs.\+org/}} (versión LTS)
+
+\begin{quote}
+{\bfseries{Importante\+:}} marcar la opción {\bfseries{Add to PATH}} durante la instalación. Reiniciar el ordenador. \end{quote}
+Comprobar instalación\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{node\ -\/v}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Instalación}
+
+\doxysubsection*{Descargar el proyecto}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/PSyC25-\/26/PSyC-\/SS-\/05.git}
+\DoxyCodeLine{cd\ PSyC-\/SS-\/05}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{Abrir en Visual Studio Code}
+
+Ir a {\bfseries{File → Open Folder}} y seleccionar la carpeta del proyecto.
+
+\doxysubsection*{Configurar My\+SQL}
+
+Abrir My\+SQL Workbench, conectarse con usuario {\ttfamily root} / contraseña {\ttfamily 1234} y ejecutar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{CREATE}\ DATABASE\ db\_calidad;}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{Configurar el proyecto}
+
+Abrir {\ttfamily rest-\/service/src/main/resources/application.\+properties} y comprobar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{spring.application.name=rest-\/service}
+\DoxyCodeLine{}
+\DoxyCodeLine{spring.datasource.url=jdbc:mysql://localhost:3306/db\_calidad?useSSL=false\&serverTimezone=UTC\&allowPublicKeyRetrieval=true}
+\DoxyCodeLine{spring.datasource.username=root}
+\DoxyCodeLine{spring.datasource.password=1234}
+\DoxyCodeLine{}
+\DoxyCodeLine{spring.jpa.hibernate.ddl-\/auto=update}
+\DoxyCodeLine{spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect}
+\DoxyCodeLine{spring.jpa.show-\/sql=true}
+\DoxyCodeLine{}
+\DoxyCodeLine{server.port=8080}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{Instalar dependencias}
+
+Dentro de {\ttfamily PSy\+C-\/\+SS-\/05/rest-\/service} ejecutar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ clean\ install}
+
+\end{DoxyCode}
+
+
+La primera ejecución puede tardar varios minutos.
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Ejecutar la aplicación}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ spring-\/boot:run}
+
+\end{DoxyCode}
+
+
+Abrir en el navegador\+: \href{http://localhost:8080}{\texttt{ http\+://localhost\+:8080}}
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Lanzamiento con Docker}
+
+Alternativa al método manual\+: lanza toda la aplicación con un único comando, sin necesidad de instalar Java, Maven, My\+SQL ni Node.\+js.
+
+Requisito\+: tener instalado {\bfseries{Docker Desktop}} → \href{https://www.docker.com/products/docker-desktop}{\texttt{ https\+://www.\+docker.\+com/products/docker-\/desktop}}
+
+Comprobar instalación\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker\ -\/v}
+\DoxyCodeLine{docker\ compose\ version}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{Iniciar los contenedores}
+
+Si solo necesitas arrancar los contenedores sin reconstruirlos\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker-\/compose\ up}
+
+\end{DoxyCode}
+
+
+Si has modificado el Dockerfile, dependencias o configuraciones de entorno\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker-\/compose\ up\ -\/-\/build}
+
+\end{DoxyCode}
+
+
+La aplicación estará disponible en\+: \href{http://localhost:8082}{\texttt{ http\+://localhost\+:8082}}
+
+\doxysubsection*{Detener los contenedores}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker-\/compose\ down}
+
+\end{DoxyCode}
+
+
+Documentación adicional disponible en {\ttfamily docker\+\_\+essentials.\+md}.
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Registro e inicio de sesión}
+
+Registrar un usuario desde la interfaz y luego iniciar sesión.
+
+\begin{quote}
+{\bfseries{Importante\+:}} el login utiliza el campo {\ttfamily username}, no el email. \end{quote}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Campo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplo    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Campo   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplo    }\\\cline{1-2}
+\endhead
+Username   &maria    \\\cline{1-2}
+Password   &1234   \\\cline{1-2}
+\end{longtabu}
+
+
+Para verificar usuarios en My\+SQL Workbench\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{USE\ db\_calidad;}
+\DoxyCodeLine{\textcolor{keyword}{SELECT}\ *\ \textcolor{keyword}{FROM}\ usuario;}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Tests}
+
+El proyecto incluye tests unitarios, de integración, de aceptación y de rendimiento.
+
+Entrar en el directorio {\ttfamily PSy\+C-\/\+SS-\/05/rest-\/service} y ejecutar según el tipo\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Unitarios\ e\ integración}
+\DoxyCodeLine{mvn\ test}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Aceptación\ (Playwright)}
+\DoxyCodeLine{mvn\ test\ -\/P\ playwright}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Rendimiento}
+\DoxyCodeLine{mvn\ test\ -\/P\ performance}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Build\ completo\ con\ todos\ los\ tests}
+\DoxyCodeLine{mvn\ clean\ package}
+
+\end{DoxyCode}
+
+
+\doxysubsection*{Informes de cobertura Ja\+Co\+Co}
+
+Después de {\ttfamily mvn clean package} se genera el informe en\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rest-\/service/target/site/jacoco/index.html}
+
+\end{DoxyCode}
+
+
+Abrir ese archivo en el navegador para ver cobertura de clases, métodos cubiertos y porcentaje de tests.
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Integración continua (CI)}
+
+El proyecto utiliza workflows automáticos definidos en {\ttfamily .github/workflows/} que incluyen compilación automática, ejecución de tests y generación de informes.
+
+También incluye configuración Jenkins mediante {\ttfamily Jenkinsfile} para builds automáticos e integración continua.
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Problemas comunes}
+
+{\bfseries{Error\+: puerto ocupado}} ({\ttfamily Port 8080 was already in use})
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{netstat\ -\/ano\ |\ findstr\ :8080}
+\DoxyCodeLine{taskkill\ /PID\ NUMERO\ /F}
+
+\end{DoxyCode}
+
+
+{\bfseries{Error\+: {\ttfamily node} command not found}}
+
+Node.\+js no está correctamente instalado. Reinstalarlo marcando {\bfseries{Add to PATH}} y reiniciar Windows.
+
+\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+Error\+: `No plugin found for prefix \textquotesingle{}vaadin'\`{}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ clean\ install}
+
+\end{DoxyCode}
+
+
+{\bfseries{Error\+: {\ttfamily no POM in this directory}}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ rest-\/service}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Estructura del proyecto}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rest-\/service/}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ src/}
+\DoxyCodeLine{│\ \ \ ├──\ main/}
+\DoxyCodeLine{│\ \ \ └──\ test/}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ target/}
+\DoxyCodeLine{├──\ pom.xml}
+\DoxyCodeLine{└──\ application.properties}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Tecnologías utilizadas}
+
+Java 21 · Spring Boot · Vaadin · Maven · My\+SQL · JUnit · Ja\+Co\+Co · Jenkins · Git\+Hub Actions · Playwright
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Comandos de referencia rápida}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Acción   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comando    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Acción   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comando    }\\\cline{1-2}
+\endhead
+Compilar   &{\ttfamily mvn clean install}    \\\cline{1-2}
+Ejecutar aplicación   &{\ttfamily mvn spring-\/boot\+:run}    \\\cline{1-2}
+Ejecutar tests   &{\ttfamily mvn test}    \\\cline{1-2}
+Generar paquete   &{\ttfamily mvn clean package}    \\\cline{1-2}
+Arrancar con Docker   &{\ttfamily docker-\/compose up}    \\\cline{1-2}
+Reconstruir con Docker   &{\ttfamily docker-\/compose up -\/-\/build}   \\\cline{1-2}
+\end{longtabu}
+
+
+Aplicación disponible en\+: \href{http://localhost:8080}{\texttt{ http\+://localhost\+:8080}}
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Estado esperado}
+
+La aplicación debe permitir iniciar sesión, gestionar tareas, visualizar el calendario, gestionar categorías, almacenar información en My\+SQL, ejecutar tests correctamente y generar informes de calidad.
+
+\doxysection*{Documentación del Proyecto con Sphinx}
+
+La documentación técnica detallada, incluyendo la arquitectura del sistema, la guía de inicio rápido y la referencia de la API REST, está disponible en el siguiente enlace\+:
+
+\href{https://psyc25-26.github.io/PSyC-SS-05/sphinx/}{\texttt{ {\bfseries{Portal de Documentación (Sphinx)}}}}
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Documentación automática con Doxygen}
+
+El proyecto incluye documentación automática generada mediante {\bfseries{Doxygen}} integrado con {\bfseries{Maven}}. La documentación se genera automáticamente utilizando comentarios en formato Doxygen añadidos al código fuente del proyecto.
+
+\doxysubsection*{Herramientas utilizadas}
+
+
+\begin{DoxyItemize}
+\item Doxygen
+\item Graphviz
+\item Maven
+\item Git\+Hub Actions
+\item Git\+Hub Pages
+\item La\+TeX / Mi\+KTeX (generación PDF)
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+
+
+\doxysubsection*{Instalación de dependencias para documentación}
+
+\doxysubsubsection*{Doxygen}
+
+Descargar\+: \href{https://www.doxygen.nl/download.html}{\texttt{ https\+://www.\+doxygen.\+nl/download.\+html}}
+
+Comprobar instalación\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{doxygen\ -\/-\/version}
+
+\end{DoxyCode}
+
+
+\doxysubsubsection*{Graphviz}
+
+Descargar\+: \href{https://graphviz.org/download/}{\texttt{ https\+://graphviz.\+org/download/}}
+
+\begin{quote}
+{\bfseries{Importante\+:}} marcar la opción {\bfseries{Add Graphviz to PATH}} durante la instalación. \end{quote}
+Comprobar instalación\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{dot\ -\/V}
+
+\end{DoxyCode}
+
+
+\doxysubsubsection*{Mi\+KTeX}
+
+Descargar\+: \href{https://miktex.org/download}{\texttt{ https\+://miktex.\+org/download}}
+
+\DoxyHorRuler{0}
+
+
+\doxysubsection*{Generar documentación HTML}
+
+Desde {\ttfamily PSy\+C-\/\+SS-\/05/rest-\/service} ejecutar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ doxygen:report}
+
+\end{DoxyCode}
+
+
+La documentación HTML se genera en\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target/doxygen/html}
+
+\end{DoxyCode}
+
+
+Abrir\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target/doxygen/html/index.html}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysubsection*{Generar documentación PDF}
+
+Tras ejecutar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ doxygen:report}
+
+\end{DoxyCode}
+
+
+acceder a\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target/doxygen/latex}
+
+\end{DoxyCode}
+
+
+y ejecutar\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make.bat}
+
+\end{DoxyCode}
+
+
+El PDF generado será\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{refman.pdf}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysubsection*{Git\+Hub Actions y Git\+Hub Pages}
+
+El proyecto incluye automatización completa de la documentación mediante Git\+Hub Actions.
+
+Workflow utilizado\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{.github/workflows/doxygen.yml}
+
+\end{DoxyCode}
+
+
+Cada push realizado sobre la rama principal genera automáticamente\+:
+
+
+\begin{DoxyItemize}
+\item documentación Doxygen
+\item integración Maven
+\item despliegue automático en Git\+Hub Pages
+\end{DoxyItemize}
+
+Documentación publicada en\+:
+
+\href{https://psyc25-26.github.io/PSyC-SS-05/}{\texttt{ https\+://psyc25-\/26.\+github.\+io/\+PSy\+C-\/\+SS-\/05/}}
+
+\DoxyHorRuler{0}
+ 

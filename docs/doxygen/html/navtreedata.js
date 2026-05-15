@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "CalendarioApp", "index.html", [
+    [ "PSyC Quality Manager", "index.html", null ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", null ]
     ] ],
