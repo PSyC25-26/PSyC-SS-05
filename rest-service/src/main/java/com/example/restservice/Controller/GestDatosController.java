@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -28,7 +30,7 @@ import java.util.List;
 @RequestMapping("/gestDatos")
 public class GestDatosController {
   private final GestDatosService gestDatosService;
-
+  private static final Logger logger = LoggerFactory.getLogger(GestDatosController.class);
   /**
    * @brief Constructor del controlador.
    * 
@@ -59,11 +61,10 @@ public class GestDatosController {
       return new ResponseEntity<>(idUsuario, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace();
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+logger.error("Se ha producido un error de argumento ilegal", e);      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -86,11 +87,11 @@ public class GestDatosController {
       return new ResponseEntity<>(idTarea, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -110,11 +111,11 @@ public class GestDatosController {
       return new ResponseEntity<>(idCalendario, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace(); 
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -133,10 +134,10 @@ public class GestDatosController {
       Long idCategoria = gestDatosService.guardarCategoria(categoria, idUsuario);
       return new ResponseEntity<>(idCategoria, HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
-      e.printStackTrace();
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -154,11 +155,11 @@ public class GestDatosController {
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -176,11 +177,11 @@ public class GestDatosController {
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e );
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -197,7 +198,7 @@ public class GestDatosController {
       return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -215,7 +216,7 @@ public class GestDatosController {
       return new ResponseEntity<>(tareas, HttpStatus.OK);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -233,7 +234,7 @@ public class GestDatosController {
       return new ResponseEntity<>(calendario, HttpStatus.OK);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -251,7 +252,7 @@ public class GestDatosController {
       return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e );
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -270,11 +271,11 @@ public class GestDatosController {
       return new ResponseEntity<>(tarea, HttpStatus.OK);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e );
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -293,11 +294,11 @@ public class GestDatosController {
       return new ResponseEntity<>(calendario, HttpStatus.OK);
     }
     catch (IllegalArgumentException e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     catch (Exception e){
-      e.printStackTrace();
+      logger.error("Se ha producido un error inesperado", e );
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
