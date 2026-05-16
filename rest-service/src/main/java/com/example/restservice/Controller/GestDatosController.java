@@ -2,6 +2,10 @@ package com.example.restservice.Controller;
 import java.util.concurrent.atomic.AtomicLong;
 import com.example.restservice.Entity.*;
 import com.example.restservice.Dao.*;
+import com.example.restservice.Dto.UsuarioDTO;
+import com.example.restservice.Dto.TareaDTO;
+import com.example.restservice.Dto.CalendarioDTO;
+import com.example.restservice.Dto.CategoriaDTO;
 import com.example.restservice.Service.GestDatosService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,20 +54,23 @@ public class GestDatosController {
    * @return identificador del usuario creado.
    */
   @PostMapping("/guardarUsuario")
-  public ResponseEntity <Long> guardarUsuario (@RequestBody Usuario usuario) {
-    try{
-      // 1. Guardamos el usuario y recogemos el objeto Usuario devuelto
-      Usuario usuarioGuardado = gestDatosService.guardarUsuario(usuario);
+  public ResponseEntity<Long> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+    try {
+      Usuario usuarioEntity = new Usuario();
+
+      usuarioEntity.setUsername(usuarioDTO.getUsername());
+      usuarioEntity.setEmail(usuarioDTO.getEmail());
+      usuarioEntity.setPassword(usuarioDTO.getPassword());
+      usuarioEntity.setTipoUsuario(usuarioDTO.getTipoUsuario());
+
+      Usuario usuarioGuardado = gestDatosService.guardarUsuario(usuarioEntity);
+
+      return new ResponseEntity<>(usuarioGuardado.getId(), HttpStatus.CREATED);
       
-      // 2. Le pedimos el ID a ese usuario guardado
-      Long idUsuario = usuarioGuardado.getId();
-      
-      return new ResponseEntity<>(idUsuario, HttpStatus.CREATED);
-    }
-    catch (IllegalArgumentException e){
-logger.error("Se ha producido un error de argumento ilegal", e);      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-    catch (Exception e){
+    } catch (IllegalArgumentException e) {
+      logger.error("Se ha producido un error de argumento ilegal", e);
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
       logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -79,11 +86,23 @@ logger.error("Se ha producido un error de argumento ilegal", e);      return new
    * @param tarea tarea que se desea almacenar.
    * @return identificador de la tarea creada.
    */
-  @PostMapping("/guardarTarea") // <-- Quitamos el /{idUsuario}
-  public ResponseEntity <Long> guardarTarea (@RequestParam("idUsuarios") List<Long> idUsuarios, @RequestBody Tarea tarea) {
+  @PostMapping("/guardarTarea")
+  public ResponseEntity <Long> guardarTarea (@RequestParam("idUsuarios") List<Long> idUsuarios, @RequestBody TareaDTO tareaDTO) { // <-- 1. Usamos el DTO
     try{
-      // Pasamos la lista de idUsuarios al servicio
-      Long idTarea = gestDatosService.guardarTarea(tarea, idUsuarios);
+      
+      Tarea tareaEntity = new Tarea();
+      
+      tareaEntity.setTitulo(tareaDTO.getTitulo());
+      tareaEntity.setDescripcion(tareaDTO.getDescripcion());
+      tareaEntity.setFechaInicio(tareaDTO.getFechaInicio());
+      tareaEntity.setFechaFin(tareaDTO.getFechaFin());
+      
+      Categoria categoria = new Categoria();
+      categoria.setId(tareaDTO.getIdCategoria());
+      tareaEntity.setCategoria(categoria);
+
+      Long idTarea = gestDatosService.guardarTarea(tareaEntity, idUsuarios);
+
       return new ResponseEntity<>(idTarea, HttpStatus.CREATED);
     }
     catch (IllegalArgumentException e){
@@ -104,22 +123,25 @@ logger.error("Se ha producido un error de argumento ilegal", e);      return new
    * @return identificador del calendario creado.
    */
   @PostMapping("/guardarCalendario/{idUsuario}")
-  public ResponseEntity <Long> guardarCalendario (@PathVariable("idUsuario") Long idUsuario, @RequestBody Calendario calendario) {
-    try{
-      // Le pasamos el calendario y el id del usuario al servicio
-      Long idCalendario = gestDatosService.guardarCalendario(calendario, idUsuario);
+  public ResponseEntity<Long> guardarCalendario(@PathVariable("idUsuario") Long idUsuario, @RequestBody CalendarioDTO calendarioDTO) { // <-- 1. Recibe el DTO
+    try {
+      Calendario calendarioEntity = new Calendario();
+
+      calendarioEntity.setNombre(calendarioDTO.getNombre());
+
+      Long idCalendario = gestDatosService.guardarCalendario(calendarioEntity, idUsuario);
+
       return new ResponseEntity<>(idCalendario, HttpStatus.CREATED);
-    }
-    catch (IllegalArgumentException e){
+    } 
+    catch (IllegalArgumentException e) {
       logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-    catch (Exception e){
+    } 
+    catch (Exception e) {
       logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
-
   /**
    * @brief Guarda una categoría asociada a un usuario.
    * 
@@ -128,14 +150,21 @@ logger.error("Se ha producido un error de argumento ilegal", e);      return new
    * @return identificador de la categoría creada.
    */
   @PostMapping("/guardarCategoria/{idUsuario}")
-  public ResponseEntity<Long> guardarCategoria(@PathVariable("idUsuario") Long idUsuario, @RequestBody Categoria categoria) {
+  public ResponseEntity<Long> guardarCategoria(@PathVariable("idUsuario") Long idUsuario, @RequestBody CategoriaDTO categoriaDTO) { // <-- 1. Recibe el DTO
     try {
-      // Ahora sí recibimos el idUsuario por la URL
-      Long idCategoria = gestDatosService.guardarCategoria(categoria, idUsuario);
+      Categoria categoriaEntity = new Categoria();
+      
+      categoriaEntity.setNombre(categoriaDTO.getNombre());
+      categoriaEntity.setColor(categoriaDTO.getColor());
+
+      Long idCategoria = gestDatosService.guardarCategoria(categoriaEntity, idUsuario);
+
       return new ResponseEntity<>(idCategoria, HttpStatus.CREATED);
+
     } catch (IllegalArgumentException e) {
       logger.error("Se ha producido un error de argumento ilegal", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
     } catch (Exception e) {
       logger.error("Se ha producido un error inesperado", e);
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -265,9 +294,22 @@ logger.error("Se ha producido un error de argumento ilegal", e);      return new
    * @return tarea modificada.
    */
   @PutMapping ("/modificarTarea/{idTarea}")
-  public ResponseEntity <Tarea> modificarTarea(@PathVariable ("idTarea") Long idTarea, @RequestBody Tarea tareaModificada){
+  public ResponseEntity <Tarea> modificarTarea(@PathVariable ("idTarea") Long idTarea, @RequestBody TareaDTO tareaDTO){ 
     try{
-      Tarea tarea = gestDatosService.modificarTarea(idTarea, tareaModificada);
+      
+      Tarea tareaEntity = new Tarea();
+      
+      tareaEntity.setTitulo(tareaDTO.getTitulo());
+      tareaEntity.setDescripcion(tareaDTO.getDescripcion());
+      tareaEntity.setFechaInicio(tareaDTO.getFechaInicio());
+      tareaEntity.setFechaFin(tareaDTO.getFechaFin());
+
+      Categoria categoria = new Categoria();
+      categoria.setId(tareaDTO.getIdCategoria());
+      tareaEntity.setCategoria(categoria);
+
+      Tarea tarea = gestDatosService.modificarTarea(idTarea, tareaEntity);
+
       return new ResponseEntity<>(tarea, HttpStatus.OK);
     }
     catch (IllegalArgumentException e){
@@ -279,7 +321,6 @@ logger.error("Se ha producido un error de argumento ilegal", e);      return new
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
-
   /**
    * @brief Modifica un calendario existente.
    * 
@@ -288,9 +329,14 @@ logger.error("Se ha producido un error de argumento ilegal", e);      return new
    * @return calendario modificado.
    */
   @PutMapping ("/modificarCalendario/{idCalendario}")
-  public ResponseEntity <Calendario> modificarCalendario(@PathVariable ("idCalendario") Long idCalendario, @RequestBody Calendario calendarioModificado){
+  public ResponseEntity <Calendario> modificarCalendario(@PathVariable ("idCalendario") Long idCalendario, @RequestBody CalendarioDTO calendarioDTO){
     try{
-      Calendario calendario = gestDatosService.modificarCalendario(idCalendario, calendarioModificado);
+      // Creamos la entidad y le pasamos el nombre
+      Calendario calendarioEntity = new Calendario();
+      calendarioEntity.setNombre(calendarioDTO.getNombre());
+
+      Calendario calendario = gestDatosService.modificarCalendario(idCalendario, calendarioEntity);
+
       return new ResponseEntity<>(calendario, HttpStatus.OK);
     }
     catch (IllegalArgumentException e){
