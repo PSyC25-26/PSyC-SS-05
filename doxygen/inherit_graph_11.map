@@ -1,15 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,173,120,198"/>
-<area shape="rect" id="Node000001" href="$classcom_1_1example_1_1restservice_1_1_u_i_1_1_categoria_view.html" title="Vista para la gestión de categorías." alt="" coords="168,5,359,45"/>
-<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="76,159,113,107,138,79,166,55,188,43,190,48,170,60,142,83,117,110,80,162"/>
-<area shape="rect" id="Node000002" href="$classcom_1_1example_1_1restservice_1_1_u_i_1_1_home_view.html" title="Vista principal de la aplicación." alt="" coords="168,69,359,109"/>
-<area shape="poly" id="edge7_Node000000_Node000002" title=" " alt="" coords="92,162,167,119,196,107,198,112,169,124,95,167"/>
-<area shape="rect" id="Node000003" href="$classcom_1_1example_1_1restservice_1_1_u_i_1_1_inicio_view.html" title="Vista principal del calendario." alt="" coords="168,133,359,173"/>
-<area shape="poly" id="edge8_Node000000_Node000003" title=" " alt="" coords="133,171,167,166,168,171,134,177"/>
-<area shape="rect" id="Node000004" href="$classcom_1_1example_1_1restservice_1_1_u_i_1_1_login_view.html" title="Vista de autenticación de usuarios." alt="" coords="168,197,359,237"/>
-<area shape="poly" id="edge9_Node000000_Node000004" title=" " alt="" coords="134,194,168,199,167,205,133,199"/>
-<area shape="rect" id="Node000005" href="$classcom_1_1example_1_1restservice_1_1_u_i_1_1_registro_view.html" title="Vista de registro de usuarios." alt="" coords="168,261,359,301"/>
-<area shape="poly" id="edge10_Node000000_Node000005" title=" " alt="" coords="95,204,169,247,198,259,196,264,167,252,92,208"/>
-<area shape="rect" id="Node000006" href="$classcom_1_1example_1_1restservice_1_1_u_i_1_1_tarea_view.html" title="Vista de gestión de tareas." alt="" coords="168,325,359,365"/>
-<area shape="poly" id="edge11_Node000000_Node000006" title=" " alt="" coords="80,208,117,260,142,288,170,311,190,323,188,328,166,316,138,291,113,264,76,212"/>
+<area shape="rect" id="Node000000" href="$enumcom_1_1example_1_1restservice_1_1_entity_1_1_usuario_1_1_tipo_usuario.html" title="Enumeración de tipos de usuario." alt="" coords="5,5,200,45"/>
 </map>

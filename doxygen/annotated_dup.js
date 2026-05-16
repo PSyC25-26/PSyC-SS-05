@@ -15,6 +15,12 @@ var annotated_dup =
             [ "TareaDAO", "interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o.html", "interfacecom_1_1example_1_1restservice_1_1_dao_1_1_tarea_d_a_o" ],
             [ "UsuarioDAO", "interfacecom_1_1example_1_1restservice_1_1_dao_1_1_usuario_d_a_o.html", "interfacecom_1_1example_1_1restservice_1_1_dao_1_1_usuario_d_a_o" ]
           ] ],
+          [ "Dto", "namespacecom_1_1example_1_1restservice_1_1_dto.html", [
+            [ "CalendarioDTO", "classcom_1_1example_1_1restservice_1_1_dto_1_1_calendario_d_t_o.html", "classcom_1_1example_1_1restservice_1_1_dto_1_1_calendario_d_t_o" ],
+            [ "CategoriaDTO", "classcom_1_1example_1_1restservice_1_1_dto_1_1_categoria_d_t_o.html", "classcom_1_1example_1_1restservice_1_1_dto_1_1_categoria_d_t_o" ],
+            [ "TareaDTO", "classcom_1_1example_1_1restservice_1_1_dto_1_1_tarea_d_t_o.html", "classcom_1_1example_1_1restservice_1_1_dto_1_1_tarea_d_t_o" ],
+            [ "UsuarioDTO", "classcom_1_1example_1_1restservice_1_1_dto_1_1_usuario_d_t_o.html", "classcom_1_1example_1_1restservice_1_1_dto_1_1_usuario_d_t_o" ]
+          ] ],
           [ "Entity", "namespacecom_1_1example_1_1restservice_1_1_entity.html", [
             [ "Calendario", "classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario.html", "classcom_1_1example_1_1restservice_1_1_entity_1_1_calendario" ],
             [ "Categoria", "classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria.html", "classcom_1_1example_1_1restservice_1_1_entity_1_1_categoria" ],
