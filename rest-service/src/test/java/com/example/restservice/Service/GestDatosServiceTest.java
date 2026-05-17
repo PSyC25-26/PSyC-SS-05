@@ -505,4 +505,85 @@ class GestDatosServiceTest {
         });
     }
 
+
+
+    /**
+    * @brief Comprueba el guardado de una tarea compartida entre varios usuarios.
+    */
+    @Test
+    void guardarTarea_conMultiplesUsuarios_ok() {
+
+        Usuario usuario1 = new Usuario();
+        usuario1.setId(1L);
+
+        Usuario usuario2 = new Usuario();
+        usuario2.setId(2L);
+
+        Tarea tarea = new Tarea();
+        tarea.setTitulo("Trabajo en grupo");
+        tarea.setFechaInicio(LocalDateTime.now());
+        tarea.setFechaFin(LocalDateTime.now().plusDays(1));
+
+        Tarea tareaGuardada = new Tarea();
+        tareaGuardada.setId(10L);
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario1));
+        when(usuarioDAO.findById(2L)).thenReturn(Optional.of(usuario2));
+        when(tareaDAO.save(tarea)).thenReturn(tareaGuardada);
+
+        Long resultado = gestDatosService.guardarTarea(
+                tarea,
+                List.of(1L, 2L));
+
+        assertThat(resultado).isEqualTo(10L);
+
+        assertThat(tarea.getUsuarios()).hasSize(2);
+    }
+
+
+    /**
+    * @brief Comprueba el comportamiento al asignar una tarea a un usuario inexistente.
+    */
+    @Test
+    void guardarTarea_usuarioNoExiste() {
+
+        Tarea tarea = new Tarea();
+
+        tarea.setFechaInicio(LocalDateTime.now());
+        tarea.setFechaFin(LocalDateTime.now().plusDays(1));
+
+        when(usuarioDAO.findById(99L)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.guardarTarea(tarea, List.of(99L));
+        });
+    }
+
+
+
+    /**
+    * @brief Comprueba la eliminación de un usuario asociado a varias tareas.
+    */
+    @Test
+    void eliminarUsuario_conVariasTareas() {
+
+        Usuario usuario = new Usuario();
+        usuario.setId(1L);
+
+        Tarea tarea1 = new Tarea();
+        tarea1.setUsuarios(new java.util.ArrayList<>(List.of(usuario)));
+
+        Tarea tarea2 = new Tarea();
+        tarea2.setUsuarios(new java.util.ArrayList<>(List.of(usuario)));
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.of(usuario));
+
+        when(tareaDAO.findByUsuarios_Id(1L))
+                .thenReturn(List.of(tarea1, tarea2));
+
+        gestDatosService.eliminarUsuario(1L);
+
+        assertThat(tarea1.getUsuarios()).isEmpty();
+        assertThat(tarea2.getUsuarios()).isEmpty();
+    }
 }
