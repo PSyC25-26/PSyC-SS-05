@@ -1,5 +1,6 @@
 package com.example.restservice.UI;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.example.restservice.Entity.Usuario;
 import com.example.restservice.Service.GestDatosService;
 import com.vaadin.flow.component.UI;
@@ -20,7 +21,7 @@ import com.vaadin.flow.router.Route;
  */
 @Route("registro")
 public class RegistroView extends VerticalLayout {
-
+    private static final Logger logger = LoggerFactory.getLogger(RegistroView.class);
     /**
      * @brief Constructor de la vista RegistroView.
      * 
@@ -65,10 +66,8 @@ public class RegistroView extends VerticalLayout {
 
             } catch (Exception ex) {
 
-                // Si la BD sigue quejándose (ej: el email YA existe de verdad)
                 Notification.show("Error: Ese nombre de usuario o email ya existe.");
-
-                ex.printStackTrace();
+                logger.error("Error al registrar usuario", ex);
             }
         });
         
