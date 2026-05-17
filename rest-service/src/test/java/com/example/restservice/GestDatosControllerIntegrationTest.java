@@ -16,16 +16,18 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.example.restservice.Dto.CalendarioDTO;
+import com.example.restservice.Dto.CategoriaDTO;
+import com.example.restservice.Dto.TareaDTO;
+import com.example.restservice.Dto.UsuarioDTO;
 import com.example.restservice.Entity.Calendario;
-import com.example.restservice.Entity.Categoria;
 import com.example.restservice.Entity.Tarea;
 import com.example.restservice.Entity.Usuario;
 
 /**
  * @class GestDatosControllerIntegrationTest
  * @brief Pruebas de integración de los endpoints del controlador.
- * 
- * Comprueba el funcionamiento completo de la aplicación
+ * * Comprueba el funcionamiento completo de la aplicación
  * realizando peticiones HTTP reales sobre la API REST.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -44,7 +46,6 @@ class GestDatosControllerIntegrationTest {
      */
     @BeforeEach
     void setUp() {
-
         baseUrl = "http://localhost:" + port + "/gestDatos";
     }
 
@@ -54,44 +55,39 @@ class GestDatosControllerIntegrationTest {
     @Test
     void testFlujoCompletoUsuarioYCalendario() {
 
-        Usuario nuevoUsuario = new Usuario();
-
+        // 1. Usar UsuarioDTO para enviar
+        UsuarioDTO nuevoUsuario = new UsuarioDTO();
         nuevoUsuario.setUsername("usuarioIntegracion");
         nuevoUsuario.setPassword("1234"); 
         nuevoUsuario.setEmail("integracion@test.com");
         nuevoUsuario.setTipoUsuario(Usuario.TipoUsuario.PARTICULAR);
         
         ResponseEntity<Long> responseUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", nuevoUsuario, Long.class);
-
         assertThat(responseUsuario.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         Long idUsuario = responseUsuario.getBody();
-
         assertThat(idUsuario).isNotNull();
 
         ResponseEntity<Usuario[]> responseGetUsuarios = restTemplate.getForEntity(baseUrl + "/obtenerUsuarios", Usuario[].class);
-
         assertThat(responseGetUsuarios.getStatusCode()).isEqualTo(HttpStatus.OK);
-
         assertThat(responseGetUsuarios.getBody()).isNotEmpty();
 
-        Calendario calendarioInicial = new Calendario();
-
+        // 2. Usar CalendarioDTO para enviar
+        CalendarioDTO calendarioInicial = new CalendarioDTO();
         calendarioInicial.setNombre("Calendario Original");
 
         restTemplate.postForEntity(baseUrl + "/guardarCalendario/" + idUsuario, calendarioInicial, Long.class);
 
-        Calendario calendarioModificado = new Calendario();
-
+        // 3. Usar CalendarioDTO para modificar
+        CalendarioDTO calendarioModificado = new CalendarioDTO();
         calendarioModificado.setNombre("Calendario Modificado Integracion");
         
         ResponseEntity<Calendario> responseGetCalendario = restTemplate.getForEntity(baseUrl + "/obtenerCalendario/" + idUsuario, Calendario.class);
-
         assertThat(responseGetCalendario.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         Long idCalendario = responseGetCalendario.getBody().getId();
 
-        HttpEntity<Calendario> requestUpdateCalendario = new HttpEntity<>(calendarioModificado);
+        HttpEntity<CalendarioDTO> requestUpdateCalendario = new HttpEntity<>(calendarioModificado);
 
         ResponseEntity<Calendario> responsePutCalendario = restTemplate.exchange(
                 baseUrl + "/modificarCalendario/" + idCalendario,
@@ -100,7 +96,6 @@ class GestDatosControllerIntegrationTest {
                 Calendario.class);
 
         assertThat(responsePutCalendario.getStatusCode()).isEqualTo(HttpStatus.OK);
-
         assertThat(responsePutCalendario.getBody().getNombre()).isEqualTo("Calendario Modificado Integracion");
 
         ResponseEntity<Void> responseDelete = restTemplate.exchange(
@@ -118,8 +113,8 @@ class GestDatosControllerIntegrationTest {
     @Test
     void testFlujoCompletoTareaYCategoria() {
 
-        Usuario usuario = new Usuario();
-
+        // 1. Usar UsuarioDTO
+        UsuarioDTO usuario = new UsuarioDTO();
         usuario.setUsername("usuarioParaTarea");
         usuario.setPassword("1234");
         usuario.setEmail("tarea_integracion@test.com");
@@ -127,37 +122,34 @@ class GestDatosControllerIntegrationTest {
 
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();
 
-        Categoria categoria = new Categoria();
-
-        categoria.setNombre("Categoria de Integracion");
+        // 2. Usar CategoriaDTO
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        categoriaDTO.setNombre("Categoria de Integracion");
+        categoriaDTO.setColor("#FF0000"); // Asumiendo que tenías color
         
         ResponseEntity<Long> responseCategoria = restTemplate.postForEntity(
                 baseUrl + "/guardarCategoria/" + idUsuario,
-                categoria,
+                categoriaDTO,
                 Long.class);
 
         assertThat(responseCategoria.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-
         Long idCategoria = responseCategoria.getBody();
 
-        categoria.setId(idCategoria);
-
-        Tarea tarea = new Tarea();
-
-        tarea.setTitulo("Tarea de Integracion");
-        tarea.setDescripcion("Descripcion de prueba");
-        tarea.setFechaInicio(LocalDateTime.now());
-        tarea.setFechaFin(LocalDateTime.now().plusDays(1));
-        tarea.setCategoria(categoria);
+        // 3. Usar TareaDTO
+        TareaDTO tareaDTO = new TareaDTO();
+        tareaDTO.setTitulo("Tarea de Integracion");
+        tareaDTO.setDescripcion("Descripcion de prueba");
+        tareaDTO.setFechaInicio(LocalDateTime.now());
+        tareaDTO.setFechaFin(LocalDateTime.now().plusDays(1));
+        tareaDTO.setIdCategoria(idCategoria); // Pasamos solo el ID
         
         String urlGuardarTarea = baseUrl + "/guardarTarea?idUsuarios=" + idUsuario;
 
-        ResponseEntity<Long> responseTarea = restTemplate.postForEntity(urlGuardarTarea, tarea, Long.class);
+        ResponseEntity<Long> responseTarea = restTemplate.postForEntity(urlGuardarTarea, tareaDTO, Long.class);
 
         assertThat(responseTarea.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         Long idTarea = responseTarea.getBody();
-
         assertThat(idTarea).isNotNull();
 
         ResponseEntity<Tarea[]> responseTareasUsuario = restTemplate.getForEntity(
@@ -165,18 +157,17 @@ class GestDatosControllerIntegrationTest {
                 Tarea[].class);
 
         assertThat(responseTareasUsuario.getStatusCode()).isEqualTo(HttpStatus.OK);
-
         assertThat(responseTareasUsuario.getBody()).hasSizeGreaterThan(0);
 
-        Tarea tareaModificada = new Tarea();
-
+        // 4. Modificar TareaDTO
+        TareaDTO tareaModificada = new TareaDTO();
         tareaModificada.setTitulo("Tarea Modificada");
         tareaModificada.setDescripcion("Descripcion de prueba");
         tareaModificada.setFechaInicio(LocalDateTime.now());
         tareaModificada.setFechaFin(LocalDateTime.now().plusDays(1));
-        tareaModificada.setCategoria(categoria);
+        tareaModificada.setIdCategoria(idCategoria);
 
-        HttpEntity<Tarea> requestUpdateTarea = new HttpEntity<>(tareaModificada);
+        HttpEntity<TareaDTO> requestUpdateTarea = new HttpEntity<>(tareaModificada);
         
         ResponseEntity<Tarea> responsePutTarea = restTemplate.exchange(
                 baseUrl + "/modificarTarea/" + idTarea,
@@ -185,7 +176,6 @@ class GestDatosControllerIntegrationTest {
                 Tarea.class);
 
         assertThat(responsePutTarea.getStatusCode()).isEqualTo(HttpStatus.OK);
-
         assertThat(responsePutTarea.getBody().getTitulo()).isEqualTo("Tarea Modificada");
 
         ResponseEntity<Void> responseDeleteTarea = restTemplate.exchange(
@@ -209,8 +199,7 @@ class GestDatosControllerIntegrationTest {
     @Test
     void testGuardarCalendarioConFalloPorDuplicado() {
 
-        Usuario usuario = new Usuario();
-
+        UsuarioDTO usuario = new UsuarioDTO();
         usuario.setUsername("userCalendario");
         usuario.setPassword("1234"); 
         usuario.setEmail("calendario_error@test.com");
@@ -218,8 +207,7 @@ class GestDatosControllerIntegrationTest {
 
         Long idUsuario = restTemplate.postForEntity(baseUrl + "/guardarUsuario", usuario, Long.class).getBody();
 
-        Calendario nuevoCalendario = new Calendario();
-
+        CalendarioDTO nuevoCalendario = new CalendarioDTO();
         nuevoCalendario.setNombre("Calendario Extra");
 
         restTemplate.postForEntity(
