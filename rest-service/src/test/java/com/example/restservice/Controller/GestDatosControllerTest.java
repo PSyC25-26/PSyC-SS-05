@@ -351,4 +351,138 @@ class GestDatosControllerTest {
         logger.warn("Error esperado, status: {}", response.getStatusCodeValue());
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
+
+    /**
+    * @brief Comprueba el guardado correcto de calendarios.
+    */
+    @Test
+    void guardarCalendario_ok() {
+
+        GestDatosService service = Mockito.mock(GestDatosService.class);
+
+        GestDatosController controller =
+                new GestDatosController(service);
+
+        CalendarioDTO dto = new CalendarioDTO();
+
+        dto.setNombre("Calendario personal");
+
+        Mockito.when(service.guardarCalendario(
+            any(Calendario.class), eq(1L)))
+                .thenReturn(1L);
+
+        ResponseEntity<Long> response =
+                controller.guardarCalendario(1L, dto);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(201);
+    }
+
+    /**
+    * @brief Comprueba el manejo de errores al guardar calendarios.
+    */
+    @Test
+    void guardarCalendario_error() {
+
+        GestDatosService service = Mockito.mock(GestDatosService.class);
+
+        GestDatosController controller =
+                new GestDatosController(service);
+
+        CalendarioDTO dto = new CalendarioDTO();
+
+        Mockito.when(service.guardarCalendario(
+                any(Calendario.class), eq(1L)))
+                .thenThrow(new IllegalArgumentException());
+
+        ResponseEntity<Long> response =
+                controller.guardarCalendario(1L, dto);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    /**
+    * @brief Comprueba el manejo de errores al guardar tareas.
+    */
+    @Test
+    void guardarTarea_error() {
+
+        GestDatosService service = Mockito.mock(GestDatosService.class);
+
+        GestDatosController controller =
+                new GestDatosController(service);
+
+        TareaDTO dto = new TareaDTO();
+
+        Mockito.when(service.guardarTarea(
+                any(Tarea.class), eq(List.of(1L))))
+                .thenThrow(new IllegalArgumentException());
+
+        ResponseEntity<Long> response =
+                controller.guardarTarea(List.of(1L), dto);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    /**
+    * @brief Comprueba el manejo de errores al modificar tareas.
+    */
+    @Test
+    void modificarTarea_error() {
+
+        GestDatosService service = Mockito.mock(GestDatosService.class);
+
+        GestDatosController controller =
+                new GestDatosController(service);
+
+        TareaDTO dto = new TareaDTO();
+
+        Mockito.when(service.modificarTarea(
+                eq(1L), any(Tarea.class)))
+                .thenThrow(new IllegalArgumentException());
+
+        ResponseEntity<Tarea> response =
+                controller.modificarTarea(1L, dto);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    /**
+    * @brief Comprueba el manejo de errores al obtener calendarios.
+    */
+    @Test
+    void obtenerCalendario_error() {
+
+        GestDatosService service = Mockito.mock(GestDatosService.class);
+
+        GestDatosController controller =
+                new GestDatosController(service);
+
+        Mockito.when(service.cargarCalendarioPorUsuario(1L))
+                .thenThrow(new RuntimeException());
+
+        ResponseEntity<Calendario> response =
+                controller.obtenerCalendarioPorUsuario(1L);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    /**
+    * @brief Comprueba el manejo de errores al obtener categorías por tarea.
+    */
+    @Test
+    void obtenerCategoriaPorTarea_error() {
+
+        GestDatosService service = Mockito.mock(GestDatosService.class);
+
+        GestDatosController controller =
+                new GestDatosController(service);
+
+        Mockito.when(service.obtenerCategoriaPorTarea(1L))
+                .thenThrow(new RuntimeException());
+
+        ResponseEntity<Categoria> response =
+                controller.obtenerCategoriaPorTarea(1L);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
 }
