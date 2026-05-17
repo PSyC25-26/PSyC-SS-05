@@ -375,4 +375,134 @@ class GestDatosServiceTest {
         assertThat(res).isNotNull();
     }
 
+
+    /**
+    * @brief Comprueba la autenticación correcta de un usuario.
+     */
+    @Test
+    void autenticarUsuario_ok() {
+
+        Usuario usuario = new Usuario();
+
+        usuario.setUsername("admin");
+        usuario.setPassword("1234");
+
+        when(usuarioDAO.findAll()).thenReturn(List.of(usuario));
+
+        Usuario resultado = gestDatosService.autenticarUsuario("admin", "1234");
+
+        assertThat(resultado).isNotNull();
+    }
+
+    /**
+    * @brief Comprueba que la autenticación falla con credenciales incorrectas.
+    */
+    @Test
+    void autenticarUsuario_incorrecto() {
+
+        Usuario usuario = new Usuario();
+
+        usuario.setUsername("admin");
+        usuario.setPassword("1234");
+
+        when(usuarioDAO.findAll()).thenReturn(List.of(usuario));
+
+        Usuario resultado = gestDatosService.autenticarUsuario("admin", "mal");
+
+        assertThat(resultado).isNull();
+    }
+
+    /**
+    * @brief Comprueba que se devuelven todas las tareas si la categoría es nula.
+    */
+    @Test
+    void obtenerTareasPorCategoria_null_devuelveTodas() {
+
+        when(tareaDAO.findAll()).thenReturn(List.of(new Tarea(), new Tarea()));
+
+        List<Tarea> resultado = gestDatosService.obtenerTareasPorCategoria(null);
+
+        assertThat(resultado).hasSize(2);
+    }
+
+    /**
+    * @brief Comprueba la obtención de tareas filtradas por categoría.
+    */
+    @Test
+    void obtenerTareasPorCategoria_ok() {
+
+        Categoria categoria = new Categoria();
+
+        when(tareaDAO.findByCategoria(categoria))
+                .thenReturn(List.of(new Tarea()));
+
+        List<Tarea> resultado =
+                gestDatosService.obtenerTareasPorCategoria(categoria);
+
+        assertThat(resultado).hasSize(1);
+    }
+
+    /**
+    * @brief Comprueba que no se puede guardar un calendario nulo.
+    */
+    @Test
+    void guardarCalendario_null_deberiaLanzarExcepcion() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.guardarCalendario(null, 1L);
+        });
+    }
+
+    /**
+    * @brief Comprueba el comportamiento cuando la tarea a modificar no existe.
+    */
+    @Test
+    void modificarTarea_noExiste() {
+
+        when(tareaDAO.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.modificarTarea(1L, new Tarea());
+        });
+    }
+
+    /**
+    * @brief Comprueba el comportamiento cuando el calendario no existe.
+    */
+    @Test
+    void modificarCalendario_noExiste() {
+
+        when(calendarioDAO.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.modificarCalendario(1L, new Calendario());
+        });
+    }
+
+    /**
+    * @brief Comprueba el comportamiento cuando la tarea no existe.
+    */
+    @Test
+    void obtenerCategoriaPorTarea_noExiste() {
+
+        when(tareaDAO.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.obtenerCategoriaPorTarea(1L);
+        });
+    }
+
+    /**
+    * @brief Comprueba el comportamiento cuando el usuario no existe.
+    */
+    @Test
+    void eliminarUsuario_noExiste() {
+
+        when(usuarioDAO.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            gestDatosService.eliminarUsuario(1L);
+        });
+    }
+
 }
