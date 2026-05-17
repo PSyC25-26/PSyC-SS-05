@@ -225,13 +225,23 @@ Abrir ese archivo en el navegador para ver cobertura de clases, métodos cubiert
 
 ---
 
-## Integración continua (CI)
+## Integración continua (CI) 
 
 El proyecto utiliza workflows automáticos definidos en `.github/workflows/` que incluyen compilación automática, ejecución de tests y generación de informes.
 
 También incluye configuración Jenkins mediante `Jenkinsfile` para builds automáticos e integración continua.
 
+
+
 ---
+
+## SonarCloud
+
+El proyecto integra análisis continuo de calidad de código mediante SonarCloud, incluyendo métricas de mantenibilidad, cobertura de tests, duplicación y detección de vulnerabilidades.
+
+Puedes consultar el panel del proyecto aquí:
+
+[SonarCloud Dashboard](https://sonarcloud.io/project/overview?id=PSyC25-26_PSyC-SS-05)
 
 ## Problemas comunes
 
