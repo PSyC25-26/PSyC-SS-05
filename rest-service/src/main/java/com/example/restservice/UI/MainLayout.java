@@ -26,7 +26,7 @@ public class MainLayout extends AppLayout {
      */
     public MainLayout() {
 
-        H1 logo = new H1("PSyC Quality Manager");
+        H1 logo = new H1("CalendarioApp");
 
         logo.getStyle()
             .set("font-size", "var(--lumo-font-size-l)")
